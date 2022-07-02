@@ -7,7 +7,17 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Esta clase se conecta con la base de datos y permite insertar, borrar, seleccionar y modificar los datos del video
+ */
 public class DARegistroVideo {
+
+
+    /**
+     * @param video
+     * @return actualizacion de la base de datos
+     * @throws SQLException
+     */
     public int annadirVideo(Video video)throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion) values( ?, ?, ?, ?, ?)";

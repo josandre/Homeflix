@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * Esta clase maneja el registro de los videos
+ */
 public class RegistroController {
 
     @FXML
@@ -49,12 +52,17 @@ public class RegistroController {
         System.out.println("initialize");
     }
 
+    /**
+     * @param event Este evento registra el video
+     */
     @FXML
     public void handleButtonRegistrar(ActionEvent event){
         registrarVerificacion();
-
     }
 
+    /**
+     * Esta funcion permite la verfificacion de los espacios en blanco del registro
+     */
     public void registrarVerificacion(){
         Video video = new Video();
         String nombre = txtNombreVideo.getText();
@@ -64,6 +72,7 @@ public class RegistroController {
 
         if(nombre != null && !txtNombreVideo.getText().isEmpty()){
             video.setNombre(nombre);
+
         }else{
             txtNombreVideo.setBorder(obtenerBordeError());
         }
@@ -88,17 +97,28 @@ public class RegistroController {
 
     }
 
+    /**
+     * Esta funcion crea un borde rojo con el que se trabaja las validaciones de espacios en blanco
+     * @return Esta funcion retorna un borde rojo
+     *
+     */
     public static Border obtenerBordeError(){
        return new Border(new BorderStroke(Color.RED, Color.RED, Color.RED, Color.RED,
                 BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY, new BorderWidths(1), Insets.EMPTY));
     }
 
+    /**
+     * @param event Este evento cancela el registro y envia al usuario a la pagina principal
+     */
     @FXML
     public void handleButtonCancelar(ActionEvent event){
         System.out.println("cancelando");
     }
 
+    /**
+     * @param event Este evento permite subir el archivo del video que se esta registrando
+     */
     @FXML
     public void handleButtonSubirArchivo(ActionEvent event){
         this.txtSubirArchivo.setEditable(false);

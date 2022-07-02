@@ -1,5 +1,11 @@
 package Controller;
 
-public class Bl {
+import DataAcces.DARegistroVideo;
 
+public class Bl {
+    DARegistroVideo daREgistroVideo = new DARegistroVideo();
+
+    private Bl() {
+
+    }
 }
