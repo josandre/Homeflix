@@ -1,5 +1,6 @@
 package com.example.proyecto;
 
+import DataAcces.DARegistroVideo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +12,6 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args){
         launch(args);
-
     }
 
     @Override
