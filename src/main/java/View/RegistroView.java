@@ -1,5 +1,6 @@
 package View;
 
+import Controller.BL;
 import Model.Video;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,11 +14,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  * Esta clase maneja el registro de los videos
  */
-public class RegistroController {
+public class RegistroView {
 
     @FXML
     public TextField txtNombreVideo;
@@ -39,14 +42,16 @@ public class RegistroController {
 
     @FXML
     public AnchorPane mainPane;
-    Stage stage;
 
+    private BL blConexion = BL.getInstanciaBl();
+    Stage stage;
     {
         if(mainPane != null){
             stage = (Stage) mainPane.getScene().getWindow();
         }
-
     }
+
+
 
     public void initialize(){
         System.out.println("initialize");
@@ -56,43 +61,77 @@ public class RegistroController {
      * @param event Este evento registra el video
      */
     @FXML
-    public void handleButtonRegistrar(ActionEvent event){
-        registrarVerificacion();
+    public void handleButtonRegistrar(ActionEvent event) throws SQLException {
+
+        if(registrarVerificacion()){
+            Video video = new Video();
+            video.setFecha(LocalDate.now());
+            String nombre = txtNombreVideo.getText();
+            String categoria = txtCategoria.getText();
+            String descripcion = txtDescripcion.getText();
+            String subirArchivo = txtSubirArchivo.getText();
+            video.setCalificacion(0);
+            video.setNombre(nombre);
+            video.setCategoria(categoria);
+            video.setDescripcion(descripcion);
+            video.setArchivo(subirArchivo);
+
+            blConexion.annadirVideo(video);
+
+        }
+
+
     }
 
     /**
      * Esta funcion permite la verfificacion de los espacios en blanco del registro
      */
-    public void registrarVerificacion(){
-        Video video = new Video();
+    public boolean registrarVerificacion(){
         String nombre = txtNombreVideo.getText();
         String categoria = txtCategoria.getText();
         String descripcion = txtDescripcion.getText();
         String subirArchivo = txtSubirArchivo.getText();
 
+        boolean esValido = false;
+
+
         if(nombre != null && !txtNombreVideo.getText().isEmpty()){
-            video.setNombre(nombre);
+            esValido = true;
 
         }else{
+            esValido = false;
             txtNombreVideo.setBorder(obtenerBordeError());
         }
 
         if(categoria != null && !txtCategoria.getText().isEmpty()){
-            video.setCategoria(categoria);
+            esValido = true;
+
         }else{
+            esValido = false;
             txtCategoria.setBorder(obtenerBordeError());
         }
 
         if(descripcion != null && !txtDescripcion.getText().isEmpty()){
-            video.setDescripcion(descripcion);
+            esValido = true;
+
+
         }else {
+            esValido = false;
             txtDescripcion.setBorder(obtenerBordeError());
         }
 
         if(subirArchivo != null && !txtSubirArchivo.getText().isEmpty()){
-            video.setArchivo(subirArchivo);
+            esValido = true;
+
         }else{
+            esValido = false;
             txtSubirArchivo.setBorder(obtenerBordeError());
+        }
+
+        if(!esValido ){
+            return  false;
+        }else {
+            return true;
         }
 
     }
@@ -131,5 +170,7 @@ public class RegistroController {
             this.txtSubirArchivo.setText(file.getAbsolutePath());
         }
     }
+
+
 
 }

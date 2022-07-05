@@ -10,8 +10,7 @@ import java.sql.SQLException;
 /**
  * Esta clase se conecta con la base de datos y permite insertar, borrar, seleccionar y modificar los datos del video
  */
-public class DARegistroVideo {
-
+public class DAVideo {
 
     /**
      * @param video
@@ -20,7 +19,7 @@ public class DARegistroVideo {
      */
     public int annadirVideo(Video video)throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
-        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion) values( ?, ?, ?, ?, ?)";
+        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlace ) values( ?, ?, ?, ?, ?, ?)";
 
         // abre la conexion y la cierra despues de hacer el insert, por eso los recursos deben ser cerrables
         try (Connection connection = connectionManager.abrirConexion()) {
@@ -30,6 +29,7 @@ public class DARegistroVideo {
                 statement.setDate(3, Date.valueOf(video.getFecha()));
                 statement.setString(4, video.getDescripcion());
                 statement.setInt(5, video.getCalificacion());
+                statement.setString(6, video.getArchivo());
 
                 return statement.executeUpdate();
 
