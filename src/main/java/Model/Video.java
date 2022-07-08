@@ -2,19 +2,16 @@ package Model;
 
 import java.time.LocalDate;
 
-
 /**
  * Esta clase contiene los metodos y atributo de Video
  */
 public class Video {
     private String id;
-
     private String nombre;
     private String categoria;
     private LocalDate fecha;
     private String descripcion;
     private int calificacion;
-
     private String archivo;
 
     public Video(String idVideo, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo) {
@@ -28,7 +25,6 @@ public class Video {
     }
 
     public Video(){
-
     }
 
     /**
@@ -142,8 +138,6 @@ public class Video {
     public void setArchivo(String archivo) {
         this.archivo = archivo;
     }
-
-
 
     @Override
     public String toString() {
