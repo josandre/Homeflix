@@ -8,38 +8,58 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RegistroView">
    <children>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="74.0" prefWidth="600.0" text="Registro de videos" textAlignment="CENTER" textFill="#5a8b76" textOverrun="CENTER_WORD_ELLIPSIS">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <effect>
-            <Glow>
-               <input>
-                  <Blend>
-                     <topInput>
-                        <ColorAdjust brightness="0.33" contrast="1.0" hue="1.0" />
-                     </topInput>
-                  </Blend>
-               </input>
-            </Glow>
-         </effect>
+      <Label layoutX="116.0" layoutY="85.0" prefHeight="17.0" prefWidth="143.0" text="Nombre del video">
          <font>
-            <Font size="18.0" />
+            <Font name="System Italic" size="17.0" />
          </font></Label>
-      <Label layoutX="116.0" layoutY="85.0" prefHeight="17.0" prefWidth="143.0" text="Nombre del video" />
-      <TextField fx:id="txtNombreVideo" layoutX="320.0" layoutY="81.0" prefHeight="26.0" prefWidth="192.0" />
+      <TextField fx:id="txtNombreVideo" layoutX="320.0" layoutY="81.0" prefHeight="26.0" prefWidth="192.0" style="-fx-border-color: Black;" />
       <ButtonBar layoutX="260.0" layoutY="465.0" prefHeight="33.0" prefWidth="80.0" />
-      <Label layoutX="116.0" layoutY="140.0" prefHeight="17.0" prefWidth="70.0" text="Categoria" />
-      <TextField fx:id="txtCategoria" layoutX="320.0" layoutY="135.0" prefHeight="26.0" prefWidth="192.0" />
-      <Label layoutX="116.0" layoutY="200.0" prefHeight="17.0" prefWidth="80.0" text="Subir archivo" />
-      <TextField fx:id="txtSubirArchivo" editable="false" layoutX="320.0" layoutY="196.0" prefHeight="26.0" prefWidth="160.0" promptText="Seleccionar Archivo" />
+      <Label layoutX="116.0" layoutY="140.0" prefHeight="17.0" prefWidth="70.0" text="Categoria">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <TextField fx:id="txtCategoria" layoutX="320.0" layoutY="135.0" prefHeight="26.0" prefWidth="192.0" style="-fx-border-color: black;" />
+      <Label layoutX="116.0" layoutY="200.0" prefHeight="22.0" prefWidth="102.0" text="Subir archivo">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <TextField fx:id="txtSubirArchivo" editable="false" layoutX="320.0" layoutY="196.0" prefHeight="26.0" prefWidth="160.0" promptText="Seleccionar Archivo" style="-fx-border-color: black;">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font></TextField>
 
-      <Label layoutX="116.0" layoutY="253.0" text="Descripcion" />
-      <TextArea fx:id="txtDescripcion" layoutX="320.0" layoutY="253.0" prefHeight="59.0" prefWidth="200.0" />
-    <Button fx:id="btnRegistrar" layoutX="67.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonRegistrar" prefHeight="33.0" prefWidth="143.0" text="Registrar" />
-      <Button fx:id="btnCancelar" layoutX="279.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="123.0" text="Cancelar" textAlignment="RIGHT" />
-      <Button fx:id="btnSubirArchivo" layoutX="480.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="26.0" prefWidth="34.0" text="..." />
-      <Button fx:id="btnReproducir" layoutX="497.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="33.0" prefWidth="77.0" text="Reproducir" />
+      <Label layoutX="116.0" layoutY="253.0" prefHeight="22.0" prefWidth="102.0" text="Descripcion">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <TextArea fx:id="txtDescripcion" layoutX="320.0" layoutY="253.0" prefHeight="59.0" prefWidth="200.0" style="-fx-border-color: black;" />
+    <Button fx:id="btnRegistrar" layoutX="116.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonRegistrar" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: Black;" text="Registrar" textFill="#f7f2f2" />
+      <Button fx:id="btnCancelar" layoutX="279.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: Black;" text="Cancelar" textAlignment="RIGHT" textFill="#fdfbfb" />
+      <Button fx:id="btnSubirArchivo" layoutX="480.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="28.0" prefWidth="34.0" style="-fx-background-color: black;" text="..." textFill="#fdfcfc" />
+      <Button fx:id="btnReproducir" layoutX="435.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: black;" text="Reproducir" textFill="#fdf7f7" />
+      <AnchorPane prefHeight="43.0" prefWidth="634.0" style="-fx-background-color: black;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="-2.0" prefHeight="47.0" prefWidth="600.0" text="Registro de videos" textAlignment="CENTER" textFill="#faf3f3" textOverrun="CENTER_WORD_ELLIPSIS">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <effect>
+                  <Glow>
+                     <input>
+                        <Blend>
+                           <topInput>
+                              <ColorAdjust brightness="0.33" contrast="1.0" hue="1.0" />
+                           </topInput>
+                        </Blend>
+                     </input>
+                  </Glow>
+               </effect>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
 
 
 
