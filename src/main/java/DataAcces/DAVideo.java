@@ -32,9 +32,8 @@ public class DAVideo {
                 statement.setString(6, video.getArchivo());
 
                 return statement.executeUpdate();
-
             }
-        }
+        }//crear un catch con un log para ver si la conexion no se logro
     }
 
 }
