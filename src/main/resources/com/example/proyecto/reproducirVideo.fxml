@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ReproducirVideoView">
+   <children>
+
+      <MediaView fx:id="mediaVideo" fitHeight="500.0" fitWidth="600.0" nodeOrientation="INHERIT">
+         <viewport>
+            <Rectangle2D height="200.0" width="400.0" />
+         </viewport>
+      </MediaView>
+      <Button fx:id="btnPausar" layoutX="262.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonPausar" style="-fx-background-color: black;" text="Play" textFill="WHITE" />
+      <Button fx:id="btnAdelantar" accessibleRole="INCREMENT_BUTTON" layoutX="349.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonAdelantar" style="-fx-background-color: black;" text="Next" textFill="#fffdfd" />
+      <Button fx:id="btnAtrasar" accessibleRole="DECREMENT_BUTTON" layoutX="165.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonRegresar" style="-fx-background-color: Black;" text="Back" textFill="WHITE" />
+
+   </children>
+</AnchorPane>

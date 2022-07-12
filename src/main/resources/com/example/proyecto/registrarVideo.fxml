@@ -36,9 +36,10 @@
 
       <Label layoutX="116.0" layoutY="253.0" text="Descripcion" />
       <TextArea fx:id="txtDescripcion" layoutX="320.0" layoutY="253.0" prefHeight="59.0" prefWidth="200.0" />
-    <Button fx:id="btnRegistrar" layoutX="149.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonRegistrar" prefHeight="33.0" prefWidth="143.0" text="Registrar" />
-      <Button fx:id="btnCancelar" layoutX="340.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="123.0" text="Cancelar" textAlignment="RIGHT" />
+    <Button fx:id="btnRegistrar" layoutX="67.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonRegistrar" prefHeight="33.0" prefWidth="143.0" text="Registrar" />
+      <Button fx:id="btnCancelar" layoutX="279.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="123.0" text="Cancelar" textAlignment="RIGHT" />
       <Button fx:id="btnSubirArchivo" layoutX="480.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="26.0" prefWidth="34.0" text="..." />
+      <Button fx:id="btnReproducir" layoutX="497.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="33.0" prefWidth="77.0" text="Reproducir" />
 
 
 
