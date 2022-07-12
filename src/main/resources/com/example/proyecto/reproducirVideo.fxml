@@ -16,6 +16,8 @@
       <Button fx:id="btnPausar" layoutX="262.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonPausar" style="-fx-background-color: black;" text="Play" textFill="WHITE" />
       <Button fx:id="btnAdelantar" accessibleRole="INCREMENT_BUTTON" layoutX="349.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonAdelantar" style="-fx-background-color: black;" text="Next" textFill="#fffdfd" />
       <Button fx:id="btnAtrasar" accessibleRole="DECREMENT_BUTTON" layoutX="165.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonRegresar" style="-fx-background-color: Black;" text="Back" textFill="WHITE" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane layoutY="149.0" prefHeight="51.0" prefWidth="200.0" />
 
    </children>
 </AnchorPane>
