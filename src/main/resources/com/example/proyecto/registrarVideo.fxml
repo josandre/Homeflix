@@ -37,7 +37,7 @@
       <Button fx:id="btnCancelar" layoutX="279.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: Black;" text="Cancelar" textAlignment="RIGHT" textFill="#fdfbfb" />
       <Button fx:id="btnSubirArchivo" layoutX="480.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="28.0" prefWidth="34.0" style="-fx-background-color: black;" text="..." textFill="#fdfcfc" />
       <Button fx:id="btnReproducir" layoutX="435.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: black;" text="Reproducir" textFill="#fdf7f7" />
-      <AnchorPane prefHeight="43.0" prefWidth="634.0" style="-fx-background-color: black;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="634.0" style="-fx-background-color: black;">
          <children>
             <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="-2.0" prefHeight="47.0" prefWidth="600.0" text="Registro de videos" textAlignment="CENTER" textFill="#faf3f3" textOverrun="CENTER_WORD_ELLIPSIS">
                <cursor>

@@ -5,19 +5,66 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ReproducirVideoView">
-   <children>
-
-      <MediaView fx:id="mediaVideo" fitHeight="500.0" fitWidth="600.0" nodeOrientation="INHERIT">
-         <viewport>
-            <Rectangle2D height="200.0" width="400.0" />
-         </viewport>
-      </MediaView>
-      <Button fx:id="btnPausar" layoutX="262.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonPausar" style="-fx-background-color: black;" text="Play" textFill="WHITE" />
-      <Button fx:id="btnAdelantar" accessibleRole="INCREMENT_BUTTON" layoutX="349.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonAdelantar" style="-fx-background-color: black;" text="Next" textFill="#fffdfd" />
-      <Button fx:id="btnAtrasar" accessibleRole="DECREMENT_BUTTON" layoutX="165.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonRegresar" style="-fx-background-color: Black;" text="Back" textFill="WHITE" />
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <AnchorPane layoutY="149.0" prefHeight="51.0" prefWidth="200.0" />
-
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ReproducirVideoView">
+   <center>
+      <StackPane prefHeight="407.0" prefWidth="632.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="603.0">
+               <children>
+                  <MediaView fx:id="mediaVideo" fitHeight="200.0" fitWidth="200.0" />
+                  <Slider maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="600.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnReproducir" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: Black;" text="Play" textFill="#fffdfd">
+                           <HBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: Black;" text="Volver" textFill="#faf6f6">
+                           <HBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnPausar" mnemonicParsing="false" onAction="#handleButtonPausar" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: black;" text="Pause" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnParar" mnemonicParsing="false" onAction="#handleButtonParar" prefHeight="26.0" prefWidth="46.0" style="-fx-background-color: black;" text="□" textFill="#fff9f9">
+                           <HBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnLento" mnemonicParsing="false" onAction="#handleButtonLento" prefHeight="26.0" prefWidth="45.0" style="-fx-background-color: black;" text="&lt;&lt;" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnRapido" mnemonicParsing="false" onAction="#handleButtonRapido" prefHeight="26.0" prefWidth="39.0" style="-fx-background-color: Black;" text="&gt;&gt;" textFill="#f7f1f1">
+                           <HBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMenosDiezSe" mnemonicParsing="false" onAction="#handleButtonMenosDiezSeg" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: black;" text="-10s" textFill="#f3f0f0">
+                           <HBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMasDiezSeg" mnemonicParsing="false" onAction="#handleButtonMasDiezSeg" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: black;" text="+10s" textFill="#f3ecec">
+                           <HBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Slider style="-fx-background-color: black;">
+                           <padding>
+                              <Insets bottom="7.0" left="7.0" right="7.0" top="12.0" />
+                           </padding>
+                        </Slider>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
