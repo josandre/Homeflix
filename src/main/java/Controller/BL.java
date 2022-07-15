@@ -10,6 +10,8 @@ import java.sql.SQLException;
 public class BL {
     DAVideo DAVideo = new DAVideo();
 
+    DAUsuario DAUsuario = new DAUsuario();
+
     private static BL instanciaBl;
 
     private BL() {
@@ -24,5 +26,9 @@ public class BL {
 
     public void annadirVideo(Video video) throws SQLException {
         DAVideo.annadirVideo(video);
+    }
+
+    public void crearUsuario(Usuario usuario) throws SQLException {
+        DAUsuario.crearUsuario(usuario);
     }
 }
