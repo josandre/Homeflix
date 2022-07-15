@@ -51,8 +51,6 @@ public class RegistroView {
         }
     }
 
-
-
     public void initialize(){
         System.out.println("initialize");
     }
@@ -77,10 +75,7 @@ public class RegistroView {
             video.setArchivo(subirArchivo);
 
             blConexion.annadirVideo(video);
-
         }
-
-
     }
 
     /**
