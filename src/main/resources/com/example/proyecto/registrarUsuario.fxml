@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.UsuarioView">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.UsuarioView">
    <children>
       <Label layoutX="138.0" layoutY="14.0" prefHeight="87.0" prefWidth="252.0" text="Registrarse a Homeflix" textAlignment="CENTER">
          <font>
@@ -17,7 +17,8 @@
       <TextField fx:id="txtNombreUsuario" layoutX="138.0" layoutY="297.0" prefHeight="42.0" prefWidth="180.0" text="Usuaio" />
       <TextField fx:id="txtContrasenna" layoutX="138.0" layoutY="365.0" prefHeight="42.0" prefWidth="180.0" text="Contraseña" />
       <TextField fx:id="txtArchivoImagen" layoutX="138.0" layoutY="432.0" prefHeight="42.0" prefWidth="180.0" text="Seleccionar imagen" />
-      <Button fx:id="btnSubirArchivoImagen" layoutX="326.0" layoutY="438.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="36.0" text=". . ." />
+      <Button fx:id="btnSubirArchivoImagen" layoutX="326.0" layoutY="438.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivoImagen" prefHeight="30.0" prefWidth="36.0" text=". . ." />
       <Button fx:id="btnRegistrarUsuario" layoutX="280.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleButtonRegistrarUsuario" prefHeight="42.0" prefWidth="87.0" text="Registrar" />
+      <Button fx:id="btnCancelarRegistro" layoutX="94.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleButtonCancelarRegsitro" prefHeight="42.0" prefWidth="87.0" text="Cancelar" />
    </children>
 </AnchorPane>

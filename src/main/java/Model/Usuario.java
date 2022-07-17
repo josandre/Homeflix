@@ -18,6 +18,9 @@ public class Usuario {
         this.archivoImagen = archivoImagen;
     }
 
+    public Usuario() {
+    }
+
     public String getNombre() {
         return nombre;
     }
