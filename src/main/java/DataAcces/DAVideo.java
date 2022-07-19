@@ -19,7 +19,7 @@ public class DAVideo {
      */
     public int annadirVideo(Video video)throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
-        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlace ) values( ?, ?, ?, ?, ?, ?)";
+        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlace) values( ?, ?, ?, ?, ?, ?)";
 
         // abre la conexion y la cierra despues de hacer el insert, por eso los recursos deben ser cerrables
         try (Connection connection = connectionManager.abrirConexion()) {
@@ -35,5 +35,4 @@ public class DAVideo {
             }
         }//crear un catch con un log para ver si la conexion no se logro
     }
-
 }
