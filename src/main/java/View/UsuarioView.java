@@ -24,8 +24,7 @@ public class UsuarioView {
     public TextField txtApellido;
     @FXML
     public TextField txtNombreUsuario;
-    @FXML
-    public TextField txtId;
+
     @FXML
     public TextField txtContrasenna;
     @FXML
@@ -44,6 +43,10 @@ public class UsuarioView {
         }
     }
 
+    public void initialize() {
+        System.out.println("inicializando");
+    }
+
     @FXML
     public void handleButtonRegistrarUsuario(ActionEvent event) throws SQLException {
         if(registrarUsuarioVerificacion()){
@@ -52,14 +55,12 @@ public class UsuarioView {
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             String nombreUsuario = txtNombreUsuario.getText();
-            String id = txtId.getText();
             String contrasenna = txtContrasenna.getText();
             String archivoImagen = txtArchivoImagen.getText();
 
-            usuario.setNombreUsuario(nombre);
+            usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setNombreUsuario(nombreUsuario);
-            usuario.setIdentificacion(Integer.parseInt(id));
             usuario.setContrasenna(contrasenna);
             usuario.setArchivoImagen(archivoImagen);
 
@@ -71,7 +72,6 @@ public class UsuarioView {
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String nombreUsuario = txtNombreUsuario.getText();
-        String id = txtId.getText();
         String contrasenna = txtContrasenna.getText();
         String archivoImagen = txtArchivoImagen.getText();
 
@@ -96,13 +96,6 @@ public class UsuarioView {
         } else {
             esValido = false;
             txtNombreUsuario.setBorder(obtenerBorderError());
-        }
-
-        if (id != null && !txtId.getText().isEmpty()) {
-            esValido = true;
-        } else {
-            esValido = false;
-            txtId.setBorder(obtenerBorderError());
         }
 
         if (contrasenna != null && !txtContrasenna.getText().isEmpty()) {
