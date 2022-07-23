@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.proyecto;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class loginMain extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
