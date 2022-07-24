@@ -1,6 +1,6 @@
 package DataAcces;
 
-import Model.Registro;
+import Model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class DARegistro {
 
-    public int annadirUsuario(Registro usuario)throws SQLException{
+    public int annadirUsuario(Usuario usuario)throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into Registro(nombre, apellido, identificacion, usuario, contrasenna, archivoImagen) values( ?, ?, ?, ?, ?, ?)";
 
