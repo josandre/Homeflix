@@ -131,7 +131,7 @@ public class RegistroView {
             txtSubirArchivo.setBorder(obtenerBordeError());
         }
 
-        if(!esValido ){
+        if(!esValido){
             return  false;
         }else {
             return true;
@@ -173,7 +173,4 @@ public class RegistroView {
             this.txtSubirArchivo.setText(file.getAbsolutePath());
         }
     }
-
-
-
 }

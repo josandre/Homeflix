@@ -28,14 +28,8 @@ public class LogInView {
     public TextField enterPasswordField;
 
     //Arreglando el bug de las imagenes
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        File brandingFile = new File("img/homeflix.jpg");
-        Image brandingImage = new Image(brandingFile.toURI().toString());
-        brandingImageView.setImage(brandingImage);
+    public void initialize() {
 
-        File lockFile = new File("img/lock.png");
-        Image lockImage = new Image(lockFile.toURI().toString());
-        lockImageView.setImage(lockImage);
 
     }
 
