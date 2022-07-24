@@ -55,8 +55,6 @@ public class RegistroView {
         }
     }
 
-
-
     public void initialize(){
         System.out.println("initialize");
     }
@@ -81,14 +79,12 @@ public class RegistroView {
             video.setArchivo(subirArchivo);
 
             blConexion.annadirVideo(video);
-
         }
     }
 
     public void handleButtonReproducir(ActionEvent event) throws IOException {
         Main.cambiaPantalla("reproducirVideo");
     }
-
 
     /**
      * Esta funcion permite la verfificacion de los espacios en blanco del registro

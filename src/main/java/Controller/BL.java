@@ -1,13 +1,14 @@
 package Controller;
 
+import DataAcces.DAUsuario;
 import DataAcces.DAVideo;
+import Model.Usuario;
 import Model.Video;
 
 import java.sql.SQLException;
 
 public class BL {
     DAVideo DAVideo = new DAVideo();
-
 
     private static BL instanciaBl;
 
@@ -24,7 +25,4 @@ public class BL {
     public void annadirVideo(Video video) throws SQLException {
         DAVideo.annadirVideo(video);
     }
-
-
-
 }

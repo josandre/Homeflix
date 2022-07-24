@@ -5,15 +5,15 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private int identificacion;
-    private String usuario;
+    private String nombreUsuario;
     private String contrasenna;
     private String archivoImagen;
 
-    public Usuario(String nombre, String apellido, int identificacion, String usuario, String contrasenna, String archivoImagen) {
+    public Usuario(String nombre, String apellido, int identificacion, String nombreUsuario, String contrasenna, String archivoImagen) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.identificacion = identificacion;
-        this.usuario = usuario;
+        this.nombreUsuario = nombreUsuario;
         this.contrasenna = contrasenna;
         this.archivoImagen = archivoImagen;
     }
@@ -42,12 +42,12 @@ public class Usuario {
         this.identificacion = identificacion;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNombreUsuario(String usuario) {
+        this.nombreUsuario = usuario;
     }
 
     public String getContrasenna() {
@@ -72,7 +72,7 @@ public class Usuario {
                 "nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", identificacion=" + identificacion +
-                ", usuario='" + usuario + '\'' +
+                ", nombreUsuario='" + nombreUsuario + '\'' +
                 ", contrasenna='" + contrasenna + '\'' +
                 ", archivoImagen='" + archivoImagen + '\'' +
                 '}';
