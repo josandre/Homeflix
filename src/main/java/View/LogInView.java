@@ -1,9 +1,9 @@
-package Controller;
+package View;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,20 +13,19 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class loginController {
-    //Variables de javafx
+public class LogInView {
     @FXML
-    private Label loginMessageLabel;
+    public Label loginMessageLabel;
     @FXML
-    private Button cancelButton;
+    public Button cancelButton;
     @FXML
-    private ImageView brandingImageView;
+    public ImageView brandingImageView;
     @FXML
-    private ImageView lockImageView;
+    public ImageView lockImageView;
     @FXML
-    private TextField usernameTextField;
+    public TextField usernameTextField;
     @FXML
-    private TextField enterPasswordField;
+    public TextField enterPasswordField;
 
     //Arreglando el bug de las imagenes
     public void initialize(URL url, ResourceBundle resourceBundle) {

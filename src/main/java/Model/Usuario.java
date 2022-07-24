@@ -1,6 +1,6 @@
 package Model;
 
-public class Registro {
+public class Usuario {
 
     private String nombre;
     private String apellido;
@@ -9,7 +9,7 @@ public class Registro {
     private String contrasenna;
     private String archivoImagen;
 
-    public Registro(String nombre, String apellido, int identificacion, String usuario, String contrasenna, String archivoImagen) {
+    public Usuario(String nombre, String apellido, int identificacion, String usuario, String contrasenna, String archivoImagen) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.identificacion = identificacion;
