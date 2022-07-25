@@ -5,9 +5,7 @@ import Model.Video;
 import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -24,7 +22,7 @@ import java.time.LocalDate;
 /**
  * Esta clase maneja el registro de los videos
  */
-public class RegistroView {
+public class RegistroVideoView {
 
     @FXML
     public TextField txtNombreVideo;

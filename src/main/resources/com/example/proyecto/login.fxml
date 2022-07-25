@@ -35,7 +35,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="btnIngresar" layoutX="61.0" layoutY="314.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Ingresar" textFill="#fffdfd" />
+            <Button fx:id="btnIngresar" layoutX="61.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleButtonLogIn" style="-fx-background-color: black;" text="Ingresar" textFill="#fffdfd" />
             <Button fx:id="btnSalir" layoutX="170.0" layoutY="314.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: black;" text="Salir" textFill="#fff7f7" />
          </children>
       </AnchorPane>

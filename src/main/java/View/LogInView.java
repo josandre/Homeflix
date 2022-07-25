@@ -1,5 +1,8 @@
 package View;
 
+import Controller.BL;
+import Model.Usuario;
+import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,22 +13,24 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LogInView {
-    @FXML
-    public Label loginMessageLabel;
+
     @FXML
     public Button cancelButton;
+
     @FXML
-    public ImageView brandingImageView;
+    public  TextField txtUsuario;
+
     @FXML
-    public ImageView lockImageView;
-    @FXML
-    public TextField usernameTextField;
-    @FXML
-    public TextField enterPasswordField;
+    public  TextField txtConstrasenna;
+
+
+    private BL blConexion = BL.getInstanciaBl();
 
     //Arreglando el bug de las imagenes
     public void initialize() {
@@ -33,13 +38,14 @@ public class LogInView {
 
     }
 
-    //Validacion
-    public void loginButtonOnAction(ActionEvent event) {
-        if (usernameTextField.getText().isBlank() == false && enterPasswordField.getText().isBlank() == false) {
-            validarLogin();
-        } else {
-            loginMessageLabel.setText("Por favor ingrese su ID y/o PW");
-        }
+
+    public void handleButtonLogIn(ActionEvent event) throws SQLException, IOException {
+       Usuario usuario =  blConexion.buscarUsuario(txtUsuario.getText(), txtConstrasenna.getText());
+      if(usuario != null){
+          System.out.println("pantalla principal");
+      }else {
+          Main.cambiaPantalla("registrarUsuario");
+      }
     }
 
 

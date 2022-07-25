@@ -31,10 +31,14 @@ public class UsuarioView {
     public TextField txtArchivoImagen;
     @FXML
     public Button btnCancelarRegistro;
+
+    @FXML
+    public TextField txtIdentificacion;
+
     @FXML
     public AnchorPane mainPane;
 
-    private final BL blConexion = BL.getInstanciaBl();
+    private BL blConexion = BL.getInstanciaBl();
 
     Stage stage;
     {
@@ -57,12 +61,14 @@ public class UsuarioView {
             String nombreUsuario = txtNombreUsuario.getText();
             String contrasenna = txtContrasenna.getText();
             String archivoImagen = txtArchivoImagen.getText();
+            String identificacion = txtIdentificacion.getText();
 
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setNombreUsuario(nombreUsuario);
             usuario.setContrasenna(contrasenna);
             usuario.setArchivoImagen(archivoImagen);
+            usuario.setIdentificacion(identificacion);
 
             blConexion.crearUsuario(usuario);
         }
@@ -74,8 +80,9 @@ public class UsuarioView {
         String nombreUsuario = txtNombreUsuario.getText();
         String contrasenna = txtContrasenna.getText();
         String archivoImagen = txtArchivoImagen.getText();
+        String identificacion = txtIdentificacion.getText();
 
-        boolean esValido;
+        boolean esValido = false;
 
         if (nombre != null && !txtNombre.getText().isEmpty()) {
             esValido = true;
@@ -112,7 +119,17 @@ public class UsuarioView {
             txtArchivoImagen.setBorder(obtenerBorderError());
         }
 
-        return esValido;
+        if(identificacion != null && !txtIdentificacion.getText().isEmpty()){
+            esValido = true;
+        }else{
+            esValido = false;
+        }
+
+        if(esValido){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public static Border obtenerBorderError() {

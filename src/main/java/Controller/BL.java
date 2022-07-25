@@ -31,4 +31,9 @@ public class BL {
     public void crearUsuario(Usuario usuario) throws SQLException {
         DAUsuario.annadirUsuario(usuario);
     }
+
+    public Usuario buscarUsuario(String contrasenna, String nombreUsuario)throws  SQLException{
+        Usuario usuario = DAUsuario.buscarUsuario(contrasenna, nombreUsuario);
+        return  usuario;
+    }
 }
