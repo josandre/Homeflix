@@ -2,6 +2,7 @@ package View;
 
 import Model.Usuario;
 import Controller.BL;
+import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -13,6 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class UsuarioView {
@@ -32,8 +34,6 @@ public class UsuarioView {
     @FXML
     public Button btnCancelarRegistro;
 
-    @FXML
-    public TextField txtIdentificacion;
 
     @FXML
     public AnchorPane mainPane;
@@ -61,14 +61,14 @@ public class UsuarioView {
             String nombreUsuario = txtNombreUsuario.getText();
             String contrasenna = txtContrasenna.getText();
             String archivoImagen = txtArchivoImagen.getText();
-            String identificacion = txtIdentificacion.getText();
+
 
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setNombreUsuario(nombreUsuario);
             usuario.setContrasenna(contrasenna);
             usuario.setArchivoImagen(archivoImagen);
-            usuario.setIdentificacion(identificacion);
+
 
             blConexion.crearUsuario(usuario);
         }
@@ -80,7 +80,7 @@ public class UsuarioView {
         String nombreUsuario = txtNombreUsuario.getText();
         String contrasenna = txtContrasenna.getText();
         String archivoImagen = txtArchivoImagen.getText();
-        String identificacion = txtIdentificacion.getText();
+
 
         boolean esValido = false;
 
@@ -119,11 +119,6 @@ public class UsuarioView {
             txtArchivoImagen.setBorder(obtenerBorderError());
         }
 
-        if(identificacion != null && !txtIdentificacion.getText().isEmpty()){
-            esValido = true;
-        }else{
-            esValido = false;
-        }
 
         if(esValido){
             return true;
@@ -151,7 +146,8 @@ public class UsuarioView {
         }
     }
     @FXML
-    public void handleButtonCancelarRegsitro(ActionEvent event){
+    public void handleButtonCancelarRegsitro(ActionEvent event) throws IOException {
+        Main.cambiaPantalla("login");
         System.out.println("cancelando...");
     }
 }

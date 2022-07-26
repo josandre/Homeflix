@@ -4,17 +4,15 @@ public class Usuario {
 
     private String nombre;
     private String apellido;
-    private String identificacion;
     private String nombreUsuario;
     private String contrasenna;
     private String archivoImagen;
 
 
 
-    public Usuario(String nombre, String apellido, String identificacion, String nombreUsuario, String contrasenna, String archivoImagen) {
+    public Usuario(String nombre, String apellido, String nombreUsuario, String contrasenna, String archivoImagen) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.identificacion = identificacion;
         this.nombreUsuario = nombreUsuario;
         this.contrasenna = contrasenna;
         this.archivoImagen = archivoImagen;
@@ -39,13 +37,8 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public String getIdentificacion() {
-        return identificacion;
-    }
 
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
-    }
+
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -76,7 +69,6 @@ public class Usuario {
         return "Registro{" +
                 "nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", identificacion=" + identificacion +
                 ", nombreUsuario='" + nombreUsuario + '\'' +
                 ", contrasenna='" + contrasenna + '\'' +
                 ", archivoImagen='" + archivoImagen + '\'' +
