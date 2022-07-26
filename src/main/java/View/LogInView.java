@@ -5,9 +5,7 @@ import Model.Usuario;
 import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -16,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LogInView {
@@ -40,21 +39,33 @@ public class LogInView {
 
 
     public void handleButtonLogIn(ActionEvent event) throws SQLException, IOException {
-       Usuario usuario =  blConexion.buscarUsuario(txtUsuario.getText(), txtConstrasenna.getText());
+        System.out.println("entrando");
+       Usuario usuario =  blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
       if(usuario != null){
+
           System.out.println("pantalla principal");
       }else {
-          Main.cambiaPantalla("registrarUsuario");
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+          alert.setTitle("Esta cuenta no existe en nuestro sistema");
+          alert.setContentText("Desea abrir una cuenta");
+          ButtonType okButton = new ButtonType("OK");
+          ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+          alert.getButtonTypes().setAll(okButton, cancelButton);
+
+          Optional<ButtonType> result = alert.showAndWait();
+
+          if(result.get() == okButton){
+              Main.cambiaPantalla("registrarUsuario");
+          }else if(result.get() == cancelButton){
+
+              txtUsuario.setText("");
+              txtConstrasenna.setText("");
+          }
+
       }
     }
 
 
-    public void cancelButtonOnAction(ActionEvent event) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-    }
 
-    public void validarLogin() {
 
-    }
 }
