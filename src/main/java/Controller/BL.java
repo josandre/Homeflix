@@ -6,6 +6,7 @@ import Model.Usuario;
 import Model.Video;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class BL {
     DAVideo DAVideo = new DAVideo();
@@ -36,4 +37,15 @@ public class BL {
         Usuario usuario = DAUsuario.buscarUsuario(contrasenna, nombreUsuario);
         return  usuario;
     }
+
+    public ArrayList<Video> listarVideos()throws SQLException{
+        ArrayList<Video> videos = DAVideo.obtenerVideos();
+        return  videos;
+    }
+
+    public ArrayList<Video> buscarVideo(String criterio)throws SQLException{
+        ArrayList<Video> videosSolicitados = DAVideo.buscarVideos(criterio);
+        return videosSolicitados;
+    }
+
 }
