@@ -63,7 +63,7 @@ public class ReproducirVideoView {
 
 
     public void initialize(){
-        System.out.println("reproduciendo video");
+
         final String nombreArchivo = "Video2.mp4";
         File archivo = new File(nombreArchivo);
 
