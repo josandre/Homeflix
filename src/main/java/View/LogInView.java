@@ -20,18 +20,20 @@ import java.util.ResourceBundle;
 public class LogInView {
 
     @FXML
-    public Button cancelButton;
+    public TextField txtUsuario;
 
-    @FXML
-    public  TextField txtUsuario;
+    public TextField getTxtUsuario() {
+        return txtUsuario;
+    }
 
     @FXML
     public  TextField txtConstrasenna;
 
-
     private BL blConexion = BL.getInstanciaBl();
 
-    //Arreglando el bug de las imagenes
+    private static LogInView instancia;
+
+
     public void initialize() {
 
 
@@ -40,10 +42,11 @@ public class LogInView {
 
     public void handleButtonLogIn(ActionEvent event) throws SQLException, IOException {
         System.out.println("entrando");
-       Usuario usuario =  blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
+        Usuario usuario =  blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
       if(usuario != null){
 
-          System.out.println("pantalla principal");
+          Main.cambiaPantalla("paginaPrincipal");
+
       }else {
           Alert alert = new Alert(Alert.AlertType.WARNING);
           alert.setTitle("Esta cuenta no existe en nuestro sistema");
@@ -64,6 +67,8 @@ public class LogInView {
 
       }
     }
+
+
 
 
 

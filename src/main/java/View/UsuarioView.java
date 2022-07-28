@@ -112,12 +112,6 @@ public class UsuarioView {
             txtContrasenna.setBorder(obtenerBorderError());
         }
 
-        if (archivoImagen != null && !txtArchivoImagen.getText().isEmpty()) {
-            esValido = true;
-        } else {
-            esValido = false;
-            txtArchivoImagen.setBorder(obtenerBorderError());
-        }
 
 
         if(esValido){

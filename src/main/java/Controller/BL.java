@@ -15,6 +15,8 @@ public class BL {
 
     private static BL instanciaBl;
 
+    private Usuario usuarioActual;
+
     private BL() {
     }
 
@@ -34,7 +36,12 @@ public class BL {
     }
 
     public Usuario buscarUsuario(String contrasenna, String nombreUsuario)throws  SQLException{
+
         Usuario usuario = DAUsuario.buscarUsuario(contrasenna, nombreUsuario);
+        if(usuario != null){
+            usuarioActual = usuario;
+        }
+
         return  usuario;
     }
 
@@ -47,5 +54,17 @@ public class BL {
         ArrayList<Video> videosSolicitados = DAVideo.buscarVideos(criterio);
         return videosSolicitados;
     }
+
+    public Usuario getUsuarioActual(){
+        return usuarioActual;
+    }
+
+
+
+
+
+
+
+
 
 }
