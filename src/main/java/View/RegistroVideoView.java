@@ -75,12 +75,13 @@ public class RegistroVideoView {
             String categoria = txtCategoria.getText();
             String descripcion = txtDescripcion.getText();
             String subirArchivo = txtSubirArchivo.getText();
+            String subirArchivoImagen = txtSubirThumbnail.getText();
             video.setCalificacion(0);
             video.setNombre(nombre);
             video.setCategoria(categoria);
             video.setDescripcion(descripcion);
             video.setArchivo(subirArchivo);
-            video.setThumbnailVideo(subirArchivo);
+            video.setThumbnailVideo(subirArchivoImagen);
 
             blConexion.annadirVideo(video);
         }
@@ -135,14 +136,6 @@ public class RegistroVideoView {
         }else{
             esValido = false;
             txtSubirArchivo.setBorder(obtenerBordeError());
-        }
-
-        if(subirThumbnail != null && !txtSubirThumbnail.getText().isEmpty()){
-            esValido = true;
-
-        }else{
-            esValido = false;
-            txtSubirThumbnail.setBorder(obtenerBordeError());
         }
 
 
