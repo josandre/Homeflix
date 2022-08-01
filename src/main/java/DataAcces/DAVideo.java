@@ -17,7 +17,7 @@ public class DAVideo {
      */
     public int annadirVideo(Video video)throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
-        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlace) values( ?, ?, ?, ?, ?, ?)";
+        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlace, enlaceImagen) values( ?, ?, ?, ?, ?, ?, ?)";
 
         // abre la conexion y la cierra despues de hacer el insert, por eso los recursos deben ser cerrables
         try (Connection connection = connectionManager.abrirConexion()) {
@@ -28,6 +28,8 @@ public class DAVideo {
                 statement.setString(4, video.getDescripcion());
                 statement.setInt(5, video.getCalificacion());
                 statement.setString(6, video.getArchivo());
+                statement.setString(7, video.getThumbnailVideo());
+
 
                 return statement.executeUpdate();
             }
@@ -37,7 +39,7 @@ public class DAVideo {
     public ArrayList<Video> obtenerVideos() throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select Nombre, Descripcion FROM Video ";
+        String select = "Select Nombre, Descripcion, enlaceImagen FROM Video ";
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
@@ -47,6 +49,8 @@ public class DAVideo {
                     Video video = new Video();
                     video.setNombre(resultSet.getString("Nombre"));
                     video.setDescripcion(resultSet.getString("Descripcion"));
+                    video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
+
                     result.add(video);
                 }
                 return result;
@@ -75,7 +79,6 @@ public class DAVideo {
                     result.add(video);
                 }
                 return result;
-
             }
         }
 

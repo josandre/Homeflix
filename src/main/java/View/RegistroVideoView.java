@@ -43,7 +43,12 @@ public class RegistroVideoView {
     public TextField txtSubirArchivo;
 
     @FXML
+    public TextField txtSubirThumbnail;
+
+    @FXML
     public AnchorPane mainPane;
+
+
 
     private BL blConexion = BL.getInstanciaBl();
     Stage stage;
@@ -75,6 +80,7 @@ public class RegistroVideoView {
             video.setCategoria(categoria);
             video.setDescripcion(descripcion);
             video.setArchivo(subirArchivo);
+            video.setThumbnailVideo(subirArchivo);
 
             blConexion.annadirVideo(video);
         }
@@ -92,6 +98,8 @@ public class RegistroVideoView {
         String categoria = txtCategoria.getText();
         String descripcion = txtDescripcion.getText();
         String subirArchivo = txtSubirArchivo.getText();
+        String subirThumbnail = txtSubirThumbnail.getText();
+
 
         boolean esValido = false;
 
@@ -128,6 +136,16 @@ public class RegistroVideoView {
             esValido = false;
             txtSubirArchivo.setBorder(obtenerBordeError());
         }
+
+        if(subirThumbnail != null && !txtSubirThumbnail.getText().isEmpty()){
+            esValido = true;
+
+        }else{
+            esValido = false;
+            txtSubirThumbnail.setBorder(obtenerBordeError());
+        }
+
+
 
         if(!esValido){
             return  false;
@@ -171,4 +189,17 @@ public class RegistroVideoView {
             this.txtSubirArchivo.setText(file.getAbsolutePath());
         }
     }
+    @FXML
+    public void handleButtonSubirThumbnail(ActionEvent event){
+        this.txtSubirThumbnail.setEditable(false);
+        System.out.println("subiendo archivo");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Abrir recurso del video");
+        File file = fileChooser.showOpenDialog(stage);
+
+        if(file != null){
+            this.txtSubirThumbnail.setText(file.getAbsolutePath());
+        }
+    }
+
 }

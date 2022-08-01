@@ -13,8 +13,10 @@ public class Video {
     private String descripcion;
     private int calificacion;
     private String archivo;
+    private String thumbnailVideo;
 
-    public Video(String idVideo, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo) {
+
+    public Video(String idVideo, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo, String thumbnailVideo) {
         this.id = idVideo;
         this.nombre = nombre;
         this.categoria = categoria;
@@ -22,6 +24,7 @@ public class Video {
         this.descripcion = descripcion;
         this.calificacion = calificacion;
         this.archivo = archivo;
+        this.thumbnailVideo = thumbnailVideo;
     }
 
     public Video(){
@@ -139,15 +142,25 @@ public class Video {
         this.archivo = archivo;
     }
 
+    public String getThumbnailVideo() {
+        return thumbnailVideo;
+    }
+
+    public void setThumbnailVideo(String thumbnailVideo) {
+        this.thumbnailVideo = thumbnailVideo;
+    }
+
     @Override
     public String toString() {
         return "Video{" +
-                "idVideo='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", categoria='" + categoria + '\'' +
-                ", Fecha=" + fecha +
-                ", Descripcion='" + descripcion + '\'' +
+                ", fecha=" + fecha +
+                ", descripcion='" + descripcion + '\'' +
                 ", calificacion=" + calificacion +
+                ", archivo='" + archivo + '\'' +
+                ", thumbnailVideo='" + thumbnailVideo + '\'' +
                 '}';
     }
 }

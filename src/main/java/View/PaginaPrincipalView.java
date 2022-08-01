@@ -13,6 +13,7 @@ import javafx.scene.AccessibleAction;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -40,13 +41,10 @@ public class PaginaPrincipalView {
     public TextField txtBuscar;
 
     @FXML
-    public TableView<Video> table;
+    public AnchorPane idAnchorPane;
 
     @FXML
-    public TableColumn<Video, String> colNombre;
-
-    @FXML
-    public TableColumn<Video, String> colDescripcion;
+    public Button btnAddVideo;
 
     ObservableList<Video> listaVideos = FXCollections.observableArrayList();
     private BL blConexion = BL.getInstanciaBl();
@@ -65,35 +63,38 @@ public class PaginaPrincipalView {
             Image imageDefault = new Image(urlImage.toString());
             imageView.setFill(new ImagePattern(imageDefault));
         }
-
-
-
-        colNombre.setCellValueFactory(video -> new SimpleStringProperty(video.getValue().getNombre()));
-        colDescripcion.setCellValueFactory(video -> new SimpleStringProperty(video.getValue().getDescripcion()));
         loadData();
     }
 
 
 
     public void loadData() throws SQLException {
-        listaVideos.removeAll();
-        listaVideos.addAll(blConexion.listarVideos());
-        table.setItems(listaVideos);
+        for (int i = 0; i < blConexion.listarVideos().size(); i++) {
+            Image img = new Image("file: " + blConexion.listarVideos().get(i).getThumbnailVideo());
+            ImageView imageView = new ImageView(img);
+            imageView.setFitHeight(200);
+            imageView.setFitWidth(150);
+            idAnchorPane.getChildren().add(imageView);
+        }
+
+
 
     }
 
     public void handleButtonSearch(ActionEvent event)throws SQLException{
         ArrayList<Video> videosEncontrados = blConexion.buscarVideo(txtBuscar.getText());
-        loadDataVideo(videosEncontrados);
 
     }
 
-    public void loadDataVideo(ArrayList<Video> videosEncontrados)throws SQLException{
+    public void handleButtonAddVideo() throws IOException {
+        Main.cambiaPantalla("registrarVideo");
+    }
+    /**public void loadDataVideo(ArrayList<Video> videosEncontrados)throws SQLException{
         table.getItems().clear();
         listaVideos.removeAll();
         listaVideos.addAll(videosEncontrados);
         table.setItems(listaVideos);
-    }
+    }**/
 
     public void handleButtonExit() throws IOException {
         Main.cambiaPantalla("login");
