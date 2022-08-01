@@ -5,10 +5,12 @@ import Model.Usuario;
 import Model.Video;
 import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class PaginaPrincipalView {
 
-    public static final int HEIGHT_VIDEO_IMAGE = 200;
+    public static final int HEIGHT_VIDEO_IMAGE = 150;
     public static final int WIDTH_VIDEO_IMAGE = 150;
     private static PaginaPrincipalView instancia;
 
@@ -51,10 +53,10 @@ public class PaginaPrincipalView {
         Usuario usuarioActual = blConexion.getUsuarioActual();
         labelUserName.setText(usuarioActual.getNombreUsuario());
 
-        if(usuarioActual.getArchivoImagen() != null && usuarioActual.getArchivoImagen().equalsIgnoreCase(" ")){
+        if(usuarioActual.getArchivoImagen() != null && !usuarioActual.getArchivoImagen().equalsIgnoreCase("")){
             Image image = new Image("file:" + usuarioActual.getArchivoImagen());
-
             imageView.setFill(new ImagePattern(image));
+            System.out.println(image.getUrl());
         }else {
             URL urlImage =  Main.class.getResource("img/defaultImage.png");
             Image imageDefault = new Image(urlImage.toString());
@@ -63,38 +65,41 @@ public class PaginaPrincipalView {
 
         listaVideos.setSpacing(5);
 
-        loadData();
+        loadData(usuarioActual.getId());
     }
 
 
 
-    public void loadData() throws SQLException {
-        ArrayList<Video> videos = blConexion.listarVideos();
+    public void loadData(int userId) throws SQLException {
+        ArrayList<Video> videos = blConexion.listarVideos(userId);
         for (int i = 0; i < videos.size(); i++) {
             Image img;
 
 
-
-
-            if(videos.get(i).getThumbnailVideo() != null && videos.get(i).getThumbnailVideo().equals(" ")){
-                img = new Image("file: " + videos.get(i).getThumbnailVideo());
-
-
+            if(videos.get(i).getThumbnailVideo() != null && !videos.get(i).getThumbnailVideo().equals("")){
+                img = new Image("file:" + videos.get(i).getThumbnailVideo());
+                System.out.println(img.getUrl());
 
             }else {
                 URL urlImage2 =  Main.class.getResource("img/defaulImageVideo.jpeg");
                 img = new Image(urlImage2.toString());
 
             }
+
             ImageView imageView = new ImageView(img);
             imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
             imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
+            imageView.setPickOnBounds(true);
+            int finalI = i;
+            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    System.out.println(videos.get(finalI));
+                }
+            });
             listaVideos.getChildren().add(imageView);
 
-
         }
-
-
 
     }
 
@@ -106,16 +111,13 @@ public class PaginaPrincipalView {
     public void handleButtonAddVideo() throws IOException {
         Main.cambiaPantalla("registrarVideo");
     }
-    /**public void loadDataVideo(ArrayList<Video> videosEncontrados)throws SQLException{
-        table.getItems().clear();
-        listaVideos.removeAll();
-        listaVideos.addAll(videosEncontrados);
-        table.setItems(listaVideos);
-    }**/
 
     public void handleButtonExit() throws IOException {
         Main.cambiaPantalla("login");
     }
+
+
+
 
 
 }

@@ -22,16 +22,14 @@ public class LogInView {
     @FXML
     public TextField txtUsuario;
 
-    public TextField getTxtUsuario() {
-        return txtUsuario;
-    }
+
 
     @FXML
     public  TextField txtConstrasenna;
 
     private BL blConexion = BL.getInstanciaBl();
 
-    private static LogInView instancia;
+
 
 
     public void initialize() {
@@ -68,9 +66,9 @@ public class LogInView {
       }
     }
 
-
-
-
+    public void handleButtonExit(){
+        System.exit(0);
+    }
 
 
 }

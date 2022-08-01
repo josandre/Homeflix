@@ -1,21 +1,27 @@
 package View;
 
 import Controller.BL;
+import Model.Usuario;
 import Model.Video;
 import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -48,6 +54,12 @@ public class RegistroVideoView {
     @FXML
     public AnchorPane mainPane;
 
+    @FXML
+    public Label labelActualUser;
+
+    @FXML
+    public Circle actualUserPhoto;
+
 
 
     private BL blConexion = BL.getInstanciaBl();
@@ -59,7 +71,19 @@ public class RegistroVideoView {
     }
 
     public void initialize(){
-        System.out.println("initialize");
+        Usuario usuarioActual = blConexion.getUsuarioActual();
+        labelActualUser.setText(usuarioActual.getNombreUsuario());
+
+        if(usuarioActual.getArchivoImagen() != null && usuarioActual.getArchivoImagen().equalsIgnoreCase("")){
+            Image image = new Image("file:" + usuarioActual.getArchivoImagen());
+            actualUserPhoto.setFill(new ImagePattern(image));
+        }else {
+            URL urlImage =  Main.class.getResource("img/defaultImage.png");
+            Image imageDefault = new Image(urlImage.toString());
+            actualUserPhoto.setFill(new ImagePattern(imageDefault));
+        }
+
+
     }
 
     /**
@@ -82,7 +106,9 @@ public class RegistroVideoView {
             video.setDescripcion(descripcion);
             video.setArchivo(subirArchivo);
             video.setThumbnailVideo(subirArchivoImagen);
-
+            video.setUserId(blConexion.getUsuarioActual().getId());
+            blConexion.getUsuarioActual().getUserVideos().add(video);
+            System.out.println(blConexion.getUsuarioActual().getUserVideos());
             blConexion.annadirVideo(video);
         }
     }
@@ -163,8 +189,9 @@ public class RegistroVideoView {
      * @param event Este evento cancela el registro y envia al usuario a la pagina principal
      */
     @FXML
-    public void handleButtonCancelar(ActionEvent event){
-        System.out.println("cancelando");
+    public void handleButtonCancelar(ActionEvent event) throws IOException {
+        Main.cambiaPantalla("paginaPrincipal");
+
     }
 
     /**

@@ -1,12 +1,14 @@
 package Model;
 
+import Controller.BL;
+
 import java.time.LocalDate;
 
 /**
  * Esta clase contiene los metodos y atributo de Video
  */
 public class Video {
-    private String id;
+    private int id;
     private String nombre;
     private String categoria;
     private LocalDate fecha;
@@ -15,9 +17,13 @@ public class Video {
     private String archivo;
     private String thumbnailVideo;
 
+    private int userId;
 
-    public Video(String idVideo, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo, String thumbnailVideo) {
-        this.id = idVideo;
+    private BL blConexion = BL.getInstanciaBl();
+
+
+    public Video(int id, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo, String thumbnailVideo, int userId) {
+        this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
         this.fecha = fecha;
@@ -25,6 +31,7 @@ public class Video {
         this.calificacion = calificacion;
         this.archivo = archivo;
         this.thumbnailVideo = thumbnailVideo;
+        this.userId = userId;
     }
 
     public Video(){
@@ -34,16 +41,16 @@ public class Video {
      * Esta funcion permite obtener el id del video
      * @return id del video
      */
-    public String getIdVideo() {
+    public int getId() {
         return id;
     }
 
     /**
-     * @param idVideo
+     * @param id
      * Esta funcion permite configurar el id del video
      */
-    public void setIdVideo(String idVideo) {
-        this.id = idVideo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -150,6 +157,15 @@ public class Video {
         this.thumbnailVideo = thumbnailVideo;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+
     @Override
     public String toString() {
         return "Video{" +
@@ -161,6 +177,7 @@ public class Video {
                 ", calificacion=" + calificacion +
                 ", archivo='" + archivo + '\'' +
                 ", thumbnailVideo='" + thumbnailVideo + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }
