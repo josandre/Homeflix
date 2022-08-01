@@ -4,15 +4,14 @@ import Controller.BL;
 import Model.Usuario;
 import Model.Video;
 import com.example.proyecto.Main;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.AccessibleAction;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -25,6 +24,8 @@ import java.util.stream.Collectors;
 
 public class PaginaPrincipalView {
 
+    public static final int HEIGHT_VIDEO_IMAGE = 150;
+    public static final int WIDTH_VIDEO_IMAGE = 150;
     private static PaginaPrincipalView instancia;
 
     @FXML
@@ -40,15 +41,11 @@ public class PaginaPrincipalView {
     public TextField txtBuscar;
 
     @FXML
-    public TableView<Video> table;
+    public HBox listaVideos;
 
     @FXML
-    public TableColumn<Video, String> colNombre;
+    public Button btnAddVideo;
 
-    @FXML
-    public TableColumn<Video, String> colDescripcion;
-
-    ObservableList<Video> listaVideos = FXCollections.observableArrayList();
     private BL blConexion = BL.getInstanciaBl();
 
 
@@ -56,48 +53,71 @@ public class PaginaPrincipalView {
         Usuario usuarioActual = blConexion.getUsuarioActual();
         labelUserName.setText(usuarioActual.getNombreUsuario());
 
-        if(usuarioActual.getArchivoImagen() != null && usuarioActual.getArchivoImagen().equalsIgnoreCase(" ")){
+        if(usuarioActual.getArchivoImagen() != null && !usuarioActual.getArchivoImagen().equalsIgnoreCase("")){
             Image image = new Image("file:" + usuarioActual.getArchivoImagen());
-
             imageView.setFill(new ImagePattern(image));
+            System.out.println(image.getUrl());
         }else {
             URL urlImage =  Main.class.getResource("img/defaultImage.png");
             Image imageDefault = new Image(urlImage.toString());
             imageView.setFill(new ImagePattern(imageDefault));
         }
 
+        listaVideos.setSpacing(5);
 
-
-        colNombre.setCellValueFactory(video -> new SimpleStringProperty(video.getValue().getNombre()));
-        colDescripcion.setCellValueFactory(video -> new SimpleStringProperty(video.getValue().getDescripcion()));
-        loadData();
+        loadData(usuarioActual.getId());
     }
 
 
 
-    public void loadData() throws SQLException {
-        listaVideos.removeAll();
-        listaVideos.addAll(blConexion.listarVideos());
-        table.setItems(listaVideos);
+    public void loadData(int userId) throws SQLException {
+        ArrayList<Video> videos = blConexion.listarVideos(userId);
+        for (int i = 0; i < videos.size(); i++) {
+            Image img;
+
+
+            if(videos.get(i).getThumbnailVideo() != null && !videos.get(i).getThumbnailVideo().equals("")){
+                img = new Image("file:" + videos.get(i).getThumbnailVideo());
+                System.out.println(img.getUrl());
+
+            }else {
+                URL urlImage2 =  Main.class.getResource("img/defaulImageVideo.jpeg");
+                img = new Image(urlImage2.toString());
+
+            }
+
+            ImageView imageView = new ImageView(img);
+            imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
+            imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
+            imageView.setPickOnBounds(true);
+            int finalI = i;
+            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    System.out.println(videos.get(finalI));
+                }
+            });
+            listaVideos.getChildren().add(imageView);
+
+        }
 
     }
 
     public void handleButtonSearch(ActionEvent event)throws SQLException{
         ArrayList<Video> videosEncontrados = blConexion.buscarVideo(txtBuscar.getText());
-        loadDataVideo(videosEncontrados);
 
     }
 
-    public void loadDataVideo(ArrayList<Video> videosEncontrados)throws SQLException{
-        table.getItems().clear();
-        listaVideos.removeAll();
-        listaVideos.addAll(videosEncontrados);
-        table.setItems(listaVideos);
+    public void handleButtonAddVideo() throws IOException {
+        Main.cambiaPantalla("registrarVideo");
     }
 
     public void handleButtonExit() throws IOException {
         Main.cambiaPantalla("login");
     }
+
+
+
 
 
 }

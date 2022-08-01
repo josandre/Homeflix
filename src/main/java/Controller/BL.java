@@ -45,8 +45,8 @@ public class BL {
         return  usuario;
     }
 
-    public ArrayList<Video> listarVideos()throws SQLException{
-        ArrayList<Video> videos = DAVideo.obtenerVideos();
+    public ArrayList<Video> listarVideos(int userId)throws SQLException{
+        ArrayList<Video> videos = DAVideo.obtenerVideos(userId);
         return  videos;
     }
 

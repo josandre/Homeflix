@@ -1,5 +1,6 @@
 package DataAcces;
 
+import Controller.BL;
 import Model.Video;
 
 import java.sql.*;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
  */
 public class DAVideo {
 
+
+
     /**
      * @param video
      * @return actualizacion de la base de datos
@@ -17,9 +20,9 @@ public class DAVideo {
      */
     public int annadirVideo(Video video)throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
-        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlace) values( ?, ?, ?, ?, ?, ?)";
+        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlace, enlaceImagen, idUsuario) values( ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        // abre la conexion y la cierra despues de hacer el insert, por eso los recursos deben ser cerrables
+
         try (Connection connection = connectionManager.abrirConexion()) {
             try ( PreparedStatement statement = connection.prepareStatement(insert)) {
                 statement.setString(1, video.getNombre());
@@ -28,25 +31,32 @@ public class DAVideo {
                 statement.setString(4, video.getDescripcion());
                 statement.setInt(5, video.getCalificacion());
                 statement.setString(6, video.getArchivo());
-
+                statement.setString(7, video.getThumbnailVideo());
+                statement.setInt(8, video.getUserId());
                 return statement.executeUpdate();
+
+
             }
-        }//crear un catch con un log para ver si la conexion no se logro
+        }
     }
 
-    public ArrayList<Video> obtenerVideos() throws SQLException {
+    public ArrayList<Video> obtenerVideos(int idUser) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select Nombre, Descripcion FROM Video ";
+        String select = "Select Nombre, Descripcion, enlaceImagen, idUsuario, id  FROM Video WHERE idUsuario = ?";
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
+                statement.setInt(1, idUser);
                 ResultSet resultSet = statement.executeQuery();
 
                 while(resultSet.next()){
                     Video video = new Video();
                     video.setNombre(resultSet.getString("Nombre"));
                     video.setDescripcion(resultSet.getString("Descripcion"));
+                    video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
+                    video.setUserId(resultSet.getInt("idUsuario"));
+                    video.setId(resultSet.getInt("id"));
                     result.add(video);
                 }
                 return result;
@@ -75,7 +85,6 @@ public class DAVideo {
                     result.add(video);
                 }
                 return result;
-
             }
         }
 

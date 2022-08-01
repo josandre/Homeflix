@@ -1,27 +1,37 @@
 package Model;
 
+import Controller.BL;
+
 import java.time.LocalDate;
 
 /**
  * Esta clase contiene los metodos y atributo de Video
  */
 public class Video {
-    private String id;
+    private int id;
     private String nombre;
     private String categoria;
     private LocalDate fecha;
     private String descripcion;
     private int calificacion;
     private String archivo;
+    private String thumbnailVideo;
 
-    public Video(String idVideo, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo) {
-        this.id = idVideo;
+    private int userId;
+
+    private BL blConexion = BL.getInstanciaBl();
+
+
+    public Video(int id, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo, String thumbnailVideo, int userId) {
+        this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.calificacion = calificacion;
         this.archivo = archivo;
+        this.thumbnailVideo = thumbnailVideo;
+        this.userId = userId;
     }
 
     public Video(){
@@ -31,16 +41,16 @@ public class Video {
      * Esta funcion permite obtener el id del video
      * @return id del video
      */
-    public String getIdVideo() {
+    public int getId() {
         return id;
     }
 
     /**
-     * @param idVideo
+     * @param id
      * Esta funcion permite configurar el id del video
      */
-    public void setIdVideo(String idVideo) {
-        this.id = idVideo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -139,15 +149,35 @@ public class Video {
         this.archivo = archivo;
     }
 
+    public String getThumbnailVideo() {
+        return thumbnailVideo;
+    }
+
+    public void setThumbnailVideo(String thumbnailVideo) {
+        this.thumbnailVideo = thumbnailVideo;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+
     @Override
     public String toString() {
         return "Video{" +
-                "idVideo='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", categoria='" + categoria + '\'' +
-                ", Fecha=" + fecha +
-                ", Descripcion='" + descripcion + '\'' +
+                ", fecha=" + fecha +
+                ", descripcion='" + descripcion + '\'' +
                 ", calificacion=" + calificacion +
+                ", archivo='" + archivo + '\'' +
+                ", thumbnailVideo='" + thumbnailVideo + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }
