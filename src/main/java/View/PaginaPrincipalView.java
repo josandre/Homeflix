@@ -71,25 +71,24 @@ public class PaginaPrincipalView {
     public void loadData() throws SQLException {
         ArrayList<Video> videos = blConexion.listarVideos();
         for (int i = 0; i < videos.size(); i++) {
+            Image img;
 
 
 
 
             if(videos.get(i).getThumbnailVideo() != null && videos.get(i).getThumbnailVideo().equals(" ")){
-                Image img = new Image("file: " + videos.get(i).getThumbnailVideo());
+                img = new Image("file: " + videos.get(i).getThumbnailVideo());
 
-                ImageView imageView = new ImageView(img);
-                imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
-                imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
+
 
             }else {
-                URL urlImage2 =  Main.class.getResource("img/defaullImageVideo.jpeg");
-                Image imageDefault = new Image(urlImage2.toString());
-                ImageView imageView = new ImageView(imageDefault);
-                imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
-                imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
-            }
+                URL urlImage2 =  Main.class.getResource("img/defaulImageVideo.jpeg");
+                img = new Image(urlImage2.toString());
 
+            }
+            ImageView imageView = new ImageView(img);
+            imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
+            imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
             listaVideos.getChildren().add(imageView);
 
 
