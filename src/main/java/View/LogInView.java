@@ -42,7 +42,6 @@ public class LogInView {
         System.out.println("entrando");
         Usuario usuario =  blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
       if(usuario != null){
-
           Main.cambiaPantalla("paginaPrincipal");
 
       }else {

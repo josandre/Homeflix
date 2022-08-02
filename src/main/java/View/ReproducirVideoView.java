@@ -1,6 +1,7 @@
 package View;
 
 import Controller.BL;
+import Model.Video;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -59,12 +60,14 @@ public class ReproducirVideoView {
     @FXML
     public Slider volumSlider;
 
+    private BL blConexion = BL.getInstanciaBl();
+
 
 
 
     public void initialize(){
-
-        final String nombreArchivo = "Video2.mp4";
+        Video actualVideo = blConexion.getActualVideo();
+        final String nombreArchivo = actualVideo.getArchivo();
         File archivo = new File(nombreArchivo);
 
         Media video = new Media(archivo.toURI().toString());
