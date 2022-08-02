@@ -17,8 +17,6 @@ public class BL {
 
     private Usuario usuarioActual;
 
-
-
     private Video actualVideo;
 
     private BL() {
