@@ -17,6 +17,10 @@ public class BL {
 
     private Usuario usuarioActual;
 
+
+
+    private Video actualVideo;
+
     private BL() {
     }
 
@@ -45,6 +49,8 @@ public class BL {
         return  usuario;
     }
 
+
+
     public ArrayList<Video> listarVideos(int userId)throws SQLException{
         ArrayList<Video> videos = DAVideo.obtenerVideos(userId);
         return  videos;
@@ -57,6 +63,14 @@ public class BL {
 
     public Usuario getUsuarioActual(){
         return usuarioActual;
+    }
+
+    public Video getActualVideo() {
+        return actualVideo;
+    }
+
+    public void setActualVideo(Video actualVideo) {
+        this.actualVideo = actualVideo;
     }
 
 

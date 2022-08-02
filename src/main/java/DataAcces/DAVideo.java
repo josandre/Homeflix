@@ -43,7 +43,7 @@ public class DAVideo {
     public ArrayList<Video> obtenerVideos(int idUser) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select Nombre, Descripcion, enlaceImagen, idUsuario, id  FROM Video WHERE idUsuario = ?";
+        String select = "Select Nombre, Descripcion, Enlace, enlaceImagen, idUsuario, id  FROM Video WHERE idUsuario = ?";
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
@@ -57,6 +57,7 @@ public class DAVideo {
                     video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
                     video.setUserId(resultSet.getInt("idUsuario"));
                     video.setId(resultSet.getInt("id"));
+                    video.setArchivo(resultSet.getString("Enlace"));
                     result.add(video);
                 }
                 return result;

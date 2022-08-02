@@ -16,11 +16,9 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PaginaPrincipalView {
 
@@ -74,10 +72,11 @@ public class PaginaPrincipalView {
         ArrayList<Video> videos = blConexion.listarVideos(userId);
         for (int i = 0; i < videos.size(); i++) {
             Image img;
+            Video video = videos.get(i);
 
 
-            if(videos.get(i).getThumbnailVideo() != null && !videos.get(i).getThumbnailVideo().equals("")){
-                img = new Image("file:" + videos.get(i).getThumbnailVideo());
+            if(videos.get(i).getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")){
+                img = new Image("file:" + video.getThumbnailVideo());
                 System.out.println(img.getUrl());
 
             }else {
@@ -90,11 +89,17 @@ public class PaginaPrincipalView {
             imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
             imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
             imageView.setPickOnBounds(true);
-            int finalI = i;
+
             imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    System.out.println(videos.get(finalI));
+                    blConexion.setActualVideo(video);
+                    try {
+                        playVideo(video);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
             });
             listaVideos.getChildren().add(imageView);
@@ -106,6 +111,10 @@ public class PaginaPrincipalView {
     public void handleButtonSearch(ActionEvent event)throws SQLException{
         ArrayList<Video> videosEncontrados = blConexion.buscarVideo(txtBuscar.getText());
 
+    }
+
+    public void playVideo(Video video) throws IOException {
+        Main.cambiaPantalla("reproducirVideo");
     }
 
     public void handleButtonAddVideo() throws IOException {
