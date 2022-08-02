@@ -39,16 +39,18 @@ public class PaginaPrincipalView {
     public TextField txtBuscar;
 
     @FXML
-    public HBox listaVideos;
+    public HBox hBoxVideos;
 
     @FXML
     public Button btnAddVideo;
 
     private BL blConexion = BL.getInstanciaBl();
 
+    private Usuario usuarioActual = blConexion.getUsuarioActual();
+
 
     public void initialize() throws SQLException {
-        Usuario usuarioActual = blConexion.getUsuarioActual();
+
         labelUserName.setText(usuarioActual.getNombreUsuario());
 
         if(usuarioActual.getArchivoImagen() != null && !usuarioActual.getArchivoImagen().equalsIgnoreCase("")){
@@ -61,7 +63,7 @@ public class PaginaPrincipalView {
             imageView.setFill(new ImagePattern(imageDefault));
         }
 
-        listaVideos.setSpacing(5);
+        hBoxVideos.setSpacing(5);
 
         loadData(usuarioActual.getId());
     }
@@ -71,11 +73,12 @@ public class PaginaPrincipalView {
     public void loadData(int userId) throws SQLException {
         ArrayList<Video> videos = blConexion.listarVideos(userId);
         for (int i = 0; i < videos.size(); i++) {
+
             Image img;
             Video video = videos.get(i);
 
 
-            if(videos.get(i).getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")){
+            if(video.getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")){
                 img = new Image("file:" + video.getThumbnailVideo());
                 System.out.println(img.getUrl());
 
@@ -90,27 +93,66 @@ public class PaginaPrincipalView {
             imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
             imageView.setPickOnBounds(true);
 
-            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    blConexion.setActualVideo(video);
-                    try {
-                        playVideo(video);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                }
-            });
-            listaVideos.getChildren().add(imageView);
+            playingVideo(imageView, video);
+            hBoxVideos.getChildren().add(imageView);
 
         }
 
     }
 
     public void handleButtonSearch(ActionEvent event)throws SQLException{
-        ArrayList<Video> videosEncontrados = blConexion.buscarVideo(txtBuscar.getText());
+        hBoxVideos.getChildren().clear();
+        if(txtBuscar.getText().trim().isEmpty()){
+           loadData(usuarioActual.getId());
+        }else
+        {
+            searchLoadData();
+        }
 
+    }
+
+    public void searchLoadData() throws SQLException {
+        ArrayList<Video> videos = blConexion.buscarVideo(txtBuscar.getText());
+        hBoxVideos.getChildren().clear();
+        for (int i = 0; i < videos.size(); i++) {
+            Image img;
+            Video video = videos.get(i);
+
+
+            if(video.getThumbnailVideo() != null && !videos.get(i).getThumbnailVideo().equals("")){
+                img = new Image("file:" + videos.get(i).getThumbnailVideo());
+                System.out.println(img.getUrl());
+
+            }else {
+                URL urlImage2 =  Main.class.getResource("img/defaulImageVideo.jpeg");
+                img = new Image(urlImage2.toString());
+
+            }
+
+            ImageView imageView = new ImageView(img);
+            imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
+            imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
+            imageView.setPickOnBounds(true);
+
+           playingVideo(imageView, video);
+           hBoxVideos.getChildren().add(imageView);
+
+        }
+    }
+
+    public void playingVideo(ImageView imageView, Video video){
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                blConexion.setActualVideo(video);
+                try {
+                    playVideo(video);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
     }
 
     public void playVideo(Video video) throws IOException {

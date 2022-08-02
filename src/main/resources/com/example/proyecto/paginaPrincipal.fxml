@@ -21,7 +21,7 @@
             <Button fx:id="btnAddVideo" layoutX="98.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleButtonAddVideo" text="+" />
             <ScrollPane layoutX="2.0" layoutY="68.0" prefHeight="166.0" prefWidth="600.0">
                <content>
-                  <HBox fx:id="listaVideos" prefHeight="153.0" prefWidth="600.0" />
+                  <HBox fx:id="hBoxVideos" prefHeight="153.0" prefWidth="600.0" />
                </content>
             </ScrollPane>
          </children>

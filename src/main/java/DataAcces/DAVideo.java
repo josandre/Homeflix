@@ -1,6 +1,7 @@
 package DataAcces;
 
 import Controller.BL;
+import Model.Usuario;
 import Model.Video;
 
 import java.sql.*;
@@ -70,7 +71,7 @@ public class DAVideo {
     public ArrayList<Video> buscarVideos(String criterio) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select Nombre, Descripcion FROM Video where Descripcion like ? or Nombre like ?";
+        String select = "Select Nombre, Descripcion, Enlace, enlaceImagen FROM Video where Descripcion like ? or Nombre like ?";
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
@@ -83,6 +84,8 @@ public class DAVideo {
                     Video video = new Video();
                     video.setNombre(resultSet.getString("Nombre"));
                     video.setDescripcion(resultSet.getString("Descripcion"));
+                    video.setArchivo(resultSet.getString("Enlace"));
+                    video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
                     result.add(video);
                 }
                 return result;
