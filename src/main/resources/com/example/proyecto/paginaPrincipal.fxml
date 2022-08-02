@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PaginaPrincipalView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PaginaPrincipalView">
    <center>
       <AnchorPane prefHeight="437.0" prefWidth="660.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="txtBuscar" layoutX="168.0" layoutY="25.0" />
-            <Button fx:id="btnBuscar" layoutX="328.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleButtonSearch" text="Buscar" />
-            <Label fx:id="labelUserName" layoutX="460.0" layoutY="30.0" prefHeight="17.0" prefWidth="60.0" text="Label" />
-            <Button fx:id="btnExit" layoutX="27.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleButtonExit" text="Exit" />
-            <Circle fx:id="imageView" fill="DODGERBLUE" layoutX="537.0" layoutY="37.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
-            <Button fx:id="btnAddVideo" layoutX="98.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleButtonAddVideo" text="+" />
-            <ScrollPane layoutX="2.0" layoutY="68.0" prefHeight="166.0" prefWidth="600.0">
+            <ScrollPane layoutX="1.0" layoutY="107.0" prefHeight="166.0" prefWidth="754.0" style="-fx-background-color: black;">
                <content>
-                  <HBox fx:id="hBoxVideos" prefHeight="153.0" prefWidth="600.0" />
+                  <HBox fx:id="hBoxVideos" prefHeight="153.0" prefWidth="753.0" />
                </content>
             </ScrollPane>
+            <AnchorPane fx:id="anchorPainMain" layoutX="2.0" layoutY="2.0" prefHeight="95.0" prefWidth="748.0">
+               <children>
+                  <Circle fx:id="imageView" fill="DODGERBLUE" layoutX="694.0" layoutY="56.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label fx:id="labelUserName" layoutX="587.0" layoutY="53.0" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                  <TextField fx:id="txtBuscar" layoutX="250.0" layoutY="43.0" />
+                  <ImageView fx:id="search" fitHeight="38.0" fitWidth="55.0" layoutX="413.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/search.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="trash" fitHeight="30.0" fitWidth="28.0" layoutX="468.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/trash3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exit" fitHeight="37.0" fitWidth="55.0" layoutX="28.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/exit.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="add" fitHeight="48.0" fitWidth="51.0" layoutX="78.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/add.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </center>

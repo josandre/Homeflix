@@ -2,6 +2,7 @@ package View;
 
 import Controller.BL;
 import Model.Video;
+import com.example.proyecto.Main;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -24,6 +25,7 @@ import javafx.util.Duration;
 import org.controlsfx.control.action.Action;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class ReproducirVideoView {
@@ -56,6 +58,9 @@ public class ReproducirVideoView {
 
     @FXML
     public Slider progresBar;
+
+    @FXML
+    public Button btnVolver;
 
     @FXML
     public Slider volumSlider;
@@ -119,19 +124,13 @@ public class ReproducirVideoView {
             }
         });
 
-
-
-
-
     }
 
 
 
-    public void handleButtonVolver(ActionEvent event){
-        //to do
+    public void handleButtonVolver(ActionEvent event) throws IOException {
+        Main.cambiaPantalla("paginaPrincipal");
     }
-
-
 
     public void handleButtonReproducir(ActionEvent event)  {
            mediaPlayer.play();
