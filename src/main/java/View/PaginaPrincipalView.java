@@ -44,9 +44,23 @@ public class PaginaPrincipalView {
     @FXML
     public Button btnAddVideo;
 
+    @FXML
+    public ImageView trash;
+
+    @FXML
+    public ImageView search;
+
+    @FXML
+    public ImageView exit;
+
+    @FXML
+    public ImageView add;
+
     private BL blConexion = BL.getInstanciaBl();
 
     private Usuario usuarioActual = blConexion.getUsuarioActual();
+
+
 
 
     public void initialize() throws SQLException {
@@ -66,7 +80,73 @@ public class PaginaPrincipalView {
         hBoxVideos.setSpacing(5);
 
         loadData(usuarioActual.getId());
+
+        trash.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hBoxVideos.getChildren().clear();
+                txtBuscar.setText("");
+                try {
+                    loadData(usuarioActual.getId());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
+        search.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hBoxVideos.getChildren().clear();
+                if(txtBuscar.getText().trim().isEmpty()){
+                    try {
+                        loadData(usuarioActual.getId());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else
+                {
+                    try {
+                        searchLoadData();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+            }
+        });
+
+        exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    Main.cambiaPantalla("login");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
+        add.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    Main.cambiaPantalla("registrarVideo");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
+
+
+
+
     }
+
 
 
 
@@ -100,16 +180,6 @@ public class PaginaPrincipalView {
 
     }
 
-    public void handleButtonSearch(ActionEvent event)throws SQLException{
-        hBoxVideos.getChildren().clear();
-        if(txtBuscar.getText().trim().isEmpty()){
-           loadData(usuarioActual.getId());
-        }else
-        {
-            searchLoadData();
-        }
-
-    }
 
     public void searchLoadData() throws SQLException {
         ArrayList<Video> videos = blConexion.buscarVideo(txtBuscar.getText());
@@ -159,13 +229,8 @@ public class PaginaPrincipalView {
         Main.cambiaPantalla("reproducirVideo");
     }
 
-    public void handleButtonAddVideo() throws IOException {
-        Main.cambiaPantalla("registrarVideo");
-    }
 
-    public void handleButtonExit() throws IOException {
-        Main.cambiaPantalla("login");
-    }
+
 
 
 
