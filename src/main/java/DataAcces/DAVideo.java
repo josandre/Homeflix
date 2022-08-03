@@ -21,7 +21,7 @@ public class DAVideo {
      */
     public int annadirVideo(Video video)throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
-        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlace, enlaceImagen, idUsuario) values( ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlaceVideo, enlaceImagen, idUsuario) values( ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
         try (Connection connection = connectionManager.abrirConexion()) {
@@ -44,7 +44,7 @@ public class DAVideo {
     public ArrayList<Video> obtenerVideos(int idUser) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select Nombre, Descripcion, Enlace, enlaceImagen, idUsuario, id  FROM Video WHERE idUsuario = ?";
+        String select = "Select nombre, descripcion, enlaceVideo, enlaceImagen, id, idUsuario  FROM Video WHERE idUsuario = ?";
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
@@ -53,12 +53,12 @@ public class DAVideo {
 
                 while(resultSet.next()){
                     Video video = new Video();
-                    video.setNombre(resultSet.getString("Nombre"));
-                    video.setDescripcion(resultSet.getString("Descripcion"));
+                    video.setNombre(resultSet.getString("nombre"));
+                    video.setDescripcion(resultSet.getString("descripcion"));
                     video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
-                    video.setUserId(resultSet.getInt("idUsuario"));
-                    video.setId(resultSet.getInt("id"));
-                    video.setArchivo(resultSet.getString("Enlace"));
+                    video.setUserId(resultSet.getInt("id"));
+                    video.setId(resultSet.getInt("idUsuario"));
+                    video.setArchivo(resultSet.getString("enlaceVideo"));
                     result.add(video);
                 }
                 return result;
@@ -71,7 +71,7 @@ public class DAVideo {
     public ArrayList<Video> buscarVideos(String criterio) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select Nombre, Descripcion, Enlace, enlaceImagen FROM Video where Descripcion like ? or Nombre like ?";
+        String select = "Select nombre, descripcion, enlace, enlaceImagen FROM Video where descripcion like ? or Nombre like ?";
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
@@ -82,9 +82,9 @@ public class DAVideo {
 
                 while(resultSet.next()){
                     Video video = new Video();
-                    video.setNombre(resultSet.getString("Nombre"));
-                    video.setDescripcion(resultSet.getString("Descripcion"));
-                    video.setArchivo(resultSet.getString("Enlace"));
+                    video.setNombre(resultSet.getString("nombre"));
+                    video.setDescripcion(resultSet.getString("descripcion"));
+                    video.setArchivo(resultSet.getString("enlace"));
                     video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
                     result.add(video);
                 }
