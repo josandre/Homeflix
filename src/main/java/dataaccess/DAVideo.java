@@ -1,8 +1,6 @@
-package DataAcces;
+package dataaccess;
 
-import Controller.BL;
-import Model.Usuario;
-import Model.Video;
+import model.Video;
 
 import java.sql.*;
 import java.util.ArrayList;

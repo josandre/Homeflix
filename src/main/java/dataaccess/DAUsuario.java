@@ -1,6 +1,6 @@
-package DataAcces;
+package dataaccess;
 
-import Model.Usuario;
+import model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

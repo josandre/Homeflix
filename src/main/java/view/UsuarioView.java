@@ -1,7 +1,7 @@
-package View;
+package view;
 
-import Model.Usuario;
-import Controller.BL;
+import model.Usuario;
+import controller.BL;
 import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

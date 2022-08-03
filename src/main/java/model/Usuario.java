@@ -1,6 +1,4 @@
-package Model;
-
-import Controller.BL;
+package model;
 
 import java.util.ArrayList;
 
