@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PaginaPrincipalView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PaginaPrincipalView">
    <center>
       <AnchorPane prefHeight="437.0" prefWidth="660.0" BorderPane.alignment="CENTER">
          <children>
@@ -46,6 +46,15 @@
                   </ImageView>
                </children>
             </AnchorPane>
+            <ScrollPane layoutY="316.0" prefHeight="199.0" prefWidth="760.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="198.0" prefWidth="758.0" style="-fx-border-color: black;">
+                     <children>
+                        <HBox fx:id="idHboxLista" layoutX="4.0" layoutY="3.0" prefHeight="180.0" prefWidth="741.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </center>

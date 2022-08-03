@@ -56,6 +56,9 @@ public class PaginaPrincipalView {
     @FXML
     public ImageView add;
 
+    @FXML
+    public HBox idHboxLista;
+
     private BL blConexion = BL.getInstanciaBl();
 
     private Usuario usuarioActual = blConexion.getUsuarioActual();
