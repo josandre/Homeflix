@@ -36,7 +36,7 @@ public class ConnectionManager {
      */
     public Connection abrirConexion() throws SQLException{
         cerrarConexion();
-        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:33097/homeFlix","appUser","appUser");
+        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:33097/homeflix","root","HomeFlix123");
         return this.connection;
     }
 
