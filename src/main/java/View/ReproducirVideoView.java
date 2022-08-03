@@ -65,6 +65,9 @@ public class ReproducirVideoView {
     @FXML
     public Slider volumSlider;
 
+    @FXML
+    public Button btnAgregarVideo;
+
     private BL blConexion = BL.getInstanciaBl();
 
 
@@ -159,6 +162,12 @@ public class ReproducirVideoView {
     public void handleButtonMenosDiezSeg(){
         mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(-10)));
     }
+
+    public void handleButtonAgregarVideo() {
+
+    }
+
+
 
 
 
