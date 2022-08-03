@@ -15,5 +15,5 @@ module com.example.proyecto {
 
     opens com.example.proyecto to javafx.fxml;
     exports com.example.proyecto;
-    exports View;
+    exports view;
 }

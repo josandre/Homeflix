@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-import Controller.BL;
+import controller.BL;
 
 import java.time.LocalDate;
 
@@ -16,10 +16,7 @@ public class Video {
     private int calificacion;
     private String archivo;
     private String thumbnailVideo;
-
     private int userId;
-
-    private BL blConexion = BL.getInstanciaBl();
 
 
     public Video(int id, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo, String thumbnailVideo, int userId) {

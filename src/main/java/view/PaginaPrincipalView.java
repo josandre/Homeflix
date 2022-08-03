@@ -1,10 +1,9 @@
-package View;
+package view;
 
-import Controller.BL;
-import Model.Usuario;
-import Model.Video;
+import controller.BL;
+import model.Usuario;
+import model.Video;
 import com.example.proyecto.Main;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

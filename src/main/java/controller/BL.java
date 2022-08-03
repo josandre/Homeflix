@@ -1,9 +1,9 @@
-package Controller;
+package controller;
 
-import DataAcces.DAUsuario;
-import DataAcces.DAVideo;
-import Model.Usuario;
-import Model.Video;
+import dataaccess.DAUsuario;
+import dataaccess.DAVideo;
+import model.Usuario;
+import model.Video;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
