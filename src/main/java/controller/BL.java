@@ -47,6 +47,11 @@ public class BL {
         return  usuario;
     }
 
+    public boolean userExists(String userName) throws SQLException {
+        return  DAUsuario.buscarUserName(userName);
+
+    }
+
 
 
     public ArrayList<Video> listarVideos(int userId)throws SQLException{

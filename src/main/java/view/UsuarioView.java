@@ -1,13 +1,12 @@
 package view;
 
+import javafx.scene.control.*;
 import model.Usuario;
 import controller.BL;
 import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -16,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class UsuarioView {
     @FXML
@@ -52,7 +52,7 @@ public class UsuarioView {
     }
 
     @FXML
-    public void handleButtonRegistrarUsuario(ActionEvent event) throws SQLException {
+    public void handleButtonRegistrarUsuario(ActionEvent event) throws SQLException, IOException {
         if(registrarUsuarioVerificacion() == true){
             Usuario usuario = new Usuario();
 
@@ -74,51 +74,57 @@ public class UsuarioView {
         }
     }
 
-    public boolean registrarUsuarioVerificacion() {
+    public boolean registrarUsuarioVerificacion() throws SQLException, IOException {
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String nombreUsuario = txtNombreUsuario.getText();
         String contrasenna = txtContrasenna.getText();
-        String archivoImagen = txtArchivoImagen.getText();
 
+        boolean esValido = true;
 
-        boolean esValido = false;
-
-        if (nombre != null && !txtNombre.getText().isEmpty()) {
-            esValido = true;
-        } else {
+        if (nombre == null || txtNombre.getText().isEmpty()) {
             esValido = false;
             txtNombre.setBorder(obtenerBorderError());
         }
 
-        if (apellido != null && !txtApellido.getText().isEmpty()) {
-            esValido = true;
-        } else {
+        if (apellido == null || txtApellido.getText().isEmpty()) {
             esValido = false;
             txtApellido.setBorder(obtenerBorderError());
         }
 
-        if (nombreUsuario != null && !txtNombreUsuario.getText().isEmpty()) {
-            esValido = true;
+        if (nombreUsuario != null && !txtNombreUsuario.getText().isEmpty()){
+            boolean userExists = blConexion.userExists(txtNombreUsuario.getText());
+            if(userExists){
+                esValido = false;
+                txtNombreUsuario.setBorder(obtenerBorderError());
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warnoing!");
+                alert.setContentText("This userName is already taken");
+                ButtonType okButton = new ButtonType("OK");
+                ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(okButton, cancelButton);
+
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if(result.get() == okButton){
+                    txtNombreUsuario.setText("");
+                }else if(result.get() == cancelButton){
+                    Main.cambiaPantalla("login");
+                }
+            }
+
         } else {
             esValido = false;
             txtNombreUsuario.setBorder(obtenerBorderError());
+
         }
 
-        if (contrasenna != null && !txtContrasenna.getText().isEmpty()) {
-            esValido = true;
-        } else {
+        if (contrasenna == null || txtContrasenna.getText().isEmpty()) {
             esValido = false;
             txtContrasenna.setBorder(obtenerBorderError());
         }
 
-
-
-        if(esValido){
-            return true;
-        }else {
-            return false;
-        }
+        return esValido;
     }
 
     public static Border obtenerBorderError() {

@@ -62,5 +62,27 @@ public class DAUsuario {
         }
     }
 
+    public boolean buscarUserName(String userName) throws SQLException{
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String select = "Select id FROM Usuario WHERE nombreUsuario = ? ";
+
+        try(Connection connection = connectionManager.abrirConexion()){
+            try(PreparedStatement statement = connection.prepareStatement(select)){
+                statement.setString(1, userName);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                if(resultSet.next()){
+                    return true;
+
+                }
+
+                return false;
+            }
+        }
+    }
+
+
+
 
 }
