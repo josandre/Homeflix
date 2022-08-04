@@ -69,6 +69,11 @@
                               <Insets right="5.0" />
                            </opaqueInsets>
                         </Slider>
+                        <ImageView fx:id="fullScreen" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/fullscreen.png" />
+                           </image>
+                        </ImageView>
                         <ImageView fx:id="heart" fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@img/heart.png" />
