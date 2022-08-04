@@ -37,6 +37,8 @@ public class BL {
         DAUsuario.annadirUsuario(usuario);
     }
 
+
+
     public Usuario buscarUsuario(String contrasenna, String nombreUsuario)throws  SQLException{
 
         Usuario usuario = DAUsuario.buscarUsuario(contrasenna, nombreUsuario);
