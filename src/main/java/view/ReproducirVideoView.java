@@ -1,6 +1,8 @@
 package view;
 
 import controller.BL;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.Video;
 import com.example.proyecto.Main;
 import javafx.beans.InvalidationListener;
@@ -63,6 +65,9 @@ public class ReproducirVideoView {
     @FXML
     public Button btnAgregarVideo;
 
+    @FXML
+    public ImageView fullScreen;
+
     private BL blConexion = BL.getInstanciaBl();
 
 
@@ -122,6 +127,20 @@ public class ReproducirVideoView {
             }
         });
 
+        fullScreen.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                ImageView imageView = (ImageView) mouseEvent.getSource();
+                Stage stage = (Stage) imageView.getScene().getWindow();
+
+                if (stage.isFullScreen()) {
+                    stage.setFullScreen(false);
+                } else {
+                    stage.setFullScreen(true);
+                }
+            }
+        });
+
     }
 
 
@@ -157,11 +176,11 @@ public class ReproducirVideoView {
     public void handleButtonMenosDiezSeg(){
         mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(-10)));
     }
+    
 
     public void handleButtonAgregarVideo() {
 
     }
-
 
 
 

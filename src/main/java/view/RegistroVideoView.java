@@ -92,7 +92,7 @@ public class RegistroVideoView {
     @FXML
     public void handleButtonRegistrar(ActionEvent event) throws SQLException {
 
-        if(registrarVerificacion()){
+        if(registrarVerificacion() == true){
             Video video = new Video();
             video.setFecha(LocalDate.now());
             String nombre = txtNombreVideo.getText();
