@@ -53,7 +53,7 @@ public class UsuarioView {
 
     @FXML
     public void handleButtonRegistrarUsuario(ActionEvent event) throws SQLException {
-        if(registrarUsuarioVerificacion()){
+        if(registrarUsuarioVerificacion() == true){
             Usuario usuario = new Usuario();
 
             String nombre = txtNombre.getText();
