@@ -25,6 +25,8 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ReproducirVideoView {
 
@@ -157,6 +159,8 @@ public class ReproducirVideoView {
         });
 
     }
+
+
 
     public void handleButtonVolver(ActionEvent event) throws IOException {
         Main.cambiaPantalla("paginaPrincipal");

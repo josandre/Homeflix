@@ -72,15 +72,14 @@ public class playListView {
         ArrayList<Video> listaVideos = blConexion.videosInPlayListActual(actualPlayList.getId());
         gridPane.getChildren().clear();
         int count = 0;
-
         double nFilas = ((double)listaVideos.size()) / ((double)nColumns);
-        int filas = (int) Math.ceil(nFilas);
+        int totalFilas = (int) Math.ceil(nFilas);
 
-        for(int fila = 0; fila < filas; fila ++){
+        for(int fila = 0; fila < totalFilas; fila ++){
             int filaActual = fila + 1;
-            int cantMaximaVideos = filaActual * nColumns;
+            int cantMaximaVideos = filaActual * Main.NCOLUMNS;
             int camposSobrantes = listaVideos.size() < cantMaximaVideos ? cantMaximaVideos - listaVideos.size(): 0;
-            int totalColumns = nColumns - camposSobrantes;
+            int totalColumns = Main.NCOLUMNS - camposSobrantes;
 
 
             for(int columna = 0; columna < totalColumns; columna++ ){
