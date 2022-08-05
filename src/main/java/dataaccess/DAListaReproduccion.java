@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Video;
 
 public class DAListaReproduccion {
     public int addReproductionList (ListaReproduccion listaVideo) throws SQLException {
@@ -60,6 +61,29 @@ public class DAListaReproduccion {
 
 
                 return statement.executeUpdate();
+
+            }
+        }
+    }
+
+    public ArrayList<Video> listaVideos(int idListaReproduccion) throws SQLException {
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        ArrayList<Video> result = new ArrayList<>();
+        String innerJoin = "Select nombre, enlaceVideo From listaVideos_video as LV Inner Join Video as V On V.id = LV.idVideo Where LV.idListaVideos = ?";
+        try(Connection connection = connectionManager.abrirConexion()){
+            try (PreparedStatement statement = connection.prepareStatement(innerJoin)){
+                statement.setInt(1, idListaReproduccion);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()){
+                    Video video = new Video();
+                    video.setNombre(resultSet.getString("nombre"));
+                    video.setArchivo(resultSet.getString("enlaceVideo"));
+                    result.add(video);
+                }
+
+
+                return result;
 
             }
         }
