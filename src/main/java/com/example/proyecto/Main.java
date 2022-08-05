@@ -25,6 +25,8 @@ public class Main extends Application {
     public static final int HEIGHT = 150;
     public static final int WIDTH = 150;
 
+    public static final int NCOLUMNS = 3;
+
     private static BL blConexion = BL.getInstanciaBl();
 
     public static void main(String[] args){
