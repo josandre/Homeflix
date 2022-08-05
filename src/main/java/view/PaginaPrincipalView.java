@@ -184,7 +184,7 @@ public class PaginaPrincipalView {
             imageView.setFitHeight(Main.HEIGHT);
             imageView.setFitWidth(Main.WIDTH);
             imageView.setPickOnBounds(true);
-
+            seeVideos(imageView, list);
             idHboxLista.getChildren().add(imageView);
         }
 
@@ -236,6 +236,21 @@ public class PaginaPrincipalView {
 
     public void playVideo(Video video) throws IOException {
         Main.cambiaPantalla("reproducirVideo");
+    }
+
+    public void seeVideos(ImageView imageView, ListaReproduccion actualPlayList){
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                blConexion.setActualPlayList(actualPlayList);
+                try {
+                    Main.cambiaPantalla("playList");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
     }
 
 

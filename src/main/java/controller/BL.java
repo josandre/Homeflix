@@ -106,6 +106,10 @@ public class BL {
         DAListasReproduccion.addVideoToPlayList(idVideo, idPlayList);
     }
 
+    public ArrayList<Video> videosInPlayListActual(int idListaReproduccion) throws SQLException {
+        return DAListasReproduccion.listaVideos(idListaReproduccion);
+    }
+
 
 
 
