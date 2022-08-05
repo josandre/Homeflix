@@ -1,6 +1,7 @@
 package view;
 
 import controller.BL;
+import model.ListaReproduccion;
 import model.Usuario;
 import model.Video;
 import com.example.proyecto.Main;
@@ -11,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
@@ -21,15 +21,15 @@ import java.util.*;
 
 public class PaginaPrincipalView {
 
-    public static final int HEIGHT_VIDEO_IMAGE = 150;
-    public static final int WIDTH_VIDEO_IMAGE = 150;
+
     private static PaginaPrincipalView instancia;
 
     @FXML
     public Label labelUserName;
 
     @FXML
-    public Circle imageView;
+    public Circle circlePhoto;
+
 
     @FXML
     public Button btnBuscar;
@@ -67,21 +67,15 @@ public class PaginaPrincipalView {
 
     public void initialize() throws SQLException {
 
-        labelUserName.setText(usuarioActual.getNombreUsuario());
-
-        if(usuarioActual.getArchivoImagen() != null && !usuarioActual.getArchivoImagen().equalsIgnoreCase("")){
-            Image image = new Image("file:" + usuarioActual.getArchivoImagen());
-            imageView.setFill(new ImagePattern(image));
-            System.out.println(image.getUrl());
-        }else {
-            URL urlImage =  Main.class.getResource("img/defaultImage.png");
-            Image imageDefault = new Image(urlImage.toString());
-            imageView.setFill(new ImagePattern(imageDefault));
-        }
+        Main.userInformation(labelUserName, circlePhoto);
 
         hBoxVideos.setSpacing(5);
 
         loadData(usuarioActual.getId());
+
+        idHboxLista.setSpacing(5);
+
+        loadDataPlayList(usuarioActual.getId());
 
         trash.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -143,13 +137,7 @@ public class PaginaPrincipalView {
             }
         });
 
-
-
-
-
     }
-
-
 
 
     public void loadData(int userId) throws SQLException {
@@ -165,23 +153,42 @@ public class PaginaPrincipalView {
                 System.out.println(img.getUrl());
 
             }else {
-                URL urlImage2 =  Main.class.getResource("img/defaulImageVideo.jpeg");
+                URL urlImage2 =  Main.class.getResource("img/defaultVideoImage.jpeg");
                 img = new Image(urlImage2.toString());
-
             }
 
             ImageView imageView = new ImageView(img);
-            imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
-            imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
+            imageView.setFitHeight(Main.HEIGHT);
+            imageView.setFitWidth(Main.WIDTH);
             imageView.setPickOnBounds(true);
 
             playingVideo(imageView, video);
             hBoxVideos.getChildren().add(imageView);
+        }
+    }
 
+    public void loadDataPlayList(int userId)throws SQLException{
+        ArrayList<ListaReproduccion> playList = blConexion.listarReproductionList(userId);
+        for(int i = 0; i < playList.size(); i++){
+            Image imgPlayList;
+            ListaReproduccion list = playList.get(i);
+
+            if(list.getArchivoImagen() != null && !list.getArchivoImagen().equals("")){
+                imgPlayList = new Image ("file:" + list.getArchivoImagen());
+            }else {
+                URL urlImage = Main.class.getResource("img/defaultReproductionList.jpeg");
+                imgPlayList = new Image(urlImage.toString());
+            }
+
+            ImageView imageView = new ImageView(imgPlayList);
+            imageView.setFitHeight(Main.HEIGHT);
+            imageView.setFitWidth(Main.WIDTH);
+            imageView.setPickOnBounds(true);
+
+            idHboxLista.getChildren().add(imageView);
         }
 
     }
-
 
     public void searchLoadData() throws SQLException {
         ArrayList<Video> videos = blConexion.buscarVideo(txtBuscar.getText());
@@ -202,8 +209,8 @@ public class PaginaPrincipalView {
             }
 
             ImageView imageView = new ImageView(img);
-            imageView.setFitHeight(HEIGHT_VIDEO_IMAGE);
-            imageView.setFitWidth(WIDTH_VIDEO_IMAGE);
+            imageView.setFitHeight(Main.HEIGHT);
+            imageView.setFitWidth(Main.WIDTH);
             imageView.setPickOnBounds(true);
 
            playingVideo(imageView, video);
@@ -230,11 +237,6 @@ public class PaginaPrincipalView {
     public void playVideo(Video video) throws IOException {
         Main.cambiaPantalla("reproducirVideo");
     }
-
-
-
-
-
 
 
 

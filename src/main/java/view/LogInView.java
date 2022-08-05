@@ -16,15 +16,13 @@ public class LogInView {
     @FXML
     public TextField txtUsuario;
 
-
+    @FXML
+    public Button btnRegistrarse;
 
     @FXML
     public  TextField txtConstrasenna;
 
     private BL blConexion = BL.getInstanciaBl();
-
-
-
 
     public void initialize() {
 
@@ -59,9 +57,15 @@ public class LogInView {
       }
     }
 
-    public void handleButtonExit(){
+    public void handleButtonExit(ActionEvent event){
         System.exit(0);
     }
+
+    public void handleButtonRegister() throws IOException {
+        Main.cambiaPantalla("registrarUsuario");
+    }
+
+
 
 
 }

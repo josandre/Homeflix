@@ -21,7 +21,7 @@
             </ScrollPane>
             <AnchorPane fx:id="anchorPainMain" layoutX="2.0" layoutY="2.0" prefHeight="95.0" prefWidth="748.0">
                <children>
-                  <Circle fx:id="imageView" fill="DODGERBLUE" layoutX="694.0" layoutY="56.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="circlePhoto" fill="DODGERBLUE" layoutX="694.0" layoutY="56.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
                   <Label fx:id="labelUserName" layoutX="587.0" layoutY="53.0" prefHeight="17.0" prefWidth="60.0" text="Label" />
                   <TextField fx:id="txtBuscar" layoutX="250.0" layoutY="43.0" />
                   <ImageView fx:id="search" fitHeight="38.0" fitWidth="55.0" layoutX="413.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">

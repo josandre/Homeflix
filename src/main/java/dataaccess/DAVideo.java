@@ -54,8 +54,8 @@ public class DAVideo {
                     video.setNombre(resultSet.getString("nombre"));
                     video.setDescripcion(resultSet.getString("descripcion"));
                     video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
-                    video.setUserId(resultSet.getInt("id"));
-                    video.setId(resultSet.getInt("idUsuario"));
+                    video.setUserId(resultSet.getInt("idUsuario"));
+                    video.setId(resultSet.getInt("id"));
                     video.setArchivo(resultSet.getString("enlaceVideo"));
                     result.add(video);
                 }

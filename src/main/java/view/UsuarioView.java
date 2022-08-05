@@ -38,6 +38,9 @@ public class UsuarioView {
     @FXML
     public AnchorPane mainPane;
 
+    @FXML
+    public Border border = Main.obtenerBordeError();
+
     private BL blConexion = BL.getInstanciaBl();
 
     Stage stage;
@@ -53,7 +56,7 @@ public class UsuarioView {
 
     @FXML
     public void handleButtonRegistrarUsuario(ActionEvent event) throws SQLException, IOException {
-        if(registrarUsuarioVerificacion() == true){
+        if(registrarUsuarioVerificacion()){
             Usuario usuario = new Usuario();
 
             String nombre = txtNombre.getText();
@@ -70,7 +73,7 @@ public class UsuarioView {
             usuario.setArchivoImagen(archivoImagen);
 
 
-            blConexion.crearUsuario(usuario);
+            blConexion.adduser(usuario);
         }
     }
 
@@ -84,21 +87,21 @@ public class UsuarioView {
 
         if (nombre == null || txtNombre.getText().isEmpty()) {
             esValido = false;
-            txtNombre.setBorder(obtenerBorderError());
+            txtNombre.setBorder(border);
         }
 
         if (apellido == null || txtApellido.getText().isEmpty()) {
             esValido = false;
-            txtApellido.setBorder(obtenerBorderError());
+            txtApellido.setBorder(border);
         }
 
         if (nombreUsuario != null && !txtNombreUsuario.getText().isEmpty()){
             boolean userExists = blConexion.userExists(txtNombreUsuario.getText());
             if(userExists){
                 esValido = false;
-                txtNombreUsuario.setBorder(obtenerBorderError());
+                txtNombreUsuario.setBorder(border);
                 Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warnoing!");
+                alert.setTitle("Warning!");
                 alert.setContentText("This userName is already taken");
                 ButtonType okButton = new ButtonType("OK");
                 ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -115,22 +118,16 @@ public class UsuarioView {
 
         } else {
             esValido = false;
-            txtNombreUsuario.setBorder(obtenerBorderError());
+            txtNombreUsuario.setBorder(border);
 
         }
 
         if (contrasenna == null || txtContrasenna.getText().isEmpty()) {
             esValido = false;
-            txtContrasenna.setBorder(obtenerBorderError());
+            txtContrasenna.setBorder(border);
         }
 
         return esValido;
-    }
-
-    public static Border obtenerBorderError() {
-        return new Border(new BorderStroke(Color.RED, Color.RED, Color.RED, Color.RED,
-                BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY, new BorderWidths(1), Insets.EMPTY));
     }
 
     @FXML

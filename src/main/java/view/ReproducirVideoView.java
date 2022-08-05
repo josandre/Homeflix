@@ -3,6 +3,7 @@ package view;
 import controller.BL;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.ListaReproduccion;
 import model.Video;
 import com.example.proyecto.Main;
 import javafx.beans.InvalidationListener;
@@ -67,6 +68,9 @@ public class ReproducirVideoView {
 
     @FXML
     public ImageView fullScreen;
+
+    @FXML
+    public  ImageView addReproductionList;
 
     private BL blConexion = BL.getInstanciaBl();
 
@@ -141,9 +145,18 @@ public class ReproducirVideoView {
             }
         });
 
+        addReproductionList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    Main.cambiaPantalla("listasDeReproduccion");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
     }
-
-
 
     public void handleButtonVolver(ActionEvent event) throws IOException {
         Main.cambiaPantalla("paginaPrincipal");
@@ -176,11 +189,10 @@ public class ReproducirVideoView {
     public void handleButtonMenosDiezSeg(){
         mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(-10)));
     }
-    
 
-    public void handleButtonAgregarVideo() {
 
-    }
+
+
 
 
 

@@ -1,77 +1,27 @@
 package dataaccess;
 
-import javafx.scene.control.Alert;
 import model.Usuario;
 
 import java.sql.*;
 
 public class DAUsuario {
 
-    public void annadirUsuario(Usuario usuario) {
+    public int annadirUsuario(Usuario usuario)throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
-        Connection connection = null;
-        PreparedStatement psInsert = null;
-        PreparedStatement psVerificacirUsuarioExiste = null;
-        ResultSet resultSet = null;
-        String insert = "INSERT INTO Usuario(nombre, apellido, nombreUsuario, contrasenna, archivoImagen) VALUES (?, ?, ?, ?, ?)";
+        String insert = "Insert into Usuario(nombre, apellido, nombreUsuario, contrasenna, archivoImagen) values(?, ?, ?, ?, ?)";
 
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try (PreparedStatement statement = connection.prepareStatement(insert)) {
+                statement.setString(1, usuario.getNombre());
+                statement.setString(2, usuario.getApellido());
+                statement.setString(3, usuario.getNombreUsuario());
+                statement.setString(4, usuario.getContrasenna());
+                statement.setString(5, usuario.getArchivoImagen());
 
-        try {
-            connection = connectionManager.abrirConexion();
-            psVerificacirUsuarioExiste = connection.prepareStatement("SELECT * FROM Usuario WHERE nombreUsuario = ?");
-            psVerificacirUsuarioExiste.setString(1, usuario.getNombreUsuario());
-            resultSet = psVerificacirUsuarioExiste.executeQuery();
-
-            if (resultSet.isBeforeFirst()) {
-                System.out.println("nombre de usuario ingresado ya existe");
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("No puede utilizar este nombre de usuario");
-                alert.showAndWait();
-            } else {
-                psInsert = connection.prepareStatement(insert);
-                psInsert.setString(1, usuario.getNombre());
-                psInsert.setString(2, usuario.getApellido());
-                psInsert.setString(3, usuario.getNombreUsuario());
-                psInsert.setString(4, usuario.getContrasenna());
-                psInsert.setString(5, usuario.getArchivoImagen());
-                psInsert.executeUpdate();
-                }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (psVerificacirUsuarioExiste != null) {
-                try {
-                    psVerificacirUsuarioExiste.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (psInsert != null) {
-                try {
-                    psInsert.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                return statement.executeUpdate();
             }
         }
     }
-
-
 
     public Usuario buscarUsuario(String contrasenna, String nombreUsuario) throws SQLException{
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
@@ -118,7 +68,6 @@ public class DAUsuario {
 
                 if(resultSet.next()){
                     return true;
-
                 }
 
                 return false;

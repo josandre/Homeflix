@@ -1,7 +1,9 @@
 package controller;
 
+import dataaccess.DAListaReproduccion;
 import dataaccess.DAUsuario;
 import dataaccess.DAVideo;
+import model.ListaReproduccion;
 import model.Usuario;
 import model.Video;
 
@@ -13,11 +15,17 @@ public class BL {
 
     DAUsuario DAUsuario = new DAUsuario();
 
+    DAListaReproduccion DAListasReproduccion = new DAListaReproduccion();
+
     private static BL instanciaBl;
 
     private Usuario usuarioActual;
 
     private Video actualVideo;
+
+    private ListaReproduccion actualPlayList;
+
+
 
     private BL() {
     }
@@ -33,8 +41,12 @@ public class BL {
         DAVideo.annadirVideo(video);
     }
 
-    public void crearUsuario(Usuario usuario) throws SQLException {
+    public void adduser(Usuario usuario) throws SQLException {
         DAUsuario.annadirUsuario(usuario);
+    }
+
+    public void addReproductionList(ListaReproduccion listaVideo) throws SQLException {
+        DAListasReproduccion.addReproductionList(listaVideo);
     }
 
 
@@ -51,7 +63,6 @@ public class BL {
 
     public boolean userExists(String userName) throws SQLException {
         return  DAUsuario.buscarUserName(userName);
-
     }
 
 
@@ -59,6 +70,11 @@ public class BL {
     public ArrayList<Video> listarVideos(int userId)throws SQLException{
         ArrayList<Video> videos = DAVideo.obtenerVideos(userId);
         return  videos;
+    }
+
+    public ArrayList<ListaReproduccion> listarReproductionList(int userId)throws SQLException{
+        ArrayList<ListaReproduccion> listasDeReproduccion = DAListasReproduccion.toListReproductionLists(userId);
+        return  listasDeReproduccion;
     }
 
     public ArrayList<Video> buscarVideo(String criterio)throws SQLException{
@@ -77,6 +93,24 @@ public class BL {
     public void setActualVideo(Video actualVideo) {
         this.actualVideo = actualVideo;
     }
+
+    public ListaReproduccion getActualPlayList() {
+        return actualPlayList;
+    }
+
+    public void setActualPlayList(ListaReproduccion actualPlayList) {
+        this.actualPlayList = actualPlayList;
+    }
+
+    public void addVideoToPlayList(int idVideo, int idPlayList)throws SQLException{
+        DAListasReproduccion.addVideoToPlayList(idVideo, idPlayList);
+    }
+
+
+
+
+
+
 
 
 

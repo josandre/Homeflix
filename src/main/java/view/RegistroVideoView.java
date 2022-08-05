@@ -60,6 +60,8 @@ public class RegistroVideoView {
     @FXML
     public Circle actualUserPhoto;
 
+    public Border border = Main.obtenerBordeError();
+
 
 
     private BL blConexion = BL.getInstanciaBl();
@@ -71,18 +73,7 @@ public class RegistroVideoView {
     }
 
     public void initialize(){
-        Usuario usuarioActual = blConexion.getUsuarioActual();
-        labelActualUser.setText(usuarioActual.getNombreUsuario());
-
-        if(usuarioActual.getArchivoImagen() != null && usuarioActual.getArchivoImagen().equalsIgnoreCase("")){
-            Image image = new Image("file:" + usuarioActual.getArchivoImagen());
-            actualUserPhoto.setFill(new ImagePattern(image));
-        }else {
-            URL urlImage =  Main.class.getResource("img/defaultImage.png");
-            Image imageDefault = new Image(urlImage.toString());
-            actualUserPhoto.setFill(new ImagePattern(imageDefault));
-        }
-
+        Main.userInformation(labelActualUser, actualUserPhoto);
 
     }
 
@@ -125,52 +116,39 @@ public class RegistroVideoView {
         String categoria = txtCategoria.getText();
         String descripcion = txtDescripcion.getText();
         String subirArchivo = txtSubirArchivo.getText();
-        String subirThumbnail = txtSubirThumbnail.getText();
 
 
-        boolean esValido = false;
+
+        boolean esValido = true;
 
 
-        if(nombre != null && !txtNombreVideo.getText().isEmpty()){
-            esValido = true;
-
-        }else{
+        if(nombre == null || txtNombreVideo.getText().isEmpty()){
             esValido = false;
-            txtNombreVideo.setBorder(obtenerBordeError());
+            txtNombreVideo.setBorder(border);
+
         }
 
-        if(categoria != null && !txtCategoria.getText().isEmpty()){
-            esValido = true;
-
-        }else{
+        if(categoria == null || txtCategoria.getText().isEmpty()){
             esValido = false;
-            txtCategoria.setBorder(obtenerBordeError());
+            txtCategoria.setBorder(border);
+
         }
 
-        if(descripcion != null && !txtDescripcion.getText().isEmpty()){
-            esValido = true;
-
-
-        }else {
+        if(descripcion == null || txtDescripcion.getText().isEmpty()){
             esValido = false;
-            txtDescripcion.setBorder(obtenerBordeError());
+            txtDescripcion.setBorder(border);
+
+
         }
 
-        if(subirArchivo != null && !txtSubirArchivo.getText().isEmpty()){
-            esValido = true;
-
-        }else{
+        if(subirArchivo == null || txtSubirArchivo.getText().isEmpty()){
             esValido = false;
-            txtSubirArchivo.setBorder(obtenerBordeError());
+            txtSubirArchivo.setBorder(border);
+
+
         }
 
-
-
-        if(!esValido){
-            return  false;
-        }else {
-            return true;
-        }
+        return esValido;
 
     }
 
@@ -179,11 +157,7 @@ public class RegistroVideoView {
      * @return Esta funcion retorna un borde rojo
      *
      */
-    public static Border obtenerBordeError(){
-       return new Border(new BorderStroke(Color.RED, Color.RED, Color.RED, Color.RED,
-                BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY, new BorderWidths(1), Insets.EMPTY));
-    }
+
 
     /**
      * @param event Este evento cancela el registro y envia al usuario a la pagina principal

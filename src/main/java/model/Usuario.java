@@ -9,7 +9,6 @@ public class Usuario {
     private String nombreUsuario;
     private String contrasenna;
     private String archivoImagen;
-
     private ArrayList<Video> userVideos;
 
     private int id;

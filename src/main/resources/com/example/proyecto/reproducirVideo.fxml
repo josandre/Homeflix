@@ -15,11 +15,11 @@
    <center>
       <StackPane prefHeight="407.0" prefWidth="632.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="693.0">
+            <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="728.0">
                <children>
                   <MediaView fx:id="mediaVideo" fitHeight="200.0" fitWidth="200.0" />
-                  <Slider fx:id="progresBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="600.0" />
-                  <HBox prefHeight="75.0" prefWidth="675.0">
+                  <Slider fx:id="progresBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="716.0" />
+                  <HBox prefHeight="75.0" prefWidth="682.0">
                      <children>
                         <Button fx:id="btnReproducir" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: Black;" text="Play" textFill="#fffdfd">
                            <HBox.margin>
@@ -77,6 +77,11 @@
                         <ImageView fx:id="heart" fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@img/heart.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="addReproductionList" fitHeight="31.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/add.png" />
                            </image>
                         </ImageView>
                      </children>
