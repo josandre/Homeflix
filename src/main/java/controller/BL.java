@@ -9,6 +9,8 @@ import model.Video;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BL {
     DAVideo DAVideo = new DAVideo();
@@ -42,7 +44,25 @@ public class BL {
     }
 
     public void adduser(Usuario usuario) throws SQLException {
-        DAUsuario.annadirUsuario(usuario);
+        if (validarContrasenna(usuario.getContrasenna()) == true) {
+            DAUsuario.annadirUsuario(usuario);
+        }
+    }
+
+    public boolean validarContrasenna(String contrsenna) {
+        String regex = "^(?=.*[0-9])" +
+                       "(?=.*[a-z])(?=.*[A-Z])" +
+                       "(?=.*[@#$%^&+=])" +
+                       "(?=\\S+$).{8,20}$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        if (contrsenna == null) {
+            return false;
+        }
+        Matcher matcher = pattern.matcher(contrsenna);
+
+        return matcher.matches();
     }
 
     public void addReproductionList(ListaReproduccion listaVideo) throws SQLException {
