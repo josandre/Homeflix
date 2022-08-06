@@ -5,6 +5,7 @@ import controller.BL;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -90,11 +91,12 @@ public class listasDeReproduccion {
                      img = new Image(urlImagen.toString());
                  }
                  ImageView imageView = new ImageView(img);
-                 imageView.setFitHeight(Main.HEIGHT);
-                 imageView.setFitWidth(Main.HEIGHT);
+                 imageView.setFitHeight(120);
+                 imageView.setFitWidth(100);
                  GridPane.setRowIndex(imageView, fila);
                  GridPane.setColumnIndex(imageView, columna);
                  gridPane.getChildren().add(imageView);
+                 gridPane.setAlignment(Pos.CENTER);
                  count++;
              }
          }

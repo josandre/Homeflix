@@ -28,7 +28,7 @@ public class UsuarioView {
     public TextField txtNombreUsuario;
 
     @FXML
-    public TextField txtContrasenna;
+    public PasswordField txtContrasenna;
     @FXML
     public TextField txtArchivoImagen;
     @FXML

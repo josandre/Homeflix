@@ -9,44 +9,47 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistroVideoView">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistroVideoView">
    <children>
-      <Label layoutX="115.0" layoutY="57.0" prefHeight="17.0" prefWidth="143.0" text="Nombre del video">
+      <Label layoutX="103.0" layoutY="116.0" prefHeight="22.0" prefWidth="143.0" text="Nombre del video">
          <font>
             <Font name="System Italic" size="17.0" />
          </font></Label>
-      <TextField fx:id="txtNombreVideo" layoutX="319.0" layoutY="53.0" prefHeight="26.0" prefWidth="192.0" style="-fx-border-color: Black;" />
+      <TextField fx:id="txtNombreVideo" layoutX="104.0" layoutY="138.0" prefHeight="26.0" prefWidth="195.0" style="-fx-border-color: Black;" />
       <ButtonBar layoutX="260.0" layoutY="465.0" prefHeight="33.0" prefWidth="80.0" />
-      <Label layoutX="115.0" layoutY="112.0" prefHeight="17.0" prefWidth="70.0" text="Categoria">
+      <Label layoutX="104.0" layoutY="194.0" prefHeight="17.0" prefWidth="70.0" text="Categoria">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <TextField fx:id="txtCategoria" layoutX="319.0" layoutY="107.0" prefHeight="26.0" prefWidth="192.0" style="-fx-border-color: black;" />
-      <Label layoutX="115.0" layoutY="172.0" prefHeight="22.0" prefWidth="102.0" text="Subir video">
+      <TextField fx:id="txtCategoria" layoutX="104.0" layoutY="216.0" prefHeight="26.0" prefWidth="195.0" style="-fx-border-color: black;" />
+      <Label layoutX="104.0" layoutY="261.0" prefHeight="22.0" prefWidth="102.0" text="Subir video">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <TextField fx:id="txtSubirArchivo" editable="false" layoutX="319.0" layoutY="168.0" prefHeight="26.0" prefWidth="160.0" promptText="Seleccionar Video" style="-fx-border-color: black;">
+      <TextField fx:id="txtSubirArchivo" editable="false" layoutX="104.0" layoutY="286.0" prefHeight="26.0" prefWidth="195.0" promptText="Seleccionar Video" style="-fx-border-color: black;">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font></TextField>
 
-      <Label layoutX="115.0" layoutY="225.0" prefHeight="22.0" prefWidth="102.0" text="Descripcion">
+      <Label layoutX="104.0" layoutY="337.0" prefHeight="22.0" prefWidth="102.0" text="Descripcion">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <TextArea fx:id="txtDescripcion" layoutX="319.0" layoutY="225.0" prefHeight="59.0" prefWidth="200.0" style="-fx-border-color: black;" />
-    <Button fx:id="btnRegistrar" layoutX="125.0" layoutY="521.0" mnemonicParsing="false" onAction="#handleButtonRegistrar" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: Black;" text="Registrar" textFill="#f7f2f2" />
-      <Button fx:id="btnCancelar" layoutX="288.0" layoutY="521.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: Black;" text="Cancelar" textAlignment="RIGHT" textFill="#fdfbfb" />
-      <Button fx:id="btnSubirArchivo" layoutX="479.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="28.0" prefWidth="34.0" style="-fx-background-color: black;" text="..." textFill="#fdfcfc" />
-      <Button fx:id="btnReproducir" layoutX="444.0" layoutY="521.0" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: black;" text="Reproducir" textFill="#fdf7f7" />
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="731.0" style="-fx-background-color: black;">
+      <TextArea fx:id="txtDescripcion" layoutX="104.0" layoutY="358.0" prefHeight="59.0" prefWidth="195.0" style="-fx-border-color: black;" />
+    <Button fx:id="btnRegistrar" layoutX="96.0" layoutY="544.0" mnemonicParsing="false" onAction="#handleButtonRegistrar" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: Black;" text="Registrar" textFill="#f7f2f2" />
+      <Button fx:id="btnCancelar" layoutX="219.0" layoutY="544.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: Black;" text="Cancelar" textAlignment="RIGHT" textFill="#fdfbfb" />
+      <Button fx:id="btnSubirArchivo" layoutX="298.0" layoutY="286.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="28.0" prefWidth="34.0" style="-fx-background-color: black;" text="..." textFill="#fdfcfc" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="95.0" prefWidth="1000.0" style="-fx-background-color: black;">
          <children>
-            <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="-2.0" prefHeight="47.0" prefWidth="600.0" text="Registro de videos" textAlignment="CENTER" textFill="#faf3f3" textOverrun="CENTER_WORD_ELLIPSIS">
+            <Label fx:id="labelActualUser" layoutX="819.0" layoutY="39.0" prefHeight="17.0" prefWidth="180.0" text="Label" textFill="#fffefe" />
+            <Circle fx:id="actualUserPhoto" fill="DODGERBLUE" layoutX="781.0" layoutY="48.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="307.0" layoutY="18.0" prefHeight="59.0" prefWidth="325.0" text="Registro de videos" textAlignment="CENTER" textFill="#faf3f3" textOverrun="CENTER_WORD_ELLIPSIS">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -62,24 +65,32 @@
                   </Glow>
                </effect>
                <font>
-                  <Font size="18.0" />
+                  <Font size="31.0" />
                </font>
             </Label>
-            <Label fx:id="labelActualUser" layoutX="486.0" layoutY="13.0" text="Label" textFill="#fffefe" />
-            <Circle fx:id="actualUserPhoto" fill="DODGERBLUE" layoutX="579.0" layoutY="22.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fitHeight="59.0" fitWidth="80.0" layoutX="26.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/back.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <Label layoutX="115.0" layoutY="321.0" prefHeight="26.0" prefWidth="160.0" text="Seleccionar Imagen">
+      <Label layoutX="104.0" layoutY="436.0" prefHeight="26.0" prefWidth="160.0" text="Seleccionar Imagen">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtSubirThumbnail" editable="false" layoutX="319.0" layoutY="317.0" prefHeight="26.0" prefWidth="160.0" promptText="Seleccionar Imagen" style="-fx-border-color: black;">
+      <TextField fx:id="txtSubirThumbnail" editable="false" layoutX="104.0" layoutY="462.0" prefHeight="26.0" prefWidth="195.0" promptText="Seleccionar Imagen" style="-fx-border-color: black;">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </TextField>
-      <Button fx:id="btnSubirThumbnail" layoutX="479.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleButtonSubirThumbnail" prefHeight="28.0" prefWidth="34.0" style="-fx-background-color: black;" text="..." textFill="#fdfcfc" />
+      <Button fx:id="btnSubirThumbnail" layoutX="298.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleButtonSubirThumbnail" prefHeight="28.0" prefWidth="34.0" style="-fx-background-color: black;" text="..." textFill="#fdfcfc" />
+      <ImageView fitHeight="411.0" fitWidth="556.0" layoutX="444.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/videoRegistro.jpeg" />
+         </image>
+      </ImageView>
 
 
 

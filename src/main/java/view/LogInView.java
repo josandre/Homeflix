@@ -20,7 +20,7 @@ public class LogInView {
     public Button btnRegistrarse;
 
     @FXML
-    public  TextField txtConstrasenna;
+    public  PasswordField txtConstrasenna;
 
     private BL blConexion = BL.getInstanciaBl();
 
