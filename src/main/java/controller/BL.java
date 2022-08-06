@@ -49,7 +49,7 @@ public class BL {
         }
     }
 
-    public boolean validarContrasenna(String contrsenna) {
+    public static boolean validarContrasenna(String contrsenna) {
         String regex = "^(?=.*[0-9])" +
                        "(?=.*[a-z])(?=.*[A-Z])" +
                        "(?=.*[@#$%^&+=])" +

@@ -56,7 +56,8 @@ public class UsuarioView {
 
     @FXML
     public void handleButtonRegistrarUsuario(ActionEvent event) throws SQLException, IOException {
-        if(registrarUsuarioVerificacion()){
+        if (registrarUsuarioVerificacion()) {
+
             Usuario usuario = new Usuario();
 
             String nombre = txtNombre.getText();
@@ -74,6 +75,12 @@ public class UsuarioView {
 
 
             blConexion.adduser(usuario);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ENHORABUENA!");
+            alert.setContentText("Se ha registrado existosamente");
+            alert.show();
+
         }
     }
 
@@ -125,7 +132,17 @@ public class UsuarioView {
         if (contrasenna == null || txtContrasenna.getText().isEmpty()) {
             esValido = false;
             txtContrasenna.setBorder(border);
+        } else if (!BL.validarContrasenna(contrasenna)) {
+            txtContrasenna.setBorder(border);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Make sure it's at least 8 characters " +
+                    "OR at least 6 characters including a number, " +
+                    "an uppercase letter, a lowercase letter and special character.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+            alert.setTitle("Password is too weak");
+            esValido = false;
         }
+
 
         return esValido;
     }
