@@ -33,28 +33,28 @@ public class LogInView {
     public void handleButtonLogIn(ActionEvent event) throws SQLException, IOException {
         System.out.println("entrando");
         Usuario usuario =  blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
-      if(usuario != null){
-          Main.cambiaPantalla("paginaPrincipal");
 
-      }else {
-          Alert alert = new Alert(Alert.AlertType.WARNING);
-          alert.setTitle("Esta cuenta no existe en nuestro sistema");
-          alert.setContentText("Desea abrir una cuenta");
-          ButtonType okButton = new ButtonType("OK");
-          ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-          alert.getButtonTypes().setAll(okButton, cancelButton);
+        if(usuario == null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Nombre de usuario o contraseña incorrecta");
+            alert.setContentText("¿Desea intentar denuevo?");
+            ButtonType tryAgainButton = new ButtonType("Intentar denuevo");
+            ButtonType registerButton = new ButtonType("Registrarse");
+            alert.getButtonTypes().setAll(tryAgainButton, registerButton);
 
-          Optional<ButtonType> result = alert.showAndWait();
+            Optional<ButtonType> result = alert.showAndWait();
 
-          if(result.get() == okButton){
-              Main.cambiaPantalla("registrarUsuario");
-          }else if(result.get() == cancelButton){
 
-              txtUsuario.setText("");
-              txtConstrasenna.setText("");
-          }
+            if(result.get() == registerButton){
+                Main.cambiaPantalla("registrarUsuario");
+            }else if(result.get() == tryAgainButton){
+                txtUsuario.setText("");
+                txtConstrasenna.setText("");
+            }
 
-      }
+        }else {
+            Main.cambiaPantalla("paginaPrincipal");
+        }
     }
 
     public void handleButtonExit(ActionEvent event){
