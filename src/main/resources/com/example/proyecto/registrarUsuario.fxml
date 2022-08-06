@@ -15,10 +15,10 @@
       <AnchorPane prefHeight="443.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="txtApellido" layoutX="185.0" layoutY="221.0" prefHeight="32.0" prefWidth="222.0" />
-            <TextField fx:id="txtNombreUsuario" layoutX="188.0" layoutY="370.0" prefHeight="32.0" prefWidth="222.0" />
-            <TextField fx:id="txtArchivoImagen" layoutX="188.0" layoutY="443.0" prefHeight="32.0" prefWidth="222.0" />
+            <TextField fx:id="txtNombreUsuario" layoutX="188.0" layoutY="363.0" prefHeight="32.0" prefWidth="222.0" />
+            <TextField fx:id="txtArchivoImagen" layoutX="188.0" layoutY="444.0" prefHeight="32.0" prefWidth="222.0" />
             <TextField fx:id="txtNombre" layoutX="185.0" layoutY="146.0" prefHeight="32.0" prefWidth="222.0" />
-            <Button fx:id="btnSubirArchivoImagen" layoutX="409.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivoImagen" prefHeight="30.0" prefWidth="36.0" style="-fx-background-color: black;" text=". . ." textFill="#fffdfd" />
+            <Button fx:id="btnSubirArchivoImagen" layoutX="409.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivoImagen" prefHeight="30.0" prefWidth="36.0" style="-fx-background-color: black;" text=". . ." textFill="#fffdfd" />
             <Button fx:id="btnRegistrarUsuario" layoutX="196.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleButtonRegistrarUsuario" prefWidth="100.0" style="-fx-background-color: black;" text="Registrar" textFill="#f5f2f2" />
             <Button fx:id="btnCancelarRegistro" layoutX="310.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleButtonCancelarRegsitro" prefWidth="100.0" style="-fx-background-color: black;" text="Cancelar" textFill="#f2f0f0" />
             <Label layoutX="187.0" layoutY="120.0" prefHeight="30.0" prefWidth="79.0" text="Nombre">
@@ -31,17 +31,17 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label layoutX="188.0" layoutY="341.0" prefHeight="30.0" prefWidth="182.0" text="Nombre de usuario ">
+            <Label layoutX="188.0" layoutY="334.0" prefHeight="31.0" prefWidth="201.0" text="Nombre de usuario ">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label layoutX="188.0" layoutY="267.0" prefHeight="30.0" prefWidth="144.0" text="Contraseña">
+            <Label layoutX="188.0" layoutY="253.0" prefHeight="30.0" prefWidth="144.0" text="Contraseña">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label layoutX="188.0" layoutY="418.0" prefHeight="30.0" prefWidth="180.0" text="Foto de perfil">
+            <Label layoutX="188.0" layoutY="419.0" prefHeight="30.0" prefWidth="180.0" text="Foto de perfil">
                <font>
                   <Font size="21.0" />
                </font>
@@ -64,7 +64,17 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <PasswordField fx:id="txtContrasenna" layoutX="185.0" layoutY="293.0" prefHeight="32.0" prefWidth="222.0" />
+            <PasswordField fx:id="txtContrasenna" layoutX="185.0" layoutY="279.0" prefHeight="32.0" prefWidth="222.0" />
+            <Label fx:id="labelUserExists" layoutX="185.0" layoutY="395.0" prefHeight="24.0" prefWidth="185.0" textFill="#ff0101">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelWeakPassword" layoutX="415.0" layoutY="279.0" prefHeight="83.0" prefWidth="149.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </left>

@@ -33,6 +33,10 @@ public class UsuarioView {
     public TextField txtArchivoImagen;
     @FXML
     public Button btnCancelarRegistro;
+    @FXML
+    public Label labelUserExists;
+    @FXML
+    public Label labelWeakPassword;
 
 
     @FXML
@@ -84,7 +88,7 @@ public class UsuarioView {
         }
     }
 
-    public boolean registrarUsuarioVerificacion() throws SQLException, IOException {
+    public boolean registrarUsuarioVerificacion() throws SQLException {
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String nombreUsuario = txtNombreUsuario.getText();
@@ -105,42 +109,28 @@ public class UsuarioView {
         if (nombreUsuario != null && !txtNombreUsuario.getText().isEmpty()){
             boolean userExists = blConexion.userExists(txtNombreUsuario.getText());
             if(userExists){
+                labelUserExists.setText("this username is not available");
                 esValido = false;
-                txtNombreUsuario.setBorder(border);
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning!");
-                alert.setContentText("This userName is already taken");
-                ButtonType okButton = new ButtonType("OK");
-                ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-                alert.getButtonTypes().setAll(okButton, cancelButton);
-
-                Optional<ButtonType> result = alert.showAndWait();
-
-                if(result.get() == okButton){
-                    txtNombreUsuario.setText("");
-                }else if(result.get() == cancelButton){
-                    Main.cambiaPantalla("login");
-                }
             }
 
         } else {
             esValido = false;
             txtNombreUsuario.setBorder(border);
-
         }
 
         if (contrasenna == null || txtContrasenna.getText().isEmpty()) {
             esValido = false;
             txtContrasenna.setBorder(border);
         } else if (!BL.validarContrasenna(contrasenna)) {
+            labelWeakPassword.setWrapText(true);
+            labelWeakPassword.setMaxWidth(200);
+            labelWeakPassword.setText("password is to weak! make sure it's at least 8 characters " +
+                    "OR at least 6 characters including a numbers, letter and special characters");
             txtContrasenna.setBorder(border);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Make sure it's at least 8 characters " +
-                    "OR at least 6 characters including a number, " +
-                    "an uppercase letter, a lowercase letter and special character.");
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
-            alert.setTitle("Password is too weak");
             esValido = false;
+        } else {
+            labelUserExists.setText("");
+            labelWeakPassword.setText("");
         }
 
 
