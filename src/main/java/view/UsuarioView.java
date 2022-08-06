@@ -92,17 +92,17 @@ public class UsuarioView {
 
         boolean esValido = true;
 
-        if (nombre == null || txtNombre.getText().isEmpty()) {
+        if (nombre == null || nombre.isEmpty()) {
             esValido = false;
             txtNombre.setBorder(border);
         }
 
-        if (apellido == null || txtApellido.getText().isEmpty()) {
+        if (apellido == null || apellido.isEmpty()) {
             esValido = false;
             txtApellido.setBorder(border);
         }
 
-        if (nombreUsuario != null && !txtNombreUsuario.getText().isEmpty()){
+        if (nombreUsuario != null && !nombreUsuario.isEmpty()){
             boolean userExists = blConexion.userExists(txtNombreUsuario.getText());
             if(userExists){
                 esValido = false;
@@ -129,7 +129,7 @@ public class UsuarioView {
 
         }
 
-        if (contrasenna == null || txtContrasenna.getText().isEmpty()) {
+        if (contrasenna == null  || contrasenna.length() < 8) {
             esValido = false;
             txtContrasenna.setBorder(border);
         } else if (!BL.validarContrasenna(contrasenna)) {

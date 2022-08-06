@@ -8,10 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import model.ListaReproduccion;
 import model.Video;
@@ -32,8 +29,8 @@ public class playListView {
     public Circle photoUser;
 
 
-    @FXML
-    public GridPane gridPane;
+   @FXML
+   public VBox vBox;
 
     @FXML
     public ImageView back;
@@ -51,6 +48,7 @@ public class playListView {
     public void initialize() throws SQLException {
         Main.userInformation(labelUserName, photoUser);
         loadVideosPlayList();
+        nombrePlayList.setText(blConexion.getActualPlayList().getNombre());
 
 
         back.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -70,44 +68,45 @@ public class playListView {
     public void loadVideosPlayList()throws SQLException{
         ListaReproduccion actualPlayList = blConexion.getActualPlayList();
         ArrayList<Video> listaVideos = blConexion.videosInPlayListActual(actualPlayList.getId());
-        gridPane.getChildren().clear();
+        vBox.getChildren().clear();
+
+        HBox hBox = new HBox();
+        hBox.setSpacing(5);
+        vBox.setSpacing(10);
         int count = 0;
-        double nFilas = ((double)listaVideos.size()) / ((double)nColumns);
-        int totalFilas = (int) Math.ceil(nFilas);
 
-        for(int fila = 0; fila < totalFilas; fila ++){
-            int filaActual = fila + 1;
-            int cantMaximaVideos = filaActual * Main.NCOLUMNS;
-            int camposSobrantes = listaVideos.size() < cantMaximaVideos ? cantMaximaVideos - listaVideos.size(): 0;
-            int totalColumns = Main.NCOLUMNS - camposSobrantes;
+        for(int i = 0; i < listaVideos.size(); i++){
+            count = i + 1;
+            Image img;
+            Video video = listaVideos.get(i);
 
 
-            for(int columna = 0; columna < totalColumns; columna++ ){
-                Image img;
-                Video video = listaVideos.get(count);
-
-                if(video.getThumbnailVideo() != null){
-                    img = new Image("file:" + video.getThumbnailVideo());
-
-
-                }else {
-                    URL urlImage2 =  Main.class.getResource("img/defaultVideoImage.jpeg");
-                    img = new Image(urlImage2.toString());
-
-                }
-                ImageView imageView = new ImageView(img);
-                imageView.setFitWidth(Main.WIDTH);
-                imageView.setFitHeight(Main.HEIGHT);
-
-                GridPane.setRowIndex(imageView, fila);
-                GridPane.setColumnIndex(imageView, columna);
-                gridPane.getChildren().add(imageView);
-                count ++;
+            if(video.getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")){
+                img = new Image("file:" + video.getThumbnailVideo());
+            }else{
+                URL urlImagen = Main.class.getResource("img/defaultVideoImage.jpeg");
+                img = new Image(urlImagen.toString());
             }
 
+            ImageView imageView = new ImageView(img);
+            imageView.setFitHeight(Main.HEIGHT);
+            imageView.setFitWidth(Main.WIDTH);
+            Label label = new Label();
+            label.setText(video.getNombre());
 
+            VBox contenedor = new VBox();
+            contenedor.setSpacing(5);
+            contenedor.getChildren().addAll(label, imageView);
+            hBox.getChildren().add(contenedor);
 
+            if(count % Main.NCOLUMNS == 0 || count == listaVideos.size()){
+                vBox.getChildren().add(hBox);
+                hBox = new HBox();
+                hBox.setSpacing(5);
+            }
         }
+
+
     }
 
 }

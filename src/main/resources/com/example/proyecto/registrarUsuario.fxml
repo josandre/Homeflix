@@ -64,7 +64,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <PasswordField fx:id="txtContrasenna" layoutX="185.0" layoutY="293.0" prefHeight="32.0" prefWidth="222.0" />
+            <PasswordField fx:id="txtContrasenna" layoutX="185.0" layoutY="293.0" prefHeight="32.0" prefWidth="222.0" promptText="Mínimo 8 caracteres" />
          </children>
       </AnchorPane>
    </left>
