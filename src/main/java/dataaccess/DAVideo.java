@@ -69,7 +69,7 @@ public class DAVideo {
     public ArrayList<Video> buscarVideos(String criterio) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select nombre, descripcion, enlace, enlaceImagen FROM Video where descripcion like ? or Nombre like ?";
+        String select = "Select nombre, descripcion, enlaceVideo, enlaceImagen FROM Video where descripcion like ? or Nombre like ?";
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
@@ -82,7 +82,7 @@ public class DAVideo {
                     Video video = new Video();
                     video.setNombre(resultSet.getString("nombre"));
                     video.setDescripcion(resultSet.getString("descripcion"));
-                    video.setArchivo(resultSet.getString("enlace"));
+                    video.setArchivo(resultSet.getString("enlaceVideo"));
                     video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
                     result.add(video);
                 }
