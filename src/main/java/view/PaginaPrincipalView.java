@@ -203,7 +203,7 @@ public class PaginaPrincipalView {
                 System.out.println(img.getUrl());
 
             }else {
-                URL urlImage2 =  Main.class.getResource("img/defaulImageVideo.jpeg");
+                URL urlImage2 =  Main.class.getResource("img/defaultVideoImage.jpeg");
                 img = new Image(urlImage2.toString());
 
             }
