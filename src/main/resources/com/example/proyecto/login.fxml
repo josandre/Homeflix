@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInView">
 
       <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER" />
       <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
@@ -20,34 +20,34 @@
          </children>
       </AnchorPane>
    <center>
-      <AnchorPane prefHeight="400.0" prefWidth="387.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="579.0" prefWidth="535.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="txtUsuario" layoutX="149.0" layoutY="224.0" promptText="nombre usuario" />
-            <Label layoutX="149.0" layoutY="204.0" prefHeight="17.0" prefWidth="95.0" text="Usuario">
+            <TextField fx:id="txtUsuario" layoutX="175.0" layoutY="202.0" prefHeight="32.0" prefWidth="222.0" promptText="nombre usuario" />
+            <Label layoutX="173.0" layoutY="175.0" prefHeight="21.0" prefWidth="163.0" text="Usuario">
                <font>
-                  <Font size="16.0" />
+                  <Font size="21.0" />
                </font>
             </Label>
-            <Label layoutX="149.0" layoutY="281.0" text="Contraseña">
+            <Label layoutX="176.0" layoutY="276.0" text="Contraseña">
                <font>
-                  <Font size="14.0" />
+                  <Font size="21.0" />
                </font>
             </Label>
-            <Button fx:id="btnIngresar" layoutX="152.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleButtonLogIn" style="-fx-background-color: black;" text="Ingresar" textFill="#fffdfd" />
-            <Button fx:id="btnSalir" layoutX="257.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: black;" text="Salir" textFill="#fff7f7" />
-            <PasswordField fx:id="txtConstrasenna" layoutX="149.0" layoutY="299.0" promptText="***********" />
+            <Button fx:id="btnIngresar" layoutX="180.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleButtonLogIn" prefWidth="100.0" style="-fx-background-color: black;" text="Ingresar" textFill="#fffdfd" />
+            <Button fx:id="btnSalir" layoutX="297.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: black;" text="Salir" textFill="#fff7f7" />
+            <PasswordField fx:id="txtConstrasenna" layoutX="176.0" layoutY="308.0" prefHeight="31.0" prefWidth="220.0" promptText="***********" />
          </children>
       </AnchorPane>
    </center>
    <right>
-      <AnchorPane prefHeight="579.0" prefWidth="358.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="579.0" prefWidth="429.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="232.0" fitWidth="254.0" layoutX="70.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="232.0" fitWidth="254.0" layoutX="99.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/homeFlixLogo.jpeg" />
                </image>
             </ImageView>
-            <Button fx:id="btnRegistrarse" layoutX="147.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonRegister" style="-fx-background-color: white;" text="Registrarse" />
+            <Button fx:id="btnRegistrarse" layoutX="170.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleButtonRegister" prefWidth="100.0" style="-fx-background-color: white;" text="Registrarse" />
          </children>
       </AnchorPane>
    </right>

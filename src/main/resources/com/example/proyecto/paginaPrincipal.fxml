@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PaginaPrincipalView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PaginaPrincipalView">
    <center>
       <AnchorPane prefHeight="621.0" prefWidth="783.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane layoutX="23.0" layoutY="164.0" prefHeight="180.0" prefWidth="750.0">
+            <ScrollPane layoutX="23.0" layoutY="164.0" prefHeight="180.0" prefWidth="950.0">
                <content>
 
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0">
@@ -26,17 +26,17 @@
 
                </content>
             </ScrollPane>
-            <AnchorPane fx:id="anchorPainMain" prefHeight="95.0" prefWidth="800.0" style="-fx-background-color: black;">
+            <AnchorPane fx:id="anchorPainMain" prefHeight="95.0" prefWidth="1000.0" style="-fx-background-color: black;">
                <children>
-                  <Circle fx:id="circlePhoto" fill="DODGERBLUE" layoutX="625.0" layoutY="48.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Label fx:id="labelUserName" layoutX="670.0" layoutY="38.0" prefHeight="18.0" prefWidth="130.0" text="Label" textFill="#e4d3d3" />
-                  <TextField fx:id="txtBuscar" layoutX="248.0" layoutY="35.0" style="-fx-background-color: white;" />
-                  <ImageView fx:id="search" fitHeight="30.0" fitWidth="28.0" layoutX="425.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                  <Circle fx:id="circlePhoto" fill="DODGERBLUE" layoutX="760.0" layoutY="48.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label fx:id="labelUserName" layoutX="803.0" layoutY="39.0" prefHeight="18.0" prefWidth="192.0" text="Label" textFill="#e4d3d3" />
+                  <TextField fx:id="txtBuscar" layoutX="258.0" layoutY="35.0" prefHeight="26.0" prefWidth="246.0" style="-fx-background-color: white;" />
+                  <ImageView fx:id="search" fitHeight="30.0" fitWidth="28.0" layoutX="517.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/search.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="trash" fitHeight="30.0" fitWidth="28.0" layoutX="478.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="478.0">
+                  <ImageView fx:id="trash" fitHeight="30.0" fitWidth="28.0" layoutX="564.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="564.0">
                      <image>
                         <Image url="@img/trash.png" />
                      </image>
@@ -53,7 +53,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <ScrollPane layoutX="22.0" layoutY="389.0" prefHeight="180.0" prefWidth="750.0">
+            <ScrollPane layoutX="22.0" layoutY="389.0" prefHeight="180.0" prefWidth="950.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0">
                      <children>

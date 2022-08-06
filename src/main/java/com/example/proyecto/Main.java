@@ -36,9 +36,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
+        stage.setTitle("HomeFlix");
         stage.setScene(scene);
+        stage.setResizable(false);
         escenaPrincipal = scene;
         stage.show();
 

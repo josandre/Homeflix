@@ -18,7 +18,7 @@
             <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="810.0">
                <children>
                   <MediaView fx:id="mediaVideo" fitHeight="200.0" fitWidth="200.0" />
-                  <Slider fx:id="progresBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="716.0" />
+                  <Slider fx:id="progresBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="800.0" />
                   <HBox prefHeight="75.0" prefWidth="729.0">
                      <children>
                         <Button fx:id="btnReproducir" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: Black;" text="Play" textFill="#fffdfd">
