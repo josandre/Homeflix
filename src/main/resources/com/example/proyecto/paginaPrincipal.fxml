@@ -9,52 +9,63 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PaginaPrincipalView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PaginaPrincipalView">
    <center>
-      <AnchorPane prefHeight="437.0" prefWidth="660.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="621.0" prefWidth="783.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane layoutX="1.0" layoutY="107.0" prefHeight="166.0" prefWidth="754.0" style="-fx-background-color: black;">
+            <ScrollPane layoutX="16.0" layoutY="191.0" prefHeight="166.0" prefWidth="754.0" style="-fx-background-color: black;">
                <content>
                   <HBox fx:id="hBoxVideos" prefHeight="153.0" prefWidth="753.0" />
                </content>
             </ScrollPane>
-            <AnchorPane fx:id="anchorPainMain" layoutX="2.0" layoutY="2.0" prefHeight="95.0" prefWidth="748.0">
+            <AnchorPane fx:id="anchorPainMain" prefHeight="95.0" prefWidth="798.0" style="-fx-background-color: black;">
                <children>
-                  <Circle fx:id="circlePhoto" fill="DODGERBLUE" layoutX="694.0" layoutY="56.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Label fx:id="labelUserName" layoutX="587.0" layoutY="53.0" prefHeight="17.0" prefWidth="60.0" text="Label" />
-                  <TextField fx:id="txtBuscar" layoutX="250.0" layoutY="43.0" />
-                  <ImageView fx:id="search" fitHeight="38.0" fitWidth="55.0" layoutX="413.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                  <Circle fx:id="circlePhoto" fill="DODGERBLUE" layoutX="717.0" layoutY="48.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label fx:id="labelUserName" layoutX="607.0" layoutY="47.0" prefHeight="17.0" prefWidth="60.0" text="Label" textFill="#e4d3d3" />
+                  <TextField fx:id="txtBuscar" layoutX="250.0" layoutY="43.0" style="-fx-background-color: white;" />
+                  <ImageView fx:id="search" fitHeight="30.0" fitWidth="28.0" layoutX="425.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/search.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="trash" fitHeight="30.0" fitWidth="28.0" layoutX="468.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="trash" fitHeight="30.0" fitWidth="28.0" layoutX="486.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="486.0">
                      <image>
-                        <Image url="@img/trash3.png" />
+                        <Image url="@img/trash.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="exit" fitHeight="37.0" fitWidth="55.0" layoutX="28.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="exit" fitHeight="40.0" fitWidth="50.0" layoutX="25.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/exit.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="add" fitHeight="48.0" fitWidth="51.0" layoutX="78.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="add" fitHeight="30.0" fitWidth="28.0" layoutX="94.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/add.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
-            <ScrollPane layoutY="316.0" prefHeight="199.0" prefWidth="760.0">
+            <ScrollPane layoutX="22.0" layoutY="416.0" prefHeight="167.0" prefWidth="754.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="198.0" prefWidth="758.0" style="-fx-border-color: black;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="165.0" prefWidth="758.0" style="-fx-border-color: black;">
                      <children>
-                        <HBox fx:id="idHboxLista" layoutX="4.0" layoutY="3.0" prefHeight="180.0" prefWidth="741.0" />
+                        <HBox fx:id="idHboxLista" layoutY="5.0" prefHeight="149.0" prefWidth="738.0" />
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
+            <Label layoutX="22.0" layoutY="390.0" prefHeight="18.0" prefWidth="378.0" text="PlayList">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="16.0" layoutY="153.0" prefHeight="38.0" prefWidth="232.0" text="Videos Recientes">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
