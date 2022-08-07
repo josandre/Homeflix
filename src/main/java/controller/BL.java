@@ -144,8 +144,8 @@ public class BL {
 
     }
 
-    public void borrarCalificacion(int idCalificacion) throws SQLException {
-        DACalificacion.borrarCalificacion(idCalificacion);
+    public void borrarCalificacion(int idVideo, int idUsuario) throws SQLException {
+        DACalificacion.borrarCalificacion(idVideo, idUsuario);
     }
 
     public ModoReproduccion getModoReproduccion() {

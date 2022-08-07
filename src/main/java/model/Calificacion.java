@@ -13,6 +13,10 @@ public class Calificacion {
         this.estado = estado;
     }
 
+    public Calificacion() {
+
+    }
+
     public int getIdCalificacion() {
         return idCalificacion;
     }

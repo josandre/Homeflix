@@ -23,14 +23,16 @@ public class DACalificacion {
         }
     }
 
-    public void borrarCalificacion (int idCalificacion) throws SQLException {
+    public void borrarCalificacion (int idVideo, int idUsuario) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
-        String delete = "Delete from Calificacion Where idCalificacion = ?";
+        String delete = "Delete from Calificacion Where idVideo = ? and idUsuario = ?";
 
         try (Connection connection = connectionManager.abrirConexion()) {
             try (PreparedStatement statement = connection.prepareStatement(delete)) {
-                statement.setInt(1, idCalificacion);
-                ResultSet resultSet = statement.executeQuery();
+                statement.setInt(1, idVideo);
+                statement.setInt(2, idUsuario);
+
+                statement.executeUpdate();
             }
         }
     }
