@@ -1,6 +1,7 @@
 package view;
 
 import controller.BL;
+import javafx.scene.layout.VBox;
 import model.ListaReproduccion;
 import model.Usuario;
 import model.Video;
@@ -22,8 +23,6 @@ import java.util.*;
 public class PaginaPrincipalView {
 
 
-    private static PaginaPrincipalView instancia;
-
     @FXML
     public Label labelUserName;
 
@@ -32,16 +31,11 @@ public class PaginaPrincipalView {
 
 
     @FXML
-    public Button btnBuscar;
-
-    @FXML
     public TextField txtBuscar;
 
     @FXML
     public HBox hBoxVideos;
 
-    @FXML
-    public Button btnAddVideo;
 
     @FXML
     public ImageView trash;
@@ -57,6 +51,10 @@ public class PaginaPrincipalView {
 
     @FXML
     public HBox idHboxLista;
+    @FXML
+    public Label resultadoBusqueda;
+
+
 
     private BL blConexion = BL.getInstanciaBl();
 
@@ -71,7 +69,7 @@ public class PaginaPrincipalView {
 
         hBoxVideos.setSpacing(5);
 
-        loadData(usuarioActual.getId());
+        loadDataVideos(usuarioActual.getId());
 
         idHboxLista.setSpacing(5);
 
@@ -83,7 +81,7 @@ public class PaginaPrincipalView {
                 hBoxVideos.getChildren().clear();
                 txtBuscar.setText("");
                 try {
-                    loadData(usuarioActual.getId());
+                    loadDataVideos(usuarioActual.getId());
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -97,7 +95,7 @@ public class PaginaPrincipalView {
                 hBoxVideos.getChildren().clear();
                 if(txtBuscar.getText().trim().isEmpty()){
                     try {
-                        loadData(usuarioActual.getId());
+                        loadDataVideos(usuarioActual.getId());
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -140,7 +138,7 @@ public class PaginaPrincipalView {
     }
 
 
-    public void loadData(int userId) throws SQLException {
+    public void loadDataVideos(int userId) throws SQLException {
         ArrayList<Video> videos = blConexion.listarVideos(userId);
         for (int i = 0; i < videos.size(); i++) {
 
@@ -161,9 +159,12 @@ public class PaginaPrincipalView {
             imageView.setFitHeight(Main.HEIGHT);
             imageView.setFitWidth(Main.WIDTH);
             imageView.setPickOnBounds(true);
-
+            Label label = new Label();
+            VBox vBox = new VBox();
+            label.setText(video.getNombre());
+            vBox.getChildren().addAll(imageView, label);
             playingVideo(imageView, video);
-            hBoxVideos.getChildren().add(imageView);
+            hBoxVideos.getChildren().add(vBox);
         }
     }
 
@@ -184,8 +185,12 @@ public class PaginaPrincipalView {
             imageView.setFitHeight(Main.HEIGHT);
             imageView.setFitWidth(Main.WIDTH);
             imageView.setPickOnBounds(true);
+            Label label = new Label();
+            VBox vBox = new VBox();
+            label.setText(list.getNombre());
+            vBox.getChildren().addAll(imageView, label);
             seeVideos(imageView, list);
-            idHboxLista.getChildren().add(imageView);
+            idHboxLista.getChildren().add(vBox);
         }
 
     }
@@ -193,6 +198,8 @@ public class PaginaPrincipalView {
     public void searchLoadData() throws SQLException {
         ArrayList<Video> videos = blConexion.buscarVideo(txtBuscar.getText());
         hBoxVideos.getChildren().clear();
+        resultadoBusqueda.setText("Resultados");
+
         for (int i = 0; i < videos.size(); i++) {
             Image img;
             Video video = videos.get(i);
@@ -212,10 +219,12 @@ public class PaginaPrincipalView {
             imageView.setFitHeight(Main.HEIGHT);
             imageView.setFitWidth(Main.WIDTH);
             imageView.setPickOnBounds(true);
-
-           playingVideo(imageView, video);
-           hBoxVideos.getChildren().add(imageView);
-
+            Label label = new Label();
+            VBox vBox = new VBox();
+            label.setText(video.getNombre());
+            vBox.getChildren().addAll(imageView, label);
+            playingVideo(imageView, video);
+            hBoxVideos.getChildren().add(vBox);
         }
     }
 
