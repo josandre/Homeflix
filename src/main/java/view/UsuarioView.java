@@ -48,8 +48,9 @@ public class UsuarioView {
     private BL blConexion = BL.getInstanciaBl();
 
     Stage stage;
+
     {
-        if(mainPane != null){
+        if (mainPane != null) {
             stage = (Stage) mainPane.getScene().getWindow();
         }
     }
@@ -85,6 +86,8 @@ public class UsuarioView {
             alert.setContentText("Se ha registrado existosamente");
             alert.show();
 
+            Main.cambiaPantalla("login");
+
         }
     }
 
@@ -106,19 +109,24 @@ public class UsuarioView {
             txtApellido.setBorder(border);
         }
 
-        if (nombreUsuario != null && !nombreUsuario.isEmpty()){
+        if (nombreUsuario == null || nombreUsuario.isEmpty()) {
+            txtNombreUsuario.setBorder(border);
+
+        } else if (nombreUsuario != null && !nombreUsuario.isEmpty()) {
             boolean userExists = blConexion.userExists(txtNombreUsuario.getText());
-            if(userExists){
+            if (userExists) {
                 labelUserExists.setText("this username is not available");
                 esValido = false;
-            }
+                txtNombreUsuario.setBorder(border);
 
-        } else {
-            esValido = false;
-            txtNombreUsuario.setBorder(border);
+
+            } else {
+                labelUserExists.setText("");
+            }
         }
 
-        if (contrasenna == null  || contrasenna.length() < 8) {
+
+        if (contrasenna == null || txtContrasenna.getText().isEmpty()) {
             esValido = false;
             txtContrasenna.setBorder(border);
         } else if (!BL.validarContrasenna(contrasenna)) {
@@ -127,9 +135,9 @@ public class UsuarioView {
             labelWeakPassword.setText("password is to weak! make sure it's at least 8 characters " +
                     "OR at least 6 characters including a numbers, letter and special characters");
             txtContrasenna.setBorder(border);
+
             esValido = false;
         } else {
-            labelUserExists.setText("");
             labelWeakPassword.setText("");
         }
 
@@ -138,17 +146,18 @@ public class UsuarioView {
     }
 
     @FXML
-    public void handleButtonSubirArchivoImagen(ActionEvent event){
+    public void handleButtonSubirArchivoImagen(ActionEvent event) {
         this.txtArchivoImagen.setEditable(false);
         System.out.println("subiendo archivo");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir recurso del video");
         File file = fileChooser.showOpenDialog(stage);
 
-        if(file != null){
+        if (file != null) {
             this.txtArchivoImagen.setText(file.getAbsolutePath());
         }
     }
+
     @FXML
     public void handleButtonCancelarRegsitro(ActionEvent event) throws IOException {
         Main.cambiaPantalla("login");

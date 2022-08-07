@@ -34,7 +34,7 @@ public class LogInView {
         System.out.println("entrando");
         Usuario usuario =  blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
 
-        if(usuario == null){
+        if(usuario == null && !(txtUsuario.getText().isEmpty() && txtConstrasenna.getText().isEmpty())){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nombre de usuario o contraseña incorrecta");
             alert.setContentText("¿Desea intentar denuevo?");
@@ -47,12 +47,9 @@ public class LogInView {
 
             if(result.get() == registerButton){
                 Main.cambiaPantalla("registrarUsuario");
-            }else if(result.get() == tryAgainButton){
-                txtUsuario.setText("");
-                txtConstrasenna.setText("");
             }
 
-        }else {
+        } else if (usuario != null) {
             Main.cambiaPantalla("paginaPrincipal");
         }
     }
