@@ -109,7 +109,6 @@ public class ReproducirVideoView {
                 };
 
 
-
                 if (stage.isFullScreen()) {
                     stage.setFullScreen(false);
                     mediaVideo.setFitHeight(550);
@@ -243,6 +242,10 @@ public class ReproducirVideoView {
         }else{
             videos.addAll(blConexion.getActualPlayList().getListaVideos());
         }
+    }
+
+    public void handleDarleLike() {
+
     }
 
 
