@@ -4,6 +4,7 @@ import dataaccess.DAListaReproduccion;
 import dataaccess.DAUsuario;
 import dataaccess.DAVideo;
 import model.ListaReproduccion;
+import model.ModoReproduccion;
 import model.Usuario;
 import model.Video;
 
@@ -26,6 +27,10 @@ public class BL {
     private Video actualVideo;
 
     private ListaReproduccion actualPlayList;
+
+
+    private ModoReproduccion modoReproduccion;
+
 
 
 
@@ -129,6 +134,15 @@ public class BL {
     public ArrayList<Video> videosInPlayListActual(int idListaReproduccion) throws SQLException {
         return DAListasReproduccion.listaVideos(idListaReproduccion);
     }
+
+    public ModoReproduccion getModoReproduccion() {
+        return modoReproduccion;
+    }
+
+    public void setModoReproduccion(ModoReproduccion modoReproduccion) {
+        this.modoReproduccion = modoReproduccion;
+    }
+
 
 
 

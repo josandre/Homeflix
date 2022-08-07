@@ -3,6 +3,7 @@ package view;
 import controller.BL;
 import javafx.scene.layout.VBox;
 import model.ListaReproduccion;
+import model.ModoReproduccion;
 import model.Usuario;
 import model.Video;
 import com.example.proyecto.Main;
@@ -234,8 +235,9 @@ public class PaginaPrincipalView {
             @Override
             public void handle(MouseEvent event) {
                 blConexion.setActualVideo(video);
+                blConexion.setModoReproduccion(ModoReproduccion.Simple);
                 try {
-                    playVideo(video);
+                    playVideo();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -244,7 +246,7 @@ public class PaginaPrincipalView {
         });
     }
 
-    public void playVideo(Video video) throws IOException {
+    public void playVideo() throws IOException {
         Main.cambiaPantalla("reproducirVideo");
     }
 
