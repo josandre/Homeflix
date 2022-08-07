@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import model.ListaReproduccion;
 import model.Usuario;
@@ -34,13 +35,10 @@ public class listasDeReproduccion {
     public ImageView imgBack;
 
     @FXML
-    public HBox hBox;
-
-    @FXML
     public Button btnAddList;
 
     @FXML
-    public GridPane gridPane;
+    public VBox vBox;
 
     private BL blConexion = BL.getInstanciaBl();
 
@@ -68,40 +66,47 @@ public class listasDeReproduccion {
     }
 
     public void loadPlayList(int userId)throws SQLException {
-        ArrayList<ListaReproduccion> playList = blConexion.listarReproductionList(userId);
-        gridPane.getChildren().clear();
+        ArrayList<ListaReproduccion> playLists = blConexion.listarReproductionList(userId);
+        vBox.getChildren().clear();
+
+         HBox hBox = new HBox();
+         hBox.setSpacing(5);
+         vBox.setSpacing(10);
          int count = 0;
-         double nFilas = ((double) playList.size()) / ((double) Main.NCOLUMNS);
-         int totalFilas = (int)Math.ceil(nFilas);
 
-         for(int fila = 0; fila < totalFilas; fila++ ){
-             int filaActual = fila + 1;
-             int cantMaximaVideos = filaActual * Main.NCOLUMNS;
-             int camposSobrantes = playList.size() < cantMaximaVideos ? cantMaximaVideos - playList.size(): 0;
-             int totalColumnas = Main.NCOLUMNS - camposSobrantes;
+         for(int i = 0; i < playLists.size(); i++){
+             count = i +1;
+             Image img;
+             ListaReproduccion listaReproduccion = playLists.get(i);
 
-             for(int columna = 0; columna < totalColumnas; columna++){
-                 Image img;
-                 ListaReproduccion listaReproduccion = playList.get(count);
-
-                 if(listaReproduccion.getArchivoImagen() != null && !listaReproduccion.getArchivoImagen().equals("")){
-                     img = new Image("file:" + listaReproduccion.getArchivoImagen());
-                 }else{
-                     URL urlImagen = Main.class.getResource("img/defaultReproductionList.jpeg");
-                     img = new Image(urlImagen.toString());
-                 }
-                 ImageView imageView = new ImageView(img);
-                 imageView.setFitHeight(120);
-                 imageView.setFitWidth(100);
-                 GridPane.setRowIndex(imageView, fila);
-                 GridPane.setColumnIndex(imageView, columna);
-                 gridPane.getChildren().add(imageView);
-                 gridPane.setAlignment(Pos.CENTER);
-                 count++;
+             if(listaReproduccion.getArchivoImagen() != null && !listaReproduccion.getArchivoImagen().equals("")){
+                 img = new Image("file:" + listaReproduccion.getArchivoImagen());
+             }else{
+                 URL urlImagen = Main.class.getResource("img/defaultReproductionList.jpeg");
+                 img = new Image(urlImagen.toString());
              }
+
+             ImageView imageView = new ImageView(img);
+             imageView.setFitHeight(Main.HEIGHT);
+             imageView.setFitWidth(Main.WIDTH);
+             Label label = new Label();
+             label.setText(listaReproduccion.getNombre());
+             VBox contenedor = new VBox();
+             contenedor.setSpacing(5);
+             contenedor.getChildren().addAll(label, imageView);
+             hBox.getChildren().add(contenedor);
+
+             if(count % Main.NCOLUMNS == 0 || count == playLists.size()){
+                 vBox.getChildren().add(hBox);
+                 hBox = new HBox();
+                 hBox.setSpacing(5);
+             }
+
+
+
+
+
          }
-
-
     }
 
 

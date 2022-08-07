@@ -1,6 +1,9 @@
 package view;
 
 import controller.BL;
+import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import model.Usuario;
 import model.Video;
 import com.example.proyecto.Main;
@@ -60,6 +63,9 @@ public class RegistroVideoView {
     @FXML
     public Circle actualUserPhoto;
 
+    @FXML
+    public ImageView imgBack;
+
     public Border border = Main.obtenerBordeError();
 
 
@@ -74,6 +80,18 @@ public class RegistroVideoView {
 
     public void initialize(){
         Main.userInformation(labelActualUser, actualUserPhoto);
+
+        imgBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    Main.cambiaPantalla("paginaPrincipal");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
 
     }
 

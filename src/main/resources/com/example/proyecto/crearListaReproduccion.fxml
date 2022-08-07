@@ -9,31 +9,31 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="524.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CrearListaReproduccion">
+<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CrearListaReproduccion">
    <children>
-      <TextField fx:id="txtNombre" layoutX="170.0" layoutY="184.0" prefHeight="30.0" prefWidth="185.0" promptText="Introduzca el nombre de la lista" />
+      <TextField fx:id="txtNombre" layoutX="170.0" layoutY="184.0" prefHeight="32.0" prefWidth="222.0" promptText="Introduzca el nombre de la lista" />
       <Label layoutX="176.0" layoutY="158.0" prefHeight="26.0" prefWidth="89.0" text="Nombre">
          <font>
-            <Font size="17.0" />
+            <Font size="21.0" />
          </font>
       </Label>
-      <Button fx:id="btnCrearListaVideos" layoutX="220.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleButonAddList" prefHeight="27.0" prefWidth="109.0" style="-fx-background-color: black;" text="Crear" textFill="#fff6f6">
+      <Button fx:id="btnCrearListaVideos" layoutX="231.0" layoutY="449.0" mnemonicParsing="false" onAction="#handleButonAddList" prefWidth="100.0" style="-fx-background-color: black;" text="Crear" textFill="#fff6f6">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
       <Label layoutX="173.0" layoutY="284.0" text="Imagen">
          <font>
-            <Font size="17.0" />
+            <Font size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEnlaceImagen" layoutX="173.0" layoutY="306.0" prefHeight="26.0" prefWidth="185.0" promptText="Archivo Imagen" />
-      <Button fx:id="btnSubirArchivo" layoutX="358.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: black;" text="..." textFill="#f2efef" />
-      <AnchorPane prefHeight="90.0" prefWidth="800.0" style="-fx-background-color: black;">
+      <TextField fx:id="txtEnlaceImagen" layoutX="173.0" layoutY="306.0" prefHeight="32.0" prefWidth="222.0" promptText="Archivo Imagen" />
+      <Button fx:id="btnSubirArchivo" layoutX="395.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: black;" text="..." textFill="#f2efef" />
+      <AnchorPane prefHeight="95.0" prefWidth="1000.0" style="-fx-background-color: black;">
          <children>
-            <Label layoutX="265.0" layoutY="25.0" prefHeight="47.0" prefWidth="266.0" text="Nueva lista de reproducción" textAlignment="CENTER" textFill="#f5f4f4">
+            <Label layoutX="246.0" layoutY="25.0" prefHeight="47.0" prefWidth="367.0" text="Nueva lista de reproducción" textAlignment="CENTER" textFill="#f5f4f4">
                <font>
-                  <Font name="System Bold" size="22.0" />
+                  <Font name="System Bold" size="31.0" />
                </font>
             </Label>
             <ImageView fx:id="imgBack" fitHeight="36.0" fitWidth="35.0" layoutX="41.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
@@ -41,18 +41,14 @@
                   <Image url="@img/back.png" />
                </image>
             </ImageView>
-            <Label fx:id="userNameLabel" layoutX="626.0" layoutY="37.0" prefHeight="17.0" prefWidth="52.0" text="Label" textFill="#f5f0f0" />
-            <Circle fx:id="circleUserPhoto" fill="DODGERBLUE" layoutX="734.0" layoutY="45.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="userNameLabel" layoutX="841.0" layoutY="41.0" prefHeight="17.0" prefWidth="157.0" text="Label" textFill="#f5f0f0" />
+            <Circle fx:id="circleUserPhoto" fill="DODGERBLUE" layoutX="802.0" layoutY="47.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="509.0" layoutY="90.0" prefHeight="511.0" prefWidth="292.0" style="-fx-background-color: black;">
-         <children>
-            <ImageView fitHeight="166.0" fitWidth="150.0" layoutX="71.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/homeFlixLogo.jpeg" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
+      <ImageView fitHeight="544.0" fitWidth="395.0" layoutX="577.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/playList.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
