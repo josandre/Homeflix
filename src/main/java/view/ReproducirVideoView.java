@@ -100,13 +100,28 @@ public class ReproducirVideoView {
         fullScreen.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                ImageView imageView = (ImageView) mouseEvent.getSource();
-                Stage stage = (Stage) imageView.getScene().getWindow();
+                Stage stage = (Stage) Main.getEscenaPrincipal().getWindow();
+                ChangeListener changeListener = (ChangeListener) (obs,oldValue,newValue) ->
+                {
+                    mediaVideo.setFitHeight(550);
+                    mediaVideo.setFitWidth(1000);
+
+                };
+
+
 
                 if (stage.isFullScreen()) {
                     stage.setFullScreen(false);
+                    mediaVideo.setFitHeight(550);
+                    mediaVideo.setFitWidth(1000);
+                    stage.fullScreenProperty().removeListener(changeListener);
+
                 } else {
                     stage.setFullScreen(true);
+                    double height = stage.getHeight() - 75;
+                    mediaVideo.setFitHeight(height);
+                    mediaVideo.setFitWidth(stage.getWidth());
+                    stage.fullScreenProperty().addListener(changeListener);
                 }
             }
         });
