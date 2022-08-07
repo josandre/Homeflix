@@ -23,7 +23,7 @@ import java.util.Optional;
 
 public class Main extends Application {
 
-    private static Scene  escenaPrincipal;
+    private static Scene escenaPrincipal;
 
     public static final int HEIGHT = 150;
     public static final int WIDTH = 150;
@@ -87,5 +87,9 @@ public class Main extends Application {
         Optional<ButtonType> result = alert.showAndWait();
         Main.cambiaPantalla(pantalla);
         return result;
+    }
+
+    public static Scene getEscenaPrincipal() {
+        return escenaPrincipal;
     }
 }
