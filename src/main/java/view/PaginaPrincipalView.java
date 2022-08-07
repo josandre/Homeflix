@@ -139,6 +139,7 @@ public class PaginaPrincipalView {
 
 
     public void loadDataVideos(int userId) throws SQLException {
+        resultadoBusqueda.setText("Mis Videos");
         ArrayList<Video> videos = blConexion.listarVideos(userId);
         for (int i = 0; i < videos.size(); i++) {
 

@@ -2,6 +2,7 @@ package view;
 
 import controller.BL;
 import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.Usuario;
@@ -10,10 +11,6 @@ import com.example.proyecto.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -99,7 +96,7 @@ public class RegistroVideoView {
      * @param event Este evento registra el video
      */
     @FXML
-    public void handleButtonRegistrar(ActionEvent event) throws SQLException {
+    public void handleButtonRegistrar(ActionEvent event) throws SQLException, IOException {
 
         if(registrarVerificacion() == true){
             Video video = new Video();
@@ -119,12 +116,12 @@ public class RegistroVideoView {
             blConexion.getUsuarioActual().getUserVideos().add(video);
             System.out.println(blConexion.getUsuarioActual().getUserVideos());
             blConexion.annadirVideo(video);
+
+            Main.showAlert("Exito", "Registro Exitoso", "OK", "paginaPrincipal", Alert.AlertType.INFORMATION);
         }
     }
 
-    public void handleButtonReproducir(ActionEvent event) throws IOException {
-        Main.cambiaPantalla("reproducirVideo");
-    }
+
 
     /**
      * Esta funcion permite la verfificacion de los espacios en blanco del registro
@@ -169,12 +166,6 @@ public class RegistroVideoView {
         return esValido;
 
     }
-
-    /**
-     * Esta funcion crea un borde rojo con el que se trabaja las validaciones de espacios en blanco
-     * @return Esta funcion retorna un borde rojo
-     *
-     */
 
 
     /**

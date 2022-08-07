@@ -81,12 +81,8 @@ public class UsuarioView {
 
             blConexion.adduser(usuario);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ENHORABUENA!");
-            alert.setContentText("Se ha registrado existosamente");
-            alert.show();
 
-            Main.cambiaPantalla("login");
+            Main.showAlert("Registro exitoso", "Se ha registrado existosamente", "OK", "login", Alert.AlertType.INFORMATION );
 
         }
     }
