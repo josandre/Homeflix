@@ -36,4 +36,30 @@ public class DACalificacion {
             }
         }
     }
+
+    public Calificacion obtenerCalificacionActual (int idVideo, int idUsuario) throws SQLException {
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String select = "Select idCalificacion, estado From Calificacion Where idVideo = ? and idUsuario = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try (PreparedStatement statement = connection.prepareStatement(select)) {
+                statement.setInt(1, idVideo);
+                statement.setInt(2, idUsuario);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    int idCalificacion = resultSet.getInt("idCalificacion");
+                    boolean estado = resultSet.getBoolean("estado");
+
+                    Calificacion calificacion = new Calificacion();
+                    calificacion.setIdCalificacion(idCalificacion);
+                    calificacion.setEstado(estado);
+
+                    return calificacion;
+                }
+            }
+        }
+        return null;
+    }
 }

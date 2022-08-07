@@ -148,6 +148,10 @@ public class BL {
         DACalificacion.borrarCalificacion(idVideo, idUsuario);
     }
 
+    public Calificacion obtenerCalificacionActual(int idVideo, int idUsuario) throws SQLException {
+        return DACalificacion.obtenerCalificacionActual(idVideo, idUsuario);
+    }
+
     public ModoReproduccion getModoReproduccion() {
         return modoReproduccion;
     }

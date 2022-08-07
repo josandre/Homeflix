@@ -80,6 +80,9 @@ public class ReproducirVideoView {
     @FXML
     public ToggleButton btnLike;
 
+    @FXML
+    public Label liked;
+
     private BL blConexion = BL.getInstanciaBl();
 
     private  int posicionActual = 0;
@@ -89,8 +92,8 @@ public class ReproducirVideoView {
 
 
 
-    public void initialize(){
-
+    public void initialize() throws SQLException {
+        indicadorLike();
         loadVideos(blConexion.getModoReproduccion());
         reproducirVideo();
 
@@ -255,18 +258,36 @@ public class ReproducirVideoView {
         int idVideoActual = blConexion.getActualVideo().getId();
         int idUsuarioActual = blConexion.getUsuarioActual().getId();
 
+
         if (btnLike.isSelected()) {
             calificacion.setIdVideo(idVideoActual);
             calificacion.setIdUsuario(idUsuarioActual);
             calificacion.setEstado(true);
 
-
-
             blConexion.guardarCalificacion(calificacion);
-
 
         } else {
             blConexion.borrarCalificacion(idVideoActual, idUsuarioActual);
+            liked.setText("");
+
+        }
+        indicadorLike();
+
+    }
+
+    public void indicadorLike() throws SQLException {
+        int idVideoActual = blConexion.getActualVideo().getId();
+        int idUsuarioActual = blConexion.getUsuarioActual().getId();
+
+        Calificacion calificacionActual = blConexion.obtenerCalificacionActual(idVideoActual, idUsuarioActual);
+
+        if (calificacionActual != null) {
+            if (calificacionActual.isEstado() == true) {
+                liked.setText("liked");
+
+            } else {
+                liked.setText("");
+            }
         }
 
     }
