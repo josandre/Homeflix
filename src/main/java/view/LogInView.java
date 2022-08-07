@@ -38,7 +38,7 @@ public class LogInView {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nombre de usuario o contraseña incorrecta");
             alert.setContentText("¿Desea intentar denuevo?");
-            ButtonType tryAgainButton = new ButtonType("Intentar denuevo");
+            ButtonType tryAgainButton = new ButtonType("Intentar de nuevo");
             ButtonType registerButton = new ButtonType("Registrarse");
             alert.getButtonTypes().setAll(tryAgainButton, registerButton);
 

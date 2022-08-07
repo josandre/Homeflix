@@ -6,7 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class listasDeReproduccion {
     @FXML
@@ -95,6 +98,7 @@ public class listasDeReproduccion {
              contenedor.setSpacing(5);
              contenedor.getChildren().addAll(label, imageView);
              hBox.getChildren().add(contenedor);
+             choosePlaylist(imageView, listaReproduccion);
 
              if(count % Main.NCOLUMNS == 0 || count == playLists.size()){
                  vBox.getChildren().add(hBox);
@@ -123,7 +127,17 @@ public class listasDeReproduccion {
 
                 try {
                     addVideo(blConexion.getActualVideo().getId(), playList.getId());
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Exitoso!");
+                    alert.setContentText("Video Añadido corrrectamente");
+                    ButtonType OK = new ButtonType("OK");
+                    alert.getButtonTypes().setAll(OK);
+                    alert.showAndWait();
+                    Main.cambiaPantalla("reproducirVideo");
+
                 } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
 
