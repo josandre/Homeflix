@@ -1,8 +1,10 @@
 package controller;
 
+import dataaccess.DACalificacion;
 import dataaccess.DAListaReproduccion;
 import dataaccess.DAUsuario;
 import dataaccess.DAVideo;
+import model.Calificacion;
 import model.ListaReproduccion;
 import model.Usuario;
 import model.Video;
@@ -18,6 +20,8 @@ public class BL {
     DAUsuario DAUsuario = new DAUsuario();
 
     DAListaReproduccion DAListasReproduccion = new DAListaReproduccion();
+
+    DACalificacion DACalificacion = new DACalificacion();
 
     private static BL instanciaBl;
 
@@ -128,6 +132,11 @@ public class BL {
 
     public ArrayList<Video> videosInPlayListActual(int idListaReproduccion) throws SQLException {
         return DAListasReproduccion.listaVideos(idListaReproduccion);
+    }
+
+    public void guardarCalificacion(Calificacion calificacion) throws SQLException {
+        DACalificacion.guardarCalificacion(calificacion);
+
     }
 
 
