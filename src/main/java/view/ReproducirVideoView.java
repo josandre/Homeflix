@@ -2,8 +2,10 @@ package view;
 
 import controller.BL;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.Calificacion;
 import model.ListaReproduccion;
 import model.ModoReproduccion;
 import model.Video;
@@ -75,6 +77,9 @@ public class ReproducirVideoView {
     @FXML
     public  ImageView addReproductionList;
 
+    @FXML
+    public ToggleButton btnLike;
+
     private BL blConexion = BL.getInstanciaBl();
 
     private  int posicionActual = 0;
@@ -107,7 +112,6 @@ public class ReproducirVideoView {
                     mediaVideo.setFitWidth(1000);
 
                 };
-
 
 
                 if (stage.isFullScreen()) {
@@ -243,6 +247,28 @@ public class ReproducirVideoView {
         }else{
             videos.addAll(blConexion.getActualPlayList().getListaVideos());
         }
+    }
+
+    @FXML
+    public void handleDarleLike() throws SQLException {
+        Calificacion calificacion = new Calificacion();
+        int idVideoActual = blConexion.getActualVideo().getId();
+        int idUsuarioActual = blConexion.getUsuarioActual().getId();
+
+        if (btnLike.isSelected()) {
+            calificacion.setIdVideo(idVideoActual);
+            calificacion.setIdUsuario(idUsuarioActual);
+            calificacion.setEstado(true);
+
+
+
+            blConexion.guardarCalificacion(calificacion);
+
+
+        } else {
+            blConexion.borrarCalificacion(idVideoActual, idUsuarioActual);
+        }
+
     }
 
 

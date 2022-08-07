@@ -4,6 +4,7 @@ import model.Calificacion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DACalificacion {
@@ -18,6 +19,20 @@ public class DACalificacion {
                 statement.setInt(2, calificacion.getIdUsuario());
                 statement.setBoolean(3, calificacion.isEstado());
                 return statement.executeUpdate();
+            }
+        }
+    }
+
+    public void borrarCalificacion (int idVideo, int idUsuario) throws SQLException {
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from Calificacion Where idVideo = ? and idUsuario = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try (PreparedStatement statement = connection.prepareStatement(delete)) {
+                statement.setInt(1, idVideo);
+                statement.setInt(2, idUsuario);
+
+                statement.executeUpdate();
             }
         }
     }
