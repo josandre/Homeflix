@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -17,6 +19,7 @@ import model.Usuario;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 
 public class Main extends Application {
 
@@ -73,5 +76,16 @@ public class Main extends Application {
         return new Border(new BorderStroke(Color.RED, Color.RED, Color.RED, Color.RED,
                 BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY, new BorderWidths(1), Insets.EMPTY));
+    }
+
+    public static Optional<ButtonType> showAlert(String titulo, String mensaje, String txtBoton, String pantalla, Alert.AlertType alertType) throws IOException {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setContentText(mensaje);
+        ButtonType OK = new ButtonType(txtBoton);
+        alert.getButtonTypes().setAll(OK);
+        Optional<ButtonType> result = alert.showAndWait();
+        Main.cambiaPantalla(pantalla);
+        return result;
     }
 }

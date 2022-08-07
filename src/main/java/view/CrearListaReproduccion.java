@@ -6,9 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +19,7 @@ import model.ListaReproduccion;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class CrearListaReproduccion {
     @FXML
@@ -74,19 +73,19 @@ public class CrearListaReproduccion {
 
     }
 
-    public void handleButonAddList() throws SQLException {
+    public void handleButonAddList() throws SQLException, IOException {
         if(verfificacionRegistro()){
             ListaReproduccion listaVideos =  new ListaReproduccion();
 
             String nombre = txtNombre.getText();
             String enlaceImagen = txtEnlaceImagen.getText();
 
-
             listaVideos.setNombre(nombre);
             listaVideos.setArchivoImagen(enlaceImagen);
             listaVideos.setUserId(blConexion.getUsuarioActual().getId());
-
             blConexion.addReproductionList(listaVideos);
+
+            Main.showAlert("Exito", "Lista de reproducción añadida correctamente","OK" , "listasDeReproduccion", Alert.AlertType.INFORMATION);
 
         }
     }
