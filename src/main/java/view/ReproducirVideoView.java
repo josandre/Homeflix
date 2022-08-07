@@ -1,9 +1,11 @@
 package view;
 
 import controller.BL;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.ListaReproduccion;
+import model.ModoReproduccion;
 import model.Video;
 import com.example.proyecto.Main;
 import javafx.beans.InvalidationListener;
@@ -32,6 +34,7 @@ public class ReproducirVideoView {
 
     @FXML
     public MediaView mediaVideo;
+
 
     private MediaPlayer mediaPlayer;
 
@@ -65,8 +68,6 @@ public class ReproducirVideoView {
     @FXML
     public Slider volumSlider;
 
-    @FXML
-    public Button btnAgregarVideo;
 
     @FXML
     public ImageView fullScreen;
@@ -76,54 +77,17 @@ public class ReproducirVideoView {
 
     private BL blConexion = BL.getInstanciaBl();
 
+    private  int posicionActual = 0;
+
+    private ArrayList<Video> videos = new ArrayList<>();
+
 
 
 
     public void initialize(){
-        Video actualVideo = blConexion.getActualVideo();
-        final String nombreArchivo = actualVideo.getArchivo();
-        File archivo = new File(nombreArchivo);
 
-        Media video = new Media(archivo.toURI().toString());
-        mediaPlayer  = new MediaPlayer(video);
-        mediaPlayer.setAutoPlay(true);
-        mediaVideo.setMediaPlayer(mediaPlayer);
-
-        DoubleProperty widhtPro = mediaVideo.fitWidthProperty();
-        DoubleProperty heightPro = mediaVideo.fitHeightProperty();
-        widhtPro.bind(Bindings.selectDouble(mediaVideo.sceneProperty(), "Width"));
-        heightPro.bind(Bindings.selectDouble(mediaVideo.sceneProperty(), "height"));
-
-        mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
-            @Override
-            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-                progresBar.setValue(newValue.toSeconds());
-
-            }
-        });
-
-        progresBar.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                mediaPlayer.seek(Duration.seconds(progresBar.getValue()));
-            }
-        });
-
-        progresBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                mediaPlayer.seek(Duration.seconds(progresBar.getValue()));
-            }
-        });
-
-        mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                Duration total = video.getDuration();
-                progresBar.setMax(total.toSeconds());
-                
-            }
-        });
+        loadVideos(blConexion.getModoReproduccion());
+        reproducirVideo();
 
         volumSlider.setValue(mediaPlayer.getVolume() * 100);
         volumSlider.valueProperty().addListener(new InvalidationListener() {
@@ -151,6 +115,7 @@ public class ReproducirVideoView {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 try {
+                    mediaPlayer.stop();
                     Main.cambiaPantalla("listasDeReproduccion");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -160,9 +125,71 @@ public class ReproducirVideoView {
 
     }
 
+    public void reproducirVideo(){
+
+        Video videoActual = videos.get(posicionActual);
+        final String nombreArchivo = videoActual.getArchivo();
+
+        File archivo = new File(nombreArchivo);
+        Media video = new Media(archivo.toURI().toString());
+        mediaPlayer  = new MediaPlayer(video);
+        mediaPlayer.setAutoPlay(true);
+        mediaVideo.setMediaPlayer(mediaPlayer);
+        mediaVideo.setPreserveRatio(false);
+        mediaVideo.setFitHeight(550);
+        mediaVideo.setFitWidth(1000);
+
+        mediaPlayer.setOnEndOfMedia( () ->
+        {
+            if(posicionActual == videos.size()-1){
+                mediaPlayer.stop();
+            }else {
+                posicionActual++;
+                reproducirVideo();
+            }
+
+        });
+
+        mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                progresBar.setValue(newValue.toSeconds());
+
+            }
+        });
+
+
+        progresBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mediaPlayer.seek(Duration.seconds(progresBar.getValue()));
+            }
+        });
+
+        progresBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mediaPlayer.seek(Duration.seconds(progresBar.getValue()));
+            }
+        });
+
+
+
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                Duration total = video.getDuration();
+                progresBar.setMax(total.toSeconds());
+
+            }
+        });
+
+    }
+
 
 
     public void handleButtonVolver(ActionEvent event) throws IOException {
+        mediaPlayer.stop();
         Main.cambiaPantalla("paginaPrincipal");
     }
 
@@ -192,6 +219,15 @@ public class ReproducirVideoView {
 
     public void handleButtonMenosDiezSeg(){
         mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(-10)));
+    }
+
+    public void loadVideos(ModoReproduccion modoReproduccion){
+        videos.clear();
+        if(modoReproduccion.equals(ModoReproduccion.Simple)){
+            videos.add(blConexion.getActualVideo());
+        }else{
+            videos.addAll(blConexion.getActualPlayList().getListaVideos());
+        }
     }
 
 

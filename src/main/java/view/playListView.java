@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import model.ListaReproduccion;
+import model.ModoReproduccion;
 import model.Video;
 
 import java.io.IOException;
@@ -35,11 +36,11 @@ public class playListView {
     @FXML
     public ImageView back;
 
+    @FXML
+    public ImageView playAll;
+
     private BL blConexion = BL.getInstanciaBl();
 
-
-
-    private int nColumns = 3;
 
 
 
@@ -63,11 +64,25 @@ public class playListView {
             }
         });
 
+        playAll.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    blConexion.setModoReproduccion(ModoReproduccion.Multiple);
+                    playVideo();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
     }
 
     public void loadVideosPlayList()throws SQLException{
         ListaReproduccion actualPlayList = blConexion.getActualPlayList();
         ArrayList<Video> listaVideos = blConexion.videosInPlayListActual(actualPlayList.getId());
+        actualPlayList.setListaVideos(listaVideos);
         vBox.getChildren().clear();
 
         HBox hBox = new HBox();
@@ -98,7 +113,7 @@ public class playListView {
             contenedor.setSpacing(5);
             contenedor.getChildren().addAll(label, imageView);
             hBox.getChildren().add(contenedor);
-
+            reproducirPlayList(imageView, video);
             if(count % Main.NCOLUMNS == 0 || count == listaVideos.size()){
                 vBox.getChildren().add(hBox);
                 hBox = new HBox();
@@ -106,7 +121,29 @@ public class playListView {
             }
         }
 
-
     }
+
+    public void reproducirPlayList(ImageView imageView, Video video){
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                blConexion.setActualVideo(video);
+                blConexion.setModoReproduccion(ModoReproduccion.Simple);
+                try {
+                    playVideo();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }
+        });
+    }
+
+
+    public void playVideo() throws IOException {
+        Main.cambiaPantalla("reproducirVideo");
+    }
+
 
 }
