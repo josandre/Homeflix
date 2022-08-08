@@ -23,7 +23,7 @@ public class DAVideo {
 
 
         try (Connection connection = connectionManager.abrirConexion()) {
-            try ( PreparedStatement statement = connection.prepareStatement(insert)) {
+            try ( PreparedStatement statement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, video.getNombre());
                 statement.setString(2, video.getCategoria());
                 statement.setDate(3, Date.valueOf(video.getFecha()));
@@ -32,11 +32,18 @@ public class DAVideo {
                 statement.setString(6, video.getArchivo());
                 statement.setString(7, video.getThumbnailVideo());
                 statement.setInt(8, video.getUserId());
-                return statement.executeUpdate();
+
+                statement.executeUpdate();
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if(resultSet.next())
+                {
+                    return  resultSet.getInt(1);
+                }
 
 
             }
         }
+        return 0;
     }
 
     public ArrayList<Video> obtenerVideos(int idUser) throws SQLException {

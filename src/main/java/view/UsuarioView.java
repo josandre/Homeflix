@@ -82,7 +82,7 @@ public class UsuarioView {
             blConexion.adduser(usuario);
 
 
-            Main.showAlert("Registro exitoso", "Se ha registrado existosamente", "OK", "login", Alert.AlertType.INFORMATION );
+            Main.showAlertOneOption("Registro exitoso", "Se ha registrado existosamente", "OK", "login", Alert.AlertType.INFORMATION );
 
         }
     }

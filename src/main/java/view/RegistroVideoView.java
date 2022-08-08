@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * Esta clase maneja el registro de los videos
@@ -114,10 +115,19 @@ public class RegistroVideoView {
             video.setThumbnailVideo(subirArchivoImagen);
             video.setUserId(blConexion.getUsuarioActual().getId());
             blConexion.getUsuarioActual().getUserVideos().add(video);
-            System.out.println(blConexion.getUsuarioActual().getUserVideos());
-            blConexion.annadirVideo(video);
+            int idVideo = blConexion.annadirVideo(video);
+            video.setId(idVideo);
 
-            Main.showAlert("Exito", "Registro Exitoso", "OK", "paginaPrincipal", Alert.AlertType.INFORMATION);
+            Main.showAlertOneOption("Exito", "Registro Exitoso", "OK", "registrarVideo", Alert.AlertType.INFORMATION);
+            Optional<ButtonType> result = Main.showAlertTwoOptions("Información", "Desea agregar el video a una lista de reproducción", "OK", "NO", Alert.AlertType.CONFIRMATION);
+            if(result.get().equals(ButtonType.OK)){
+                blConexion.setActualVideo(video);
+                Main.cambiaPantalla("listasDeReproduccion");
+            }else{
+                Main.cambiaPantalla("paginaPrincipal");
+            }
+
+
         }
     }
 
