@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CrearListaReproduccion">
+<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.CrearListaReproduccion">
    <children>
       <TextField fx:id="txtNombre" layoutX="170.0" layoutY="184.0" prefHeight="32.0" prefWidth="222.0" promptText="Introduzca el nombre de la lista" />
       <Label layoutX="176.0" layoutY="158.0" prefHeight="26.0" prefWidth="89.0" text="Nombre">

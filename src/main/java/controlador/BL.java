@@ -1,14 +1,14 @@
-package controller;
+package controlador;
 
 import dataaccess.DACalificacion;
 import dataaccess.DAListaReproduccion;
 import dataaccess.DAUsuario;
 import dataaccess.DAVideo;
-import model.Calificacion;
-import model.ListaReproduccion;
-import model.ModoReproduccion;
-import model.Usuario;
-import model.Video;
+import modelo.Calificacion;
+import modelo.ListaReproduccion;
+import modelo.ModoReproduccion;
+import modelo.Usuario;
+import modelo.Video;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

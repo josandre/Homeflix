@@ -1,6 +1,4 @@
-package model;
-
-import controller.BL;
+package modelo;
 
 import java.time.LocalDate;
 
@@ -16,10 +14,10 @@ public class Video {
     private int calificacion;
     private String archivo;
     private String thumbnailVideo;
-    private int userId;
+    private int idUsuario;
 
 
-    public Video(int id, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo, String thumbnailVideo, int userId) {
+    public Video(int id, String nombre, String categoria, LocalDate fecha, String descripcion, int calificacion, String archivo, String thumbnailVideo, int idUsuario) {
         this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
@@ -28,14 +26,15 @@ public class Video {
         this.calificacion = calificacion;
         this.archivo = archivo;
         this.thumbnailVideo = thumbnailVideo;
-        this.userId = userId;
+        this.idUsuario = idUsuario;
     }
 
-    public Video(){
+    public Video() {
     }
 
     /**
      * Esta funcion permite obtener el id del video
+     *
      * @return id del video
      */
     public int getId() {
@@ -43,8 +42,7 @@ public class Video {
     }
 
     /**
-     * @param id
-     * Esta funcion permite configurar el id del video
+     * @param id Esta funcion permite configurar el id del video
      */
     public void setId(int id) {
         this.id = id;
@@ -52,6 +50,7 @@ public class Video {
 
     /**
      * Esta funcion permite obtener el nombre del video
+     *
      * @return el nombre del video
      */
     public String getNombre() {
@@ -60,6 +59,7 @@ public class Video {
 
     /**
      * Esta funcion permite la configuracion del nombre del video
+     *
      * @param nombre
      */
     public void setNombre(String nombre) {
@@ -68,6 +68,7 @@ public class Video {
 
     /**
      * Esta funcion permite obtener el nombre del video
+     *
      * @return Categoria del video
      */
     public String getCategoria() {
@@ -76,6 +77,7 @@ public class Video {
 
     /**
      * Esta funcion permite la configuracion de la categoria del video
+     *
      * @param categoria
      */
     public void setCategoria(String categoria) {
@@ -84,6 +86,7 @@ public class Video {
 
     /**
      * Esta funcion permite obtener la fecha del registro del video
+     *
      * @return la fceha del registro del video
      */
     public LocalDate getFecha() {
@@ -92,6 +95,7 @@ public class Video {
 
     /**
      * Esta funcion permite la configuracion de la fecha del video
+     *
      * @param fecha
      */
     public void setFecha(LocalDate fecha) {
@@ -100,6 +104,7 @@ public class Video {
 
     /**
      * Esta funcion permite obtener la descripcion del video
+     *
      * @return la descripcion del video
      */
     public String getDescripcion() {
@@ -108,6 +113,7 @@ public class Video {
 
     /**
      * Esta funcion permite la configuracion de la descripcion del video
+     *
      * @param descripcion
      */
     public void setDescripcion(String descripcion) {
@@ -116,6 +122,7 @@ public class Video {
 
     /**
      * Esta funcion permite obtener la calificacion del video
+     *
      * @return la calificacion del video
      */
     public int getCalificacion() {
@@ -124,6 +131,7 @@ public class Video {
 
     /**
      * Esta funcion permite la configuracion de la calificacion del video
+     *
      * @param calificacion
      */
     public void setCalificacion(int calificacion) {
@@ -132,6 +140,7 @@ public class Video {
 
     /**
      * Esta funcion permite obtener el archivo del video
+     *
      * @return el archivo del video
      */
     public String getArchivo() {
@@ -140,6 +149,7 @@ public class Video {
 
     /**
      * Esta funcion permite la configuracion del archivo del video
+     *
      * @param archivo
      */
     public void setArchivo(String archivo) {
@@ -154,12 +164,12 @@ public class Video {
         this.thumbnailVideo = thumbnailVideo;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
 
@@ -174,7 +184,7 @@ public class Video {
                 ", calificacion=" + calificacion +
                 ", archivo='" + archivo + '\'' +
                 ", thumbnailVideo='" + thumbnailVideo + '\'' +
-                ", userId='" + userId + '\'' +
+                ", idUsuario='" + idUsuario + '\'' +
                 '}';
     }
 }

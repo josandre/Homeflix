@@ -1,4 +1,4 @@
-package model;
+package modelo;
 
 import java.util.ArrayList;
 
@@ -10,20 +10,19 @@ public class ListaReproduccion {
 
     private int id;
 
-    private int userId;
+    private int idUsuario;
 
 
-
-    public ListaReproduccion(ArrayList<Video> listaVideos, String nombre, String archivoImagen, int id, int userId) {
+    public ListaReproduccion(ArrayList<Video> listaVideos, String nombre, String archivoImagen, int id, int idUsuario) {
         this.listaVideos = listaVideos;
         this.nombre = nombre;
         this.archivoImagen = archivoImagen;
         this.id = id;
-        this.userId = userId;
+        this.idUsuario = idUsuario;
     }
 
-    public ListaReproduccion(){
-        this.listaVideos =  new ArrayList<>();
+    public ListaReproduccion() {
+        this.listaVideos = new ArrayList<>();
     }
 
     public ArrayList<Video> getListaVideos() {
@@ -58,14 +57,13 @@ public class ListaReproduccion {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
-
 
 
     @Override

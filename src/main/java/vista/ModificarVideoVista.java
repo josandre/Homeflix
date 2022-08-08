@@ -1,83 +1,69 @@
-package view;
+package vista;
 
-import controller.BL;
+import com.example.proyecto.Main;
+import controlador.BL;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import model.Usuario;
-import model.Video;
-import com.example.proyecto.Main;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import modelo.Video;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Optional;
 
 /**
  * Esta clase maneja el registro de los videos
  */
-public class RegistroVideoView {
+public class ModificarVideoVista {
 
     @FXML
     public TextField txtNombreVideo;
-
     @FXML
     public TextField txtCategoria;
-
     @FXML
     public TextArea txtDescripcion;
-
     @FXML
-    public Button btnRegistrar;
-
+    public Button btnModificar;
     @FXML
     public Button btnCancelar;
-
-    @FXML
-    public TextField txtSubirArchivo;
-
     @FXML
     public TextField txtSubirThumbnail;
-
     @FXML
     public AnchorPane mainPane;
-
     @FXML
     public Label labelActualUser;
-
     @FXML
     public Circle actualUserPhoto;
-
     @FXML
     public ImageView imgBack;
-
     public Border border = Main.obtenerBordeError();
-
-
 
     private BL blConexion = BL.getInstanciaBl();
     Stage stage;
+
     {
-        if(mainPane != null){
+        if (mainPane != null) {
             stage = (Stage) mainPane.getScene().getWindow();
         }
     }
 
-    public void initialize(){
+    public void initialize() {
         Main.userInformation(labelActualUser, actualUserPhoto);
+
+        Video video = blConexion.getActualVideo();
+        txtNombreVideo.setText(video.getNombre());
+        txtCategoria.setText(video.getCategoria());
+        txtDescripcion.setText(video.getDescripcion());
+        txtSubirThumbnail.setText(video.getThumbnailVideo());
 
         imgBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -87,96 +73,63 @@ public class RegistroVideoView {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         });
-
     }
 
     /**
      * @param event Este evento registra el video
      */
     @FXML
-    public void handleButtonRegistrar(ActionEvent event) throws SQLException, IOException {
+    public void handleButtonModificar(ActionEvent event) throws SQLException, IOException {
 
-        if(registrarVerificacion() == true){
-            Video video = new Video();
+        if (modificarVerificacion() == true) {
+            Video video = blConexion.getActualVideo();
             video.setFecha(LocalDate.now());
             String nombre = txtNombreVideo.getText();
             String categoria = txtCategoria.getText();
             String descripcion = txtDescripcion.getText();
-            String subirArchivo = txtSubirArchivo.getText();
             String subirArchivoImagen = txtSubirThumbnail.getText();
             video.setCalificacion(0);
             video.setNombre(nombre);
             video.setCategoria(categoria);
             video.setDescripcion(descripcion);
-            video.setArchivo(subirArchivo);
             video.setThumbnailVideo(subirArchivoImagen);
-            video.setUserId(blConexion.getUsuarioActual().getId());
-            blConexion.getUsuarioActual().getUserVideos().add(video);
-            int idVideo = blConexion.annadirVideo(video);
-            video.setId(idVideo);
+            video.setIdUsuario(blConexion.getUsuarioActual().getId());
+            blConexion.getUsuarioActual().getVideosUsuario().add(video);
+            blConexion.modificar(video);
 
-            Main.showAlertOneOption("Exito", "Registro Exitoso", "OK", "registrarVideo", Alert.AlertType.INFORMATION);
-            Optional<ButtonType> result = Main.showAlertTwoOptions("Información", "Desea agregar el video a una lista de reproducción", "OK", "NO", Alert.AlertType.CONFIRMATION);
-            if(result.get().equals(ButtonType.OK)){
-                blConexion.setActualVideo(video);
-                Main.cambiaPantalla("listasDeReproduccion");
-            }else{
-                Main.cambiaPantalla("paginaPrincipal");
-            }
-
-
+            Main.showAlertOneOption("Exito", "Modificación exitosa", "OK", "reproducirVideo", Alert.AlertType.INFORMATION);
         }
     }
-
 
 
     /**
      * Esta funcion permite la verfificacion de los espacios en blanco del registro
      */
-    public boolean registrarVerificacion(){
+    public boolean modificarVerificacion() {
         String nombre = txtNombreVideo.getText();
         String categoria = txtCategoria.getText();
         String descripcion = txtDescripcion.getText();
-        String subirArchivo = txtSubirArchivo.getText();
-
-
 
         boolean esValido = true;
 
-
-        if(nombre == null || txtNombreVideo.getText().isEmpty()){
+        if (nombre == null || txtNombreVideo.getText().isEmpty()) {
             esValido = false;
             txtNombreVideo.setBorder(border);
-
         }
 
-        if(categoria == null || txtCategoria.getText().isEmpty()){
+        if (categoria == null || txtCategoria.getText().isEmpty()) {
             esValido = false;
             txtCategoria.setBorder(border);
-
         }
 
-        if(descripcion == null || txtDescripcion.getText().isEmpty()){
+        if (descripcion == null || txtDescripcion.getText().isEmpty()) {
             esValido = false;
             txtDescripcion.setBorder(border);
-
-
         }
-
-        if(subirArchivo == null || txtSubirArchivo.getText().isEmpty()){
-            esValido = false;
-            txtSubirArchivo.setBorder(border);
-
-
-        }
-
         return esValido;
-
     }
-
 
     /**
      * @param event Este evento cancela el registro y envia al usuario a la pagina principal
@@ -184,33 +137,17 @@ public class RegistroVideoView {
     @FXML
     public void handleButtonCancelar(ActionEvent event) throws IOException {
         Main.cambiaPantalla("paginaPrincipal");
-
     }
 
-    /**
-     * @param event Este evento permite subir el archivo del video que se esta registrando
-     */
     @FXML
-    public void handleButtonSubirArchivo(ActionEvent event){
-        this.txtSubirArchivo.setEditable(false);
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Abrir recurso del video");
-        File file = fileChooser.showOpenDialog(stage);
-
-        if(file != null){
-            this.txtSubirArchivo.setText(file.getAbsolutePath());
-        }
-    }
-    @FXML
-    public void handleButtonSubirThumbnail(ActionEvent event){
+    public void handleButtonSubirThumbnail(ActionEvent event) {
         this.txtSubirThumbnail.setEditable(false);
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir recurso del video");
         File file = fileChooser.showOpenDialog(stage);
 
-        if(file != null){
+        if (file != null) {
             this.txtSubirThumbnail.setText(file.getAbsolutePath());
         }
     }
-
 }

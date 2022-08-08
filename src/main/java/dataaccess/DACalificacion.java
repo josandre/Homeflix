@@ -1,6 +1,6 @@
 package dataaccess;
 
-import model.Calificacion;
+import modelo.Calificacion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -72,7 +72,6 @@ public class DACalificacion {
                 statement.setInt(1, idVideo);
 
                 return statement.executeUpdate();
-
             }
         }
     }

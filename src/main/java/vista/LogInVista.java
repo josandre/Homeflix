@@ -1,39 +1,34 @@
-package view;
+package vista;
 
-import controller.BL;
-import model.Usuario;
 import com.example.proyecto.Main;
+import controlador.BL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import modelo.Usuario;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class LogInView {
+public class LogInVista {
 
     @FXML
     public TextField txtUsuario;
-
     @FXML
     public Button btnRegistrarse;
-
     @FXML
-    public  PasswordField txtConstrasenna;
-
+    public PasswordField txtConstrasenna;
     private BL blConexion = BL.getInstanciaBl();
 
     public void initialize() {
 
-
     }
 
-
     public void handleButtonLogIn(ActionEvent event) throws SQLException, IOException {
-        Usuario usuario =  blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
+        Usuario usuario = blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
 
-        if(usuario == null && !(txtUsuario.getText().isEmpty() && txtConstrasenna.getText().isEmpty())){
+        if (usuario == null && !(txtUsuario.getText().isEmpty() && txtConstrasenna.getText().isEmpty())) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nombre de usuario o contraseña incorrecta");
             alert.setContentText("¿Desea intentar denuevo?");
@@ -43,8 +38,7 @@ public class LogInView {
 
             Optional<ButtonType> result = alert.showAndWait();
 
-
-            if(result.get() == registerButton){
+            if (result.get() == registerButton) {
                 Main.cambiaPantalla("registrarUsuario");
             }
 
@@ -53,15 +47,11 @@ public class LogInView {
         }
     }
 
-    public void handleButtonExit(ActionEvent event){
+    public void handleButtonExit(ActionEvent event) {
         System.exit(0);
     }
 
     public void handleButtonRegister() throws IOException {
         Main.cambiaPantalla("registrarUsuario");
     }
-
-
-
-
 }
