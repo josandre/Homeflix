@@ -150,7 +150,6 @@ public class PaginaPrincipalView {
 
             if(video.getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")){
                 img = new Image("file:" + video.getThumbnailVideo());
-                System.out.println(img.getUrl());
 
             }else {
                 URL urlImage2 =  Main.class.getResource("img/defaultVideoImage.jpeg");
@@ -200,7 +199,10 @@ public class PaginaPrincipalView {
     public void searchLoadData() throws SQLException {
         ArrayList<Video> videos = blConexion.buscarVideo(txtBuscar.getText());
         hBoxVideos.getChildren().clear();
-        resultadoBusqueda.setText("Resultados");
+        String texto = videos.size() == 0 ? "No se encontró ningún resultado": "Resultados";
+        resultadoBusqueda.setText(texto);
+
+
 
         for (int i = 0; i < videos.size(); i++) {
             Image img;
@@ -209,7 +211,6 @@ public class PaginaPrincipalView {
 
             if(video.getThumbnailVideo() != null && !videos.get(i).getThumbnailVideo().equals("")){
                 img = new Image("file:" + videos.get(i).getThumbnailVideo());
-                System.out.println(img.getUrl());
 
             }else {
                 URL urlImage2 =  Main.class.getResource("img/defaultVideoImage.jpeg");
@@ -228,6 +229,9 @@ public class PaginaPrincipalView {
             playingVideo(imageView, video);
             hBoxVideos.getChildren().add(vBox);
         }
+
+
+
     }
 
     public void playingVideo(ImageView imageView, Video video){

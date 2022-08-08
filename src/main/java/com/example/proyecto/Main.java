@@ -64,7 +64,6 @@ public class Main extends Application {
         if(usuarioActual.getArchivoImagen() != null && !usuarioActual.getArchivoImagen().equalsIgnoreCase("")){
             Image image = new Image("file:" + usuarioActual.getArchivoImagen());
             circlePhoto.setFill(new ImagePattern(image));
-            System.out.println(image.getUrl());
         }else {
             URL urlImage =  Main.class.getResource("img/defaultImage.png");
             Image imageDefault = new Image(urlImage.toString());

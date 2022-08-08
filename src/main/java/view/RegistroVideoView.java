@@ -193,7 +193,6 @@ public class RegistroVideoView {
     @FXML
     public void handleButtonSubirArchivo(ActionEvent event){
         this.txtSubirArchivo.setEditable(false);
-        System.out.println("subiendo archivo");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir recurso del video");
         File file = fileChooser.showOpenDialog(stage);
@@ -205,7 +204,6 @@ public class RegistroVideoView {
     @FXML
     public void handleButtonSubirThumbnail(ActionEvent event){
         this.txtSubirThumbnail.setEditable(false);
-        System.out.println("subiendo archivo");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir recurso del video");
         File file = fileChooser.showOpenDialog(stage);

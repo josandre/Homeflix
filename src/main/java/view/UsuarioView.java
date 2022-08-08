@@ -56,7 +56,6 @@ public class UsuarioView {
     }
 
     public void initialize() {
-        System.out.println("inicializando");
     }
 
     @FXML
@@ -144,7 +143,6 @@ public class UsuarioView {
     @FXML
     public void handleButtonSubirArchivoImagen(ActionEvent event) {
         this.txtArchivoImagen.setEditable(false);
-        System.out.println("subiendo archivo");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir recurso del video");
         File file = fileChooser.showOpenDialog(stage);
@@ -157,7 +155,6 @@ public class UsuarioView {
     @FXML
     public void handleButtonCancelarRegsitro(ActionEvent event) throws IOException {
         Main.cambiaPantalla("login");
-        System.out.println("cancelando...");
     }
 }
 

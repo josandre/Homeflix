@@ -98,7 +98,6 @@ public class CrearListaReproduccion {
 
         if(file != null){
             this.txtEnlaceImagen.setText(file.getPath());
-            System.out.println(txtEnlaceImagen);
 
         }
     }

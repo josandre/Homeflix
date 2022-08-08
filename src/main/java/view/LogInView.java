@@ -31,7 +31,6 @@ public class LogInView {
 
 
     public void handleButtonLogIn(ActionEvent event) throws SQLException, IOException {
-        System.out.println("entrando");
         Usuario usuario =  blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
 
         if(usuario == null && !(txtUsuario.getText().isEmpty() && txtConstrasenna.getText().isEmpty())){
