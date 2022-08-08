@@ -54,13 +54,13 @@ public class DAUsuario {
         }
     }
 
-    public boolean buscarUserName(String userName) throws SQLException {
+    public boolean buscarNombreUsuario(String nombreUsuario) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String select = "Select id FROM Usuario WHERE nombreUsuario = ? ";
 
         try (Connection connection = connectionManager.abrirConexion()) {
             try (PreparedStatement statement = connection.prepareStatement(select)) {
-                statement.setString(1, userName);
+                statement.setString(1, nombreUsuario);
 
                 ResultSet resultSet = statement.executeQuery();
 

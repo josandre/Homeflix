@@ -70,7 +70,7 @@ public class CrearListaReproduccion {
             listaVideos.setNombre(nombre);
             listaVideos.setArchivoImagen(enlaceImagen);
             listaVideos.setIdUsuario(blConexion.getUsuarioActual().getId());
-            blConexion.addReproductionList(listaVideos);
+            blConexion.annadirListaReproduccion(listaVideos);
 
             Main.showAlertOneOption("Exito", "Lista de reproducción añadida correctamente", "OK", "listasDeReproduccion", Alert.AlertType.INFORMATION);
         }

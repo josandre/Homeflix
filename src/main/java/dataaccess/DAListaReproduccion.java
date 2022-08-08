@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import modelo.Video;
 
 public class DAListaReproduccion {
-    public int addReproductionList(ListaReproduccion listaVideo) throws SQLException {
+    public int agregarListaReproduccion(ListaReproduccion listaVideo) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into ListaVideos(nombre, enlaceImagen, idUsuario) values(?, ?, ?)";
 
@@ -26,7 +26,7 @@ public class DAListaReproduccion {
         }
     }
 
-    public ArrayList<ListaReproduccion> toListReproductionLists(int idUsuario) throws SQLException {
+    public ArrayList<ListaReproduccion> listarListasReproduccion(int idUsuario) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<ListaReproduccion> result = new ArrayList<>();
         String select = "Select nombre, enlaceImagen, idUsuario, id From ListaVideos WHERE idUsuario  = ?";
@@ -43,14 +43,13 @@ public class DAListaReproduccion {
                     listVideos.setIdUsuario(resultSet.getInt("idUsuario"));
                     listVideos.setId(resultSet.getInt("id"));
                     result.add(listVideos);
-
                 }
                 return result;
             }
         }
     }
 
-    public int addVideoToPlayList(int idVideo, int idPlayList) throws SQLException {
+    public int agregarVideoAPlaylist(int idVideo, int idPlayList) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into listaVideos_video (idListaVideos, idVideo ) values(?, ?)";
         try (Connection connection = connectionManager.abrirConexion()) {

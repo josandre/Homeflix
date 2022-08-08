@@ -118,7 +118,6 @@ public class DAVideo {
 
         try (Connection connection = connectionManager.abrirConexion()) {
             try (PreparedStatement statement = connection.prepareStatement(update)) {
-
                 statement.setString(1, video.getNombre());
                 statement.setString(2, video.getCategoria());
                 statement.setString(3, video.getDescripcion());

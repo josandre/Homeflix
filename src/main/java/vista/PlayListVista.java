@@ -38,7 +38,7 @@ public class PlayListVista {
     public void initialize() throws SQLException {
         Main.userInformation(labelUserName, photoUser);
         loadVideosPlayList();
-        nombrePlayList.setText(blConexion.getActualPlayList().getNombre());
+        nombrePlayList.setText(blConexion.getPlayListActual().getNombre());
 
         back.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -66,8 +66,8 @@ public class PlayListVista {
     }
 
     public void loadVideosPlayList() throws SQLException {
-        ListaReproduccion actualPlayList = blConexion.getActualPlayList();
-        ArrayList<Video> listaVideos = blConexion.videosInPlayListActual(actualPlayList.getId());
+        ListaReproduccion actualPlayList = blConexion.getPlayListActual();
+        ArrayList<Video> listaVideos = blConexion.videoEnPlayListActual(actualPlayList.getId());
         actualPlayList.setListaVideos(listaVideos);
         vBox.getChildren().clear();
 
@@ -111,7 +111,7 @@ public class PlayListVista {
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                blConexion.setActualVideo(video);
+                blConexion.setVideoActual(video);
                 blConexion.setModoReproduccion(ModoReproduccion.Simple);
                 try {
                     playVideo();
