@@ -59,7 +59,7 @@ public class ReproducirVideoView {
     public Button btnBorrar;
 
     @FXML
-    public Button btnMasDiezSeg;
+    public Button btnModificar;
 
     @FXML
     public Slider progresBar;
@@ -152,8 +152,9 @@ public class ReproducirVideoView {
 
         Video videoActual = videos.get(posicionActual);
         final String nombreArchivo = videoActual.getArchivo();
-        btnBorrar.setVisible(usuarioPermiso(blConexion.getUsuarioActual().getId(), videoActual));
-
+        boolean tienePermiso = usuarioPermiso(blConexion.getUsuarioActual().getId(), videoActual);
+        btnBorrar.setVisible(tienePermiso);
+        btnModificar.setVisible(tienePermiso);
 
 
 
@@ -244,8 +245,11 @@ public class ReproducirVideoView {
         mediaPlayer.setRate(2);
     }
 
-    public void handleButtonMasDiezSeg(ActionEvent event){
-        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(10)));
+    public void handleButtonModificar(ActionEvent event) throws IOException {
+        Video video = videos.get(posicionActual);
+        blConexion.setActualVideo(video);
+        mediaPlayer.stop();
+        Main.cambiaPantalla("modificarVideo");
     }
 
     public void handleButtonBorrar(ActionEvent event) throws SQLException, IOException {

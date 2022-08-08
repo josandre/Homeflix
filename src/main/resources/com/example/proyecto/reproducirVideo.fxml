@@ -58,7 +58,7 @@
                               <Insets left="7.0" right="7.0" top="7.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMasDiezSeg" mnemonicParsing="false" onAction="#handleButtonMasDiezSeg" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: black;" text="Actualizar" textFill="#f3ecec">
+                        <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#handleButtonModificar" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: black;" text="Actualizar" textFill="#f3ecec">
                            <HBox.margin>
                               <Insets left="7.0" right="7.0" top="7.0" />
                            </HBox.margin>

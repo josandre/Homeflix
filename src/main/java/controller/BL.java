@@ -16,13 +16,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BL {
-    DAVideo DAVideo = new DAVideo();
+    DAVideo daVideo = new DAVideo();
 
-    DAUsuario DAUsuario = new DAUsuario();
+    DAUsuario daUsuario = new DAUsuario();
 
-    DAListaReproduccion DAListaReproduccion = new DAListaReproduccion();
+    DAListaReproduccion daListaReproduccion = new DAListaReproduccion();
 
-    DACalificacion DACalificacion = new DACalificacion();
+    DACalificacion daCalificacion = new DACalificacion();
 
     private static BL instanciaBl;
 
@@ -49,12 +49,12 @@ public class BL {
     }
 
     public int annadirVideo(Video video) throws SQLException {
-        return  DAVideo.annadirVideo(video);
+        return  daVideo.annadirVideo(video);
     }
 
     public void adduser(Usuario usuario) throws SQLException {
         if (validarContrasenna(usuario.getContrasenna()) == true) {
-            DAUsuario.annadirUsuario(usuario);
+            daUsuario.annadirUsuario(usuario);
         }
     }
 
@@ -75,14 +75,14 @@ public class BL {
     }
 
     public void addReproductionList(ListaReproduccion listaVideo) throws SQLException {
-        DAListaReproduccion.addReproductionList(listaVideo);
+        daListaReproduccion.addReproductionList(listaVideo);
     }
 
 
 
     public Usuario buscarUsuario(String contrasenna, String nombreUsuario)throws  SQLException{
 
-        Usuario usuario = DAUsuario.buscarUsuario(contrasenna, nombreUsuario);
+        Usuario usuario = daUsuario.buscarUsuario(contrasenna, nombreUsuario);
         if(usuario != null){
             usuarioActual = usuario;
         }
@@ -91,23 +91,23 @@ public class BL {
     }
 
     public boolean userExists(String userName) throws SQLException {
-        return  DAUsuario.buscarUserName(userName);
+        return  daUsuario.buscarUserName(userName);
     }
 
 
 
     public ArrayList<Video> listarVideos(int userId)throws SQLException{
-        ArrayList<Video> videos = DAVideo.obtenerVideos(userId);
+        ArrayList<Video> videos = daVideo.obtenerVideos(userId);
         return  videos;
     }
 
     public ArrayList<ListaReproduccion> listarReproductionList(int userId)throws SQLException{
-        ArrayList<ListaReproduccion> listasDeReproduccion = DAListaReproduccion.toListReproductionLists(userId);
+        ArrayList<ListaReproduccion> listasDeReproduccion = daListaReproduccion.toListReproductionLists(userId);
         return  listasDeReproduccion;
     }
 
     public ArrayList<Video> buscarVideo(String criterio)throws SQLException{
-        ArrayList<Video> videosSolicitados = DAVideo.buscarVideos(criterio);
+        ArrayList<Video> videosSolicitados = daVideo.buscarVideos(criterio);
         return videosSolicitados;
     }
 
@@ -132,24 +132,24 @@ public class BL {
     }
 
     public void addVideoToPlayList(int idVideo, int idPlayList)throws SQLException{
-        DAListaReproduccion.addVideoToPlayList(idVideo, idPlayList);
+        daListaReproduccion.addVideoToPlayList(idVideo, idPlayList);
     }
 
     public ArrayList<Video> videosInPlayListActual(int idListaReproduccion) throws SQLException {
-        return DAListaReproduccion.listaVideos(idListaReproduccion);
+        return daListaReproduccion.listaVideos(idListaReproduccion);
     }
 
     public void guardarCalificacion(Calificacion calificacion) throws SQLException {
-        DACalificacion.guardarCalificacion(calificacion);
+        daCalificacion.guardarCalificacion(calificacion);
 
     }
 
     public void borrarCalificacion(int idVideo, int idUsuario) throws SQLException {
-        DACalificacion.borrarCalificacion(idVideo, idUsuario);
+        daCalificacion.borrarCalificacion(idVideo, idUsuario);
     }
 
     public Calificacion obtenerCalificacionActual(int idVideo, int idUsuario) throws SQLException {
-        return DACalificacion.obtenerCalificacionActual(idVideo, idUsuario);
+        return daCalificacion.obtenerCalificacionActual(idVideo, idUsuario);
     }
 
     public ModoReproduccion getModoReproduccion() {
@@ -161,26 +161,13 @@ public class BL {
     }
 
     public void borarVideo(int idVideo) throws SQLException {
-        DACalificacion.borrarVideo(idVideo);
-        DAListaReproduccion.borrarVideoDeLista(idVideo);
-        DAVideo.borrarVideo(idVideo);
+        daCalificacion.borrarVideo(idVideo);
+        daListaReproduccion.borrarVideoDeLista(idVideo);
+        daVideo.borrarVideo(idVideo);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void modificar(Video videoActual) throws SQLException {
+        daVideo.modificarVideo(videoActual);
+    }
 
 }

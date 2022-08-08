@@ -49,7 +49,7 @@ public class DAVideo {
     public ArrayList<Video> obtenerVideos(int idUser) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select nombre, descripcion, enlaceVideo, enlaceImagen, id, idUsuario  FROM Video WHERE idUsuario = ?";
+        String select = "Select nombre, descripcion, enlaceVideo, enlaceImagen, id, idUsuario, categoria  FROM Video WHERE idUsuario = ?";
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
@@ -64,6 +64,7 @@ public class DAVideo {
                     video.setUserId(resultSet.getInt("idUsuario"));
                     video.setId(resultSet.getInt("id"));
                     video.setArchivo(resultSet.getString("enlaceVideo"));
+                    video.setCategoria(resultSet.getString("categoria"));
                     result.add(video);
                 }
                 return result;
@@ -76,12 +77,13 @@ public class DAVideo {
     public ArrayList<Video> buscarVideos(String criterio) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String select = "Select nombre, descripcion, enlaceVideo, enlaceImagen FROM Video where descripcion like ? or Nombre like ?";
+        String select = "Select nombre, descripcion, enlaceVideo, enlaceImagen, id, idUsuario, categoria FROM Video where descripcion like ? or Nombre like ? or categoria like ?" ;
 
         try(Connection connection = connectionManager.abrirConexion()){
             try (PreparedStatement statement = connection.prepareStatement(select)){
                 statement.setString(1, "%" + criterio + "%");
                 statement.setString(2, "%" + criterio + "%");
+                statement.setString(3, "%" + criterio + "%");
 
                 ResultSet resultSet = statement.executeQuery();
 
@@ -89,8 +91,11 @@ public class DAVideo {
                     Video video = new Video();
                     video.setNombre(resultSet.getString("nombre"));
                     video.setDescripcion(resultSet.getString("descripcion"));
-                    video.setArchivo(resultSet.getString("enlaceVideo"));
                     video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
+                    video.setUserId(resultSet.getInt("idUsuario"));
+                    video.setId(resultSet.getInt("id"));
+                    video.setArchivo(resultSet.getString("enlaceVideo"));
+                    video.setCategoria(resultSet.getString("categoria"));
                     result.add(video);
                 }
                 return result;
@@ -108,6 +113,27 @@ public class DAVideo {
                 statement.setInt(1, idVideo);
 
                 return statement.executeUpdate();
+
+            }
+        }
+    }
+
+    public void modificarVideo(Video video) throws SQLException {
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String update = "UPDATE Video Set nombre = ?, categoria = ?, descripcion = ?, enlaceImagen = ? Where id = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try ( PreparedStatement statement = connection.prepareStatement(update)) {
+
+                statement.setString(1, video.getNombre());
+                statement.setString(2, video.getCategoria());
+                statement.setString(3, video.getDescripcion());
+                statement.setString(4, video.getThumbnailVideo());
+
+                statement.setInt(5, video.getId());
+
+
+                statement.executeUpdate();
 
             }
         }
