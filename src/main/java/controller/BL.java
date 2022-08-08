@@ -48,8 +48,8 @@ public class BL {
         return instanciaBl;
     }
 
-    public void annadirVideo(Video video) throws SQLException {
-        DAVideo.annadirVideo(video);
+    public int annadirVideo(Video video) throws SQLException {
+        return  DAVideo.annadirVideo(video);
     }
 
     public void adduser(Usuario usuario) throws SQLException {

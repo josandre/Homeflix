@@ -78,7 +78,7 @@ public class Main extends Application {
                 CornerRadii.EMPTY, new BorderWidths(1), Insets.EMPTY));
     }
 
-    public static Optional<ButtonType> showAlert(String titulo, String mensaje, String txtBoton, String pantalla, Alert.AlertType alertType) throws IOException {
+    public static Optional<ButtonType> showAlertOneOption(String titulo, String mensaje, String txtBoton, String pantalla, Alert.AlertType alertType) throws IOException {
         Alert alert = new Alert(alertType);
         alert.setTitle(titulo);
         alert.setContentText(mensaje);
@@ -87,6 +87,20 @@ public class Main extends Application {
         Optional<ButtonType> result = alert.showAndWait();
         Main.cambiaPantalla(pantalla);
         return result;
+
+    }
+
+    public static Optional<ButtonType> showAlertTwoOptions(String titulo, String mensaje, String txtBoton, String txtBoton2, Alert.AlertType alertType) throws IOException {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setContentText(mensaje);
+        ButtonType OK = ButtonType.OK;
+        ButtonType CANCEL = ButtonType.CANCEL;
+        alert.getButtonTypes().setAll(OK, CANCEL);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result;
+
     }
 
     public static Scene getEscenaPrincipal() {

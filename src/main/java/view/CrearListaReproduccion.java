@@ -85,7 +85,7 @@ public class CrearListaReproduccion {
             listaVideos.setUserId(blConexion.getUsuarioActual().getId());
             blConexion.addReproductionList(listaVideos);
 
-            Main.showAlert("Exito", "Lista de reproducción añadida correctamente","OK" , "listasDeReproduccion", Alert.AlertType.INFORMATION);
+            Main.showAlertOneOption("Exito", "Lista de reproducción añadida correctamente","OK" , "listasDeReproduccion", Alert.AlertType.INFORMATION);
 
         }
     }
