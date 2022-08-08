@@ -98,4 +98,18 @@ public class DAVideo {
         }
 
     }
+
+    public int borrarVideo(int idVideo)throws SQLException{
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from Video Where id = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try ( PreparedStatement statement = connection.prepareStatement(delete)) {
+                statement.setInt(1, idVideo);
+
+                return statement.executeUpdate();
+
+            }
+        }
+    }
 }

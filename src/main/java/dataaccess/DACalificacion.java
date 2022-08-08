@@ -62,4 +62,18 @@ public class DACalificacion {
         }
         return null;
     }
+
+    public int borrarVideo(int idVideo)throws SQLException{
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from Calificacion Where idVideo = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try ( PreparedStatement statement = connection.prepareStatement(delete)) {
+                statement.setInt(1, idVideo);
+
+                return statement.executeUpdate();
+
+            }
+        }
+    }
 }

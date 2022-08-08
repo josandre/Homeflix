@@ -90,5 +90,19 @@ public class DAListaReproduccion {
         }
     }
 
+    public int borrarVideoDeLista(int idVideo)throws SQLException{
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from listaVideos_video Where idVideo = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try ( PreparedStatement statement = connection.prepareStatement(delete)) {
+                statement.setInt(1, idVideo);
+
+                return statement.executeUpdate();
+
+            }
+        }
+    }
+
 
 }
