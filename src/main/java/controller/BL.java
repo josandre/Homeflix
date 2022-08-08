@@ -20,7 +20,7 @@ public class BL {
 
     DAUsuario DAUsuario = new DAUsuario();
 
-    DAListaReproduccion DAListasReproduccion = new DAListaReproduccion();
+    DAListaReproduccion DAListaReproduccion = new DAListaReproduccion();
 
     DACalificacion DACalificacion = new DACalificacion();
 
@@ -75,7 +75,7 @@ public class BL {
     }
 
     public void addReproductionList(ListaReproduccion listaVideo) throws SQLException {
-        DAListasReproduccion.addReproductionList(listaVideo);
+        DAListaReproduccion.addReproductionList(listaVideo);
     }
 
 
@@ -102,7 +102,7 @@ public class BL {
     }
 
     public ArrayList<ListaReproduccion> listarReproductionList(int userId)throws SQLException{
-        ArrayList<ListaReproduccion> listasDeReproduccion = DAListasReproduccion.toListReproductionLists(userId);
+        ArrayList<ListaReproduccion> listasDeReproduccion = DAListaReproduccion.toListReproductionLists(userId);
         return  listasDeReproduccion;
     }
 
@@ -132,11 +132,11 @@ public class BL {
     }
 
     public void addVideoToPlayList(int idVideo, int idPlayList)throws SQLException{
-        DAListasReproduccion.addVideoToPlayList(idVideo, idPlayList);
+        DAListaReproduccion.addVideoToPlayList(idVideo, idPlayList);
     }
 
     public ArrayList<Video> videosInPlayListActual(int idListaReproduccion) throws SQLException {
-        return DAListasReproduccion.listaVideos(idListaReproduccion);
+        return DAListaReproduccion.listaVideos(idListaReproduccion);
     }
 
     public void guardarCalificacion(Calificacion calificacion) throws SQLException {
@@ -158,6 +158,12 @@ public class BL {
 
     public void setModoReproduccion(ModoReproduccion modoReproduccion) {
         this.modoReproduccion = modoReproduccion;
+    }
+
+    public void borarVideo(int idVideo) throws SQLException {
+        DACalificacion.borrarVideo(idVideo);
+        DAListaReproduccion.borrarVideoDeLista(idVideo);
+        DAVideo.borrarVideo(idVideo);
     }
 
 

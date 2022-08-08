@@ -56,7 +56,7 @@ public class ReproducirVideoView {
     public Button btnRapido;
 
     @FXML
-    public Button btnMenosDiezSe;
+    public Button btnBorrar;
 
     @FXML
     public Button btnMasDiezSeg;
@@ -96,6 +96,7 @@ public class ReproducirVideoView {
         indicadorLike();
         loadVideos(blConexion.getModoReproduccion());
         reproducirVideo();
+
 
         volumSlider.setValue(mediaPlayer.getVolume() * 100);
         volumSlider.valueProperty().addListener(new InvalidationListener() {
@@ -147,10 +148,14 @@ public class ReproducirVideoView {
 
     }
 
-    public void reproducirVideo(){
+    public void reproducirVideo() throws SQLException {
 
         Video videoActual = videos.get(posicionActual);
         final String nombreArchivo = videoActual.getArchivo();
+        btnBorrar.setVisible(usuarioPermiso(blConexion.getUsuarioActual().getId(), videoActual));
+
+
+
 
         File archivo = new File(nombreArchivo);
         Media video = new Media(archivo.toURI().toString());
@@ -167,7 +172,11 @@ public class ReproducirVideoView {
                 mediaPlayer.stop();
             }else {
                 posicionActual++;
-                reproducirVideo();
+                try {
+                    reproducirVideo();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
         });
@@ -235,12 +244,15 @@ public class ReproducirVideoView {
         mediaPlayer.setRate(2);
     }
 
-    public void handleButtonMasDiezSeg(){
+    public void handleButtonMasDiezSeg(ActionEvent event){
         mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(10)));
     }
 
-    public void handleButtonMenosDiezSeg(){
-        mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(-10)));
+    public void handleButtonBorrar(ActionEvent event) throws SQLException, IOException {
+        Video video = videos.get(posicionActual);
+        blConexion.borarVideo(video.getId());
+        mediaPlayer.stop();
+        Main.cambiaPantalla("paginaPrincipal");
     }
 
     public void loadVideos(ModoReproduccion modoReproduccion){
@@ -291,6 +303,12 @@ public class ReproducirVideoView {
         }
 
     }
+
+    public boolean usuarioPermiso( int idUsuarioActual, Video videoActual){
+        return videoActual.getUserId() == idUsuarioActual;
+    }
+
+
 
 
 

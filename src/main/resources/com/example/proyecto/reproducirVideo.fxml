@@ -28,7 +28,7 @@
                               <Insets left="7.0" right="7.0" top="7.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#handleButtonVolver" style="-fx-background-color: Black;" text="Volver" textFill="#faf6f6">
+                        <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#handleButtonVolver" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: Black;" text="Volver" textFill="#faf6f6">
                            <HBox.margin>
                               <Insets left="7.0" right="7.0" top="7.0" />
                            </HBox.margin>
@@ -53,12 +53,12 @@
                               <Insets left="7.0" right="7.0" top="7.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMenosDiezSe" mnemonicParsing="false" onAction="#handleButtonMenosDiezSeg" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: black;" text="-10s" textFill="#f3f0f0">
+                        <Button fx:id="btnBorrar" mnemonicParsing="false" onAction="#handleButtonBorrar" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: black;" text="Borrar" textFill="#f3f0f0">
                            <HBox.margin>
                               <Insets left="7.0" right="7.0" top="7.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMasDiezSeg" mnemonicParsing="false" onAction="#handleButtonMasDiezSeg" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: black;" text="+10s" textFill="#f3ecec">
+                        <Button fx:id="btnMasDiezSeg" mnemonicParsing="false" onAction="#handleButtonMasDiezSeg" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: black;" text="Actualizar" textFill="#f3ecec">
                            <HBox.margin>
                               <Insets left="7.0" right="7.0" top="7.0" />
                            </HBox.margin>
