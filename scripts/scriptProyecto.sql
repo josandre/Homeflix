@@ -18,6 +18,21 @@ CREATE SCHEMA IF NOT EXISTS `homeflix` DEFAULT CHARACTER SET utf8mb4 COLLATE utf
 USE `homeflix` ;
 
 -- -----------------------------------------------------
+-- Table `homeflix`.`Calificacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `homeflix`.`Calificacion` (
+  `idCalificacion` INT NOT NULL AUTO_INCREMENT,
+  `idVideo` INT NULL DEFAULT NULL,
+  `idUsuario` INT NULL DEFAULT NULL,
+  `estado` TINYINT NULL DEFAULT NULL,
+  PRIMARY KEY (`idCalificacion`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 38
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
 -- Table `homeflix`.`Usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `homeflix`.`Usuario` (
@@ -26,10 +41,11 @@ CREATE TABLE IF NOT EXISTS `homeflix`.`Usuario` (
   `apellido` VARCHAR(45) NOT NULL,
   `nombreUsuario` VARCHAR(45) NOT NULL,
   `contrasenna` VARCHAR(45) NOT NULL,
-  `archivoImagen` VARCHAR(400) NOT NULL,
-  PRIMARY KEY (`id`))
+  `archivoImagen` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `nombreUsuario_UNIQUE` (`nombreUsuario` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 15
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -48,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `homeflix`.`ListaVideos` (
     FOREIGN KEY (`idUsuario`)
     REFERENCES `homeflix`.`Usuario` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -72,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `homeflix`.`Video` (
     FOREIGN KEY (`idUsuario`)
     REFERENCES `homeflix`.`Usuario` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 15
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 

@@ -97,43 +97,49 @@ public class UsuarioView {
         if (nombre == null || nombre.isEmpty()) {
             esValido = false;
             txtNombre.setBorder(border);
+        } else {
+            txtNombre.setBorder(null);
         }
 
         if (apellido == null || apellido.isEmpty()) {
             esValido = false;
             txtApellido.setBorder(border);
+        } else {
+            txtApellido.setBorder(null);
         }
 
         if (nombreUsuario == null || nombreUsuario.isEmpty()) {
+            esValido = false;
             txtNombreUsuario.setBorder(border);
 
-        } else if (nombreUsuario != null && !nombreUsuario.isEmpty()) {
+        } else if (nombreUsuario != null) {
             boolean userExists = blConexion.userExists(txtNombreUsuario.getText());
             if (userExists) {
-                labelUserExists.setText("this username is not available");
+                labelUserExists.setText("este nombre de usuario no está disponible");
                 esValido = false;
                 txtNombreUsuario.setBorder(border);
 
 
             } else {
                 labelUserExists.setText("");
+                txtNombreUsuario.setBorder(null);
             }
         }
 
 
         if (contrasenna == null || txtContrasenna.getText().isEmpty()) {
-            esValido = false;
             txtContrasenna.setBorder(border);
+            esValido = false;
         } else if (!BL.validarContrasenna(contrasenna)) {
             labelWeakPassword.setWrapText(true);
             labelWeakPassword.setMaxWidth(200);
-            labelWeakPassword.setText("password is to weak! make sure it's at least 8 characters " +
-                    "OR at least 6 characters including a numbers, letter and special characters");
+            labelWeakPassword.setText("contraseña ingresada muy débil! asegúrese de que sea MAYOR a 6 dígitos " +
+                    "O menor a 8 dígitos incluyendo un número, una mayúscula, una mínuscula y un carácter especial");
             txtContrasenna.setBorder(border);
-
             esValido = false;
-        } else {
+        } else if (BL.validarContrasenna(contrasenna) && !txtContrasenna.getText().isEmpty()){
             labelWeakPassword.setText("");
+            txtContrasenna.setBorder(null);
         }
 
 
