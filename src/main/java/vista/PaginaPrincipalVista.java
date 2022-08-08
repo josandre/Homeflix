@@ -1,79 +1,57 @@
-package view;
+package vista;
 
-import controller.BL;
-import javafx.scene.layout.VBox;
-import model.ListaReproduccion;
-import model.ModoReproduccion;
-import model.Usuario;
-import model.Video;
 import com.example.proyecto.Main;
+import controlador.BL;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import modelo.ListaReproduccion;
+import modelo.ModoReproduccion;
+import modelo.Usuario;
+import modelo.Video;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
-public class PaginaPrincipalView {
-
+public class PaginaPrincipalVista {
 
     @FXML
     public Label labelUserName;
-
     @FXML
     public Circle circlePhoto;
-
-
     @FXML
     public TextField txtBuscar;
-
     @FXML
     public HBox hBoxVideos;
-
-
     @FXML
     public ImageView trash;
-
     @FXML
     public ImageView search;
-
     @FXML
     public ImageView exit;
-
     @FXML
     public ImageView add;
-
     @FXML
     public HBox idHboxLista;
     @FXML
     public Label resultadoBusqueda;
-
-
-
     private BL blConexion = BL.getInstanciaBl();
-
     private Usuario usuarioActual = blConexion.getUsuarioActual();
 
-
-
-
     public void initialize() throws SQLException {
-
         Main.userInformation(labelUserName, circlePhoto);
-
         hBoxVideos.setSpacing(5);
-
         loadDataVideos(usuarioActual.getId());
-
         idHboxLista.setSpacing(5);
-
         loadDataPlayList(usuarioActual.getId());
 
         trash.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -86,7 +64,6 @@ public class PaginaPrincipalView {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         });
 
@@ -94,21 +71,19 @@ public class PaginaPrincipalView {
             @Override
             public void handle(MouseEvent event) {
                 hBoxVideos.getChildren().clear();
-                if(txtBuscar.getText().trim().isEmpty()){
+                if (txtBuscar.getText().trim().isEmpty()) {
                     try {
                         loadDataVideos(usuarioActual.getId());
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-                }else
-                {
+                } else {
                     try {
                         searchLoadData();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 }
-
             }
         });
 
@@ -120,7 +95,6 @@ public class PaginaPrincipalView {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         });
 
@@ -132,7 +106,6 @@ public class PaginaPrincipalView {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         });
 
@@ -143,16 +116,13 @@ public class PaginaPrincipalView {
         resultadoBusqueda.setText("Mis Videos");
         ArrayList<Video> videos = blConexion.listarVideos(userId);
         for (int i = 0; i < videos.size(); i++) {
-
             Image img;
             Video video = videos.get(i);
 
-
-            if(video.getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")){
+            if (video.getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")) {
                 img = new Image("file:" + video.getThumbnailVideo());
-
-            }else {
-                URL urlImage2 =  Main.class.getResource("img/defaultVideoImage.jpeg");
+            } else {
+                URL urlImage2 = Main.class.getResource("img/defaultVideoImage.jpeg");
                 img = new Image(urlImage2.toString());
             }
 
@@ -169,15 +139,15 @@ public class PaginaPrincipalView {
         }
     }
 
-    public void loadDataPlayList(int userId)throws SQLException{
+    public void loadDataPlayList(int userId) throws SQLException {
         ArrayList<ListaReproduccion> playList = blConexion.listarReproductionList(userId);
-        for(int i = 0; i < playList.size(); i++){
+        for (int i = 0; i < playList.size(); i++) {
             Image imgPlayList;
             ListaReproduccion list = playList.get(i);
 
-            if(list.getArchivoImagen() != null && !list.getArchivoImagen().equals("")){
-                imgPlayList = new Image ("file:" + list.getArchivoImagen());
-            }else {
+            if (list.getArchivoImagen() != null && !list.getArchivoImagen().equals("")) {
+                imgPlayList = new Image("file:" + list.getArchivoImagen());
+            } else {
                 URL urlImage = Main.class.getResource("img/defaultReproductionList.jpeg");
                 imgPlayList = new Image(urlImage.toString());
             }
@@ -199,23 +169,19 @@ public class PaginaPrincipalView {
     public void searchLoadData() throws SQLException {
         ArrayList<Video> videos = blConexion.buscarVideo(txtBuscar.getText());
         hBoxVideos.getChildren().clear();
-        String texto = videos.size() == 0 ? "No se encontró ningún resultado": "Resultados";
+        String texto = videos.size() == 0 ? "No se encontró ningún resultado" : "Resultados";
         resultadoBusqueda.setText(texto);
-
-
 
         for (int i = 0; i < videos.size(); i++) {
             Image img;
             Video video = videos.get(i);
 
-
-            if(video.getThumbnailVideo() != null && !videos.get(i).getThumbnailVideo().equals("")){
+            if (video.getThumbnailVideo() != null && !videos.get(i).getThumbnailVideo().equals("")) {
                 img = new Image("file:" + videos.get(i).getThumbnailVideo());
 
-            }else {
-                URL urlImage2 =  Main.class.getResource("img/defaultVideoImage.jpeg");
+            } else {
+                URL urlImage2 = Main.class.getResource("img/defaultVideoImage.jpeg");
                 img = new Image(urlImage2.toString());
-
             }
 
             ImageView imageView = new ImageView(img);
@@ -229,12 +195,9 @@ public class PaginaPrincipalView {
             playingVideo(imageView, video);
             hBoxVideos.getChildren().add(vBox);
         }
-
-
-
     }
 
-    public void playingVideo(ImageView imageView, Video video){
+    public void playingVideo(ImageView imageView, Video video) {
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -245,7 +208,6 @@ public class PaginaPrincipalView {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         });
     }
@@ -254,7 +216,7 @@ public class PaginaPrincipalView {
         Main.cambiaPantalla("reproducirVideo");
     }
 
-    public void seeVideos(ImageView imageView, ListaReproduccion actualPlayList){
+    public void seeVideos(ImageView imageView, ListaReproduccion actualPlayList) {
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -264,11 +226,7 @@ public class PaginaPrincipalView {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         });
     }
-
-
-
 }

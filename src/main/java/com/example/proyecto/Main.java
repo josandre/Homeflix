@@ -1,6 +1,6 @@
 package com.example.proyecto;
 
-import controller.BL;
+import controlador.BL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import model.Usuario;
+import modelo.Usuario;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package model;
+package modelo;
 
 import java.util.ArrayList;
 
@@ -9,22 +9,22 @@ public class Usuario {
     private String nombreUsuario;
     private String contrasenna;
     private String archivoImagen;
-    private ArrayList<Video> userVideos;
+    private ArrayList<Video> videosUsuario;
 
     private int id;
 
-    public Usuario(String nombre, String apellido, String nombreUsuario, String contrasenna, String archivoImagen, ArrayList<Video> userVideos, int id) {
+    public Usuario(String nombre, String apellido, String nombreUsuario, String contrasenna, String archivoImagen, ArrayList<Video> videosUsuario, int id) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nombreUsuario = nombreUsuario;
         this.contrasenna = contrasenna;
         this.archivoImagen = archivoImagen;
-        this.userVideos = userVideos;
+        this.videosUsuario = videosUsuario;
         this.id = id;
     }
 
     public Usuario() {
-        userVideos = new ArrayList<>();
+        videosUsuario = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -43,12 +43,12 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public ArrayList<Video> getUserVideos() {
-        return userVideos;
+    public ArrayList<Video> getVideosUsuario() {
+        return videosUsuario;
     }
 
-    public void setUserVideos(ArrayList<Video> userVideos) {
-        this.userVideos = userVideos;
+    public void setVideosUsuario(ArrayList<Video> videosUsuario) {
+        this.videosUsuario = videosUsuario;
     }
 
     public int getId() {
@@ -92,7 +92,7 @@ public class Usuario {
                 ", nombreUsuario='" + nombreUsuario + '\'' +
                 ", contrasenna='" + contrasenna + '\'' +
                 ", archivoImagen='" + archivoImagen + '\'' +
-                ", userVideos='" + userVideos + '\'' +
+                ", videosUsuario='" + videosUsuario + '\'' +
                 ", id='" + id + '\'' +
                 '}';
     }
