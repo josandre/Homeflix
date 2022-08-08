@@ -205,14 +205,14 @@ public class ReproducirVideoVista {
 
     public void handleButtonModificar(ActionEvent event) throws IOException {
         Video video = videos.get(posicionActual);
-        blConexion.setActualVideo(video);
+        blConexion.setVideoActual(video);
         mediaPlayer.stop();
         Main.cambiaPantalla("modificarVideo");
     }
 
     public void handleButtonBorrar(ActionEvent event) throws SQLException, IOException {
         Video video = videos.get(posicionActual);
-        blConexion.borarVideo(video.getId());
+        blConexion.borrarVideo(video.getId());
         mediaPlayer.stop();
         Main.cambiaPantalla("paginaPrincipal");
     }
@@ -220,16 +220,16 @@ public class ReproducirVideoVista {
     public void loadVideos(ModoReproduccion modoReproduccion) {
         videos.clear();
         if (modoReproduccion.equals(ModoReproduccion.Simple)) {
-            videos.add(blConexion.getActualVideo());
+            videos.add(blConexion.getVideoActual());
         } else {
-            videos.addAll(blConexion.getActualPlayList().getListaVideos());
+            videos.addAll(blConexion.getPlayListActual().getListaVideos());
         }
     }
 
     @FXML
     public void handleDarleLike() throws SQLException {
         Calificacion calificacion = new Calificacion();
-        int idVideoActual = blConexion.getActualVideo().getId();
+        int idVideoActual = blConexion.getVideoActual().getId();
         int idUsuarioActual = blConexion.getUsuarioActual().getId();
 
         if (btnLike.isSelected()) {
@@ -247,7 +247,7 @@ public class ReproducirVideoVista {
     }
 
     public void indicadorLike() throws SQLException {
-        int idVideoActual = blConexion.getActualVideo().getId();
+        int idVideoActual = blConexion.getVideoActual().getId();
         int idUsuarioActual = blConexion.getUsuarioActual().getId();
 
         Calificacion calificacionActual = blConexion.obtenerCalificacionActual(idVideoActual, idUsuarioActual);

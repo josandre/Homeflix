@@ -59,7 +59,7 @@ public class ModificarVideoVista {
     public void initialize() {
         Main.userInformation(labelActualUser, actualUserPhoto);
 
-        Video video = blConexion.getActualVideo();
+        Video video = blConexion.getVideoActual();
         txtNombreVideo.setText(video.getNombre());
         txtCategoria.setText(video.getCategoria());
         txtDescripcion.setText(video.getDescripcion());
@@ -84,7 +84,7 @@ public class ModificarVideoVista {
     public void handleButtonModificar(ActionEvent event) throws SQLException, IOException {
 
         if (modificarVerificacion() == true) {
-            Video video = blConexion.getActualVideo();
+            Video video = blConexion.getVideoActual();
             video.setFecha(LocalDate.now());
             String nombre = txtNombreVideo.getText();
             String categoria = txtCategoria.getText();

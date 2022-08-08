@@ -102,7 +102,7 @@ public class RegistroVideoVista {
             Main.showAlertOneOption("Exito", "Registro Exitoso", "OK", "registrarVideo", Alert.AlertType.INFORMATION);
             Optional<ButtonType> result = Main.showAlertTwoOptions("Información", "Desea agregar el video a una lista de reproducción", "OK", "NO", Alert.AlertType.CONFIRMATION);
             if (result.get().equals(ButtonType.OK)) {
-                blConexion.setActualVideo(video);
+                blConexion.setVideoActual(video);
                 Main.cambiaPantalla("listasDeReproduccion");
             } else {
                 Main.cambiaPantalla("paginaPrincipal");

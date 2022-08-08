@@ -68,7 +68,7 @@ public class RegistroUsuarioVista {
             usuario.setContrasenna(contrasenna);
             usuario.setArchivoImagen(archivoImagen);
 
-            blConexion.adduser(usuario);
+            blConexion.annadirUsuario(usuario);
 
             Main.showAlertOneOption("Registro exitoso", "Se ha registrado existosamente", "OK", "login", Alert.AlertType.INFORMATION);
         }
@@ -101,7 +101,7 @@ public class RegistroUsuarioVista {
             txtNombreUsuario.setBorder(border);
 
         } else if (nombreUsuario != null) {
-            boolean userExists = blConexion.userExists(txtNombreUsuario.getText());
+            boolean userExists = blConexion.UsuarioExiste(txtNombreUsuario.getText());
             if (userExists) {
                 labelUserExists.setText("este nombre de usuario no está disponible");
                 esValido = false;

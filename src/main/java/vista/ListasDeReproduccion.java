@@ -103,7 +103,7 @@ public class ListasDeReproduccion {
             public void handle(MouseEvent event) {
 
                 try {
-                    addVideo(blConexion.getActualVideo().getId(), playList.getId());
+                    addVideo(blConexion.getVideoActual().getId(), playList.getId());
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Exitoso!");
                     alert.setContentText("Video Añadido corrrectamente");

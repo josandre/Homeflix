@@ -201,7 +201,7 @@ public class PaginaPrincipalVista {
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                blConexion.setActualVideo(video);
+                blConexion.setVideoActual(video);
                 blConexion.setModoReproduccion(ModoReproduccion.Simple);
                 try {
                     playVideo();
@@ -220,7 +220,7 @@ public class PaginaPrincipalVista {
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                blConexion.setActualPlayList(actualPlayList);
+                blConexion.setPlayListActual(actualPlayList);
                 try {
                     Main.cambiaPantalla("playList");
                 } catch (IOException e) {
