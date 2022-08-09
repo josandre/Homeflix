@@ -110,7 +110,7 @@ public class ListasDeReproduccion {
                     ButtonType OK = new ButtonType("OK");
                     alert.getButtonTypes().setAll(OK);
                     alert.showAndWait();
-                    Main.cambiaPantalla("reproducirVideo");
+                    Main.cambiaPantalla("paginaPrincipal");
 
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
