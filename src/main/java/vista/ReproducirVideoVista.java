@@ -62,6 +62,8 @@ public class ReproducirVideoVista {
     public ToggleButton btnLike;
     @FXML
     public Label liked;
+    @FXML
+    public Label labelTime;
     private BL blConexion = BL.getInstanciaBl();
     private int posicionActual = 0;
     private ArrayList<Video> videos = new ArrayList<>();
@@ -152,6 +154,7 @@ public class ReproducirVideoVista {
             @Override
             public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
                 progresBar.setValue(newValue.toSeconds());
+                labelTime.setText(String.valueOf(newValue.toSeconds()));
             }
         });
 
