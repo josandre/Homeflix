@@ -66,6 +66,9 @@ public class ReproducirVideoVista {
     public Label labelTime;
     private BL blConexion = BL.getInstanciaBl();
     private int posicionActual = 0;
+
+    @FXML
+    public Button btnHost;
     private ArrayList<Video> videos = new ArrayList<>();
 
     public void initialize() throws SQLException {
@@ -121,6 +124,7 @@ public class ReproducirVideoVista {
     }
 
     public void reproducirVideo() throws SQLException {
+        System.out.println("iniciando Reproduccion Video");
         Video videoActual = videos.get(posicionActual);
         final String nombreArchivo = videoActual.getArchivo();
         boolean tienePermiso = usuarioPermiso(blConexion.getUsuarioActual().getId(), videoActual);
@@ -138,6 +142,7 @@ public class ReproducirVideoVista {
         mediaVideo.setFitWidth(1000);
         mediaPlayer.setOnEndOfMedia(() ->
         {
+            System.out.println("Se acabo el video");
             if (posicionActual == videos.size() - 1) {
                 mediaPlayer.stop();
             } else {
@@ -179,6 +184,8 @@ public class ReproducirVideoVista {
                 progresBar.setMax(total.toSeconds());
             }
         });
+
+        System.out.println("finalizando reproduccion del video");
     }
 
     public void handleButtonVolver(ActionEvent event) throws IOException {
@@ -258,6 +265,7 @@ public class ReproducirVideoVista {
         if (calificacionActual != null) {
             if (calificacionActual.isEstado() == true) {
                 liked.setText("liked");
+                btnLike.setSelected(true);
 
             } else {
                 liked.setText("");
@@ -267,5 +275,9 @@ public class ReproducirVideoVista {
 
     public boolean usuarioPermiso(int idUsuarioActual, Video videoActual) {
         return videoActual.getIdUsuario() == idUsuarioActual;
+    }
+
+    public void handleButtonAbrirConexion() throws IOException {
+        blConexion.iniciarHost(videos.get(posicionActual));
     }
 }

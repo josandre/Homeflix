@@ -107,7 +107,6 @@ public class RegistroUsuarioVista {
                 esValido = false;
                 txtNombreUsuario.setBorder(border);
 
-
             } else {
                 labelUserExists.setText("");
                 txtNombreUsuario.setBorder(null);
