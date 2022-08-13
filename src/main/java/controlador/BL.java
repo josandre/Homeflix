@@ -6,6 +6,7 @@ import dataaccess.DAUsuario;
 import dataaccess.DAVideo;
 import modelo.*;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -21,6 +22,8 @@ public class BL {
     private Video actualVideo;
     private ListaReproduccion playListActual;
     private ModoReproduccion modoReproduccion;
+
+    private SocketServerController socketServerController = new SocketServerController();
 
     private BL() {
     }
@@ -146,5 +149,13 @@ public class BL {
 
     public void modificar(Video videoActual) throws SQLException {
         daVideo.modificarVideo(videoActual);
+    }
+
+    public void iniciarHost(Video video) throws IOException {
+        socketServerController.iniciarHost(video);
+    }
+
+    public void cerrarHost() throws IOException {
+        socketServerController.cerrarHost();
     }
 }
