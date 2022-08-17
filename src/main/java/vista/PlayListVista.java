@@ -54,8 +54,8 @@ public class PlayListVista {
         playAll.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                blConexion.setModoReproduccion(ModoReproduccion.Multiple);
                 try {
-                    blConexion.setModoReproduccion(ModoReproduccion.Multiple);
                     playVideo();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
