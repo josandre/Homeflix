@@ -9,23 +9,24 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import modelo.Calificacion;
+import modelo.ListaReproduccion;
 import modelo.ModoReproduccion;
 import modelo.Video;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -36,6 +37,10 @@ public class ReproducirVideoVista {
     private MediaPlayer mediaPlayer;
     @FXML
     public Button btnReproducir;
+
+    @FXML
+    public VBox vBoxVideos;
+
     @FXML
     public Button btnPausar;
     @FXML
@@ -68,12 +73,16 @@ public class ReproducirVideoVista {
     private int posicionActual = 0;
 
     @FXML
+    public ScrollPane scrollPane;
+
+    @FXML
     public Button btnHost;
     private ArrayList<Video> videos = new ArrayList<>();
 
     public void initialize() throws SQLException {
+       scrollPane.setVisible(false);
         indicadorLike();
-        loadVideos(blConexion.getModoReproduccion());
+        loadVideosPlayList(blConexion.getModoReproduccion());
         reproducirVideo();
 
         volumSlider.setValue(mediaPlayer.getVolume() * 100);
@@ -124,7 +133,6 @@ public class ReproducirVideoVista {
     }
 
     public void reproducirVideo() throws SQLException {
-        System.out.println("iniciando Reproduccion Video");
         Video videoActual = videos.get(posicionActual);
         final String nombreArchivo = videoActual.getArchivo();
         boolean tienePermiso = usuarioPermiso(blConexion.getUsuarioActual().getId(), videoActual);
@@ -142,11 +150,12 @@ public class ReproducirVideoVista {
         mediaVideo.setFitWidth(1000);
         mediaPlayer.setOnEndOfMedia(() ->
         {
-            System.out.println("Se acabo el video");
+
             if (posicionActual == videos.size() - 1) {
                 mediaPlayer.stop();
             } else {
                 posicionActual++;
+
                 try {
                     reproducirVideo();
                 } catch (SQLException e) {
@@ -227,12 +236,13 @@ public class ReproducirVideoVista {
         Main.cambiaPantalla("paginaPrincipal");
     }
 
-    public void loadVideos(ModoReproduccion modoReproduccion) {
+    public void loadVideosPlayList(ModoReproduccion modoReproduccion) throws SQLException {
         videos.clear();
         if (modoReproduccion.equals(ModoReproduccion.Simple)) {
             videos.add(blConexion.getVideoActual());
         } else {
             videos.addAll(blConexion.getPlayListActual().getListaVideos());
+            loadVideosPlayList();
         }
     }
 
@@ -279,5 +289,47 @@ public class ReproducirVideoVista {
 
     public void handleButtonAbrirConexion() throws IOException {
         blConexion.iniciarHost(videos.get(posicionActual));
+    }
+
+    public void loadVideosPlayList() throws SQLException {
+        ListaReproduccion actualPlayList = blConexion.getPlayListActual();
+        ArrayList<Video>  videos = actualPlayList.getListaVideos();
+
+        vBoxVideos.getChildren().clear();
+        vBoxVideos.setSpacing(3);
+        scrollPane.setVisible(true);
+
+
+        for(int i = 0; i < videos.size(); i++){
+            Image img;
+            Video video = videos.get(i);
+
+
+            if(video.getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")){
+                img = new Image("file:" + video.getThumbnailVideo());
+            }else {
+                URL urlImage = Main.class.getResource("img/defaultVideoImage.jpeg");
+                img = new Image(urlImage.toString());
+            }
+
+            ImageView imageview = new ImageView(img);
+            imageview.setFitHeight(Main.HEIGHT);
+            imageview.setFitWidth(Main.WIDTH);
+            vBoxVideos.getChildren().add(imageview);
+            int finalI = i;
+            imageview.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    mediaPlayer.stop();
+                    posicionActual = finalI;
+                    try {
+                        reproducirVideo();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+        }
     }
 }
