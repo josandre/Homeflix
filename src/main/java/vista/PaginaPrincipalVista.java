@@ -203,6 +203,7 @@ public class PaginaPrincipalVista {
             public void handle(MouseEvent event) {
                 blConexion.setVideoActual(video);
                 blConexion.setModoReproduccion(ModoReproduccion.Simple);
+                System.out.println(blConexion.getVideoActual().getId());
                 try {
                     playVideo();
                 } catch (IOException e) {
