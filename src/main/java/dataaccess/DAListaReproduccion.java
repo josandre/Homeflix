@@ -135,5 +135,20 @@ public class DAListaReproduccion {
         }
     }
 
+    public void modificarPlayLis(ListaReproduccion playlistActual) throws SQLException {
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String update = "UPDATE ListaVideos Set nombre = ?, enlaceImagen = ? Where id = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try (PreparedStatement statement = connection.prepareStatement(update)) {
+                statement.setString(1, playlistActual.getNombre());
+                statement.setString(2, playlistActual.getArchivoImagen());
+                statement.setInt(3, playlistActual.getId());
+
+                statement.executeUpdate();
+            }
+        }
+    }
+
 
 }

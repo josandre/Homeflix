@@ -167,4 +167,8 @@ public class BL {
     public void borrarVideoEnPlayList(int idVideo)throws SQLException{
         daListaReproduccion.borrarVideoEnPlayList(idVideo);
     }
+
+    public void modificarPlayList(ListaReproduccion playListActual)throws SQLException{
+        daListaReproduccion.modificarPlayLis(playListActual);
+    }
 }

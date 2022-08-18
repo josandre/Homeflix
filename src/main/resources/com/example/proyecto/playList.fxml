@@ -57,6 +57,11 @@
                   <Image url="@img/trash3.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="update" fitHeight="42.0" fitWidth="87.0" layoutX="860.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/update.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </bottom>
