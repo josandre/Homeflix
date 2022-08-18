@@ -158,4 +158,10 @@ public class BL {
     public void cerrarHost() throws IOException {
         socketServerController.cerrarHost();
     }
+
+    public void borrarPlayList(int idPlayList)throws SQLException{
+        daListaReproduccion.borrarPlayListTablaIntermedia(idPlayList);
+        daListaReproduccion.borrarListaVideos(idPlayList);
+
+    }
 }

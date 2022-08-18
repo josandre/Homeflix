@@ -95,4 +95,32 @@ public class DAListaReproduccion {
             }
         }
     }
+
+    public int borrarPlayListTablaIntermedia(int idPlayList)throws SQLException{
+        ConnectionManager connectionMannager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from listaVideos_video Where idListaVideos = ?";
+
+        try(Connection connection = connectionMannager.abrirConexion()){
+            try(PreparedStatement statement = connection.prepareStatement(delete)){
+                statement.setInt(1, idPlayList);
+
+                return  statement.executeUpdate();
+            }
+        }
+    }
+
+    public int borrarListaVideos(int idPlayList)throws SQLException{
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from ListaVideos Where id = ? ";
+        try(Connection connection = connectionManager.abrirConexion()){
+            try(PreparedStatement statement = connection.prepareStatement(delete)){
+                statement.setInt(1,idPlayList);
+
+                return  statement.executeUpdate();
+            }
+        }
+    }
+
+
+
 }

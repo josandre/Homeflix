@@ -4,6 +4,7 @@ import com.example.proyecto.Main;
 import controlador.BL;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,12 +34,16 @@ public class PlayListVista {
     public ImageView back;
     @FXML
     public ImageView playAll;
+
+    @FXML
+    public ImageView trashView;
     private BL blConexion = BL.getInstanciaBl();
 
     public void initialize() throws SQLException {
         Main.userInformation(labelUserName, photoUser);
         loadVideosPlayList();
-        nombrePlayList.setText(blConexion.getPlayListActual().getNombre());
+        ListaReproduccion playListActual = blConexion.getPlayListActual();
+        nombrePlayList.setText(playListActual.getNombre());
 
         back.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -60,6 +65,19 @@ public class PlayListVista {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            }
+        });
+
+        trashView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    blConexion.borrarPlayList(playListActual.getId());
+                    Main.showAlertOneOption("Exito!", "Playlist Eliminado correctamente", "OK", "paginaPrincipal", Alert.AlertType.INFORMATION);
+                } catch (SQLException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         });
 
@@ -93,12 +111,33 @@ public class PlayListVista {
             imageView.setFitWidth(Main.WIDTH);
             Label label = new Label();
             label.setText(video.getNombre());
-
+            URL urlImageTrash = Main.class.getResource("img/trash3.png");
+            Image imgTrash = new Image(urlImageTrash.toString());
+            ImageView imageViewtrash = new ImageView(imgTrash);
+            imageViewtrash.setFitHeight(20);
+            imageViewtrash.setFitWidth(20);
             VBox contenedor = new VBox();
+            HBox contenedor2 = new HBox();
+            contenedor2.setSpacing(5);
             contenedor.setSpacing(5);
-            contenedor.getChildren().addAll(label, imageView);
+            contenedor2.getChildren().addAll(label, imageViewtrash);
+            contenedor.getChildren().addAll(contenedor2, imageView);
             hBox.getChildren().add(contenedor);
             reproducirPlayList(imageView, video);
+
+            imageViewtrash.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        blConexion.borrarPlayList(actualPlayList.getId());
+
+                        }
+                    catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
             if (count % Main.NCOLUMNS == 0 || count == listaVideos.size()) {
                 vBox.getChildren().add(hBox);
                 hBox = new HBox();

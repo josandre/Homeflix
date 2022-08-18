@@ -18,7 +18,7 @@ public class SocketServerController {
         public void iniciarHost(Video video)throws IOException{
             try{
                 final AsynchronousServerSocketChannel listener =
-                        AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(5000));
+                        AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(3400));
 
                 listener.accept(null, new CompletionHandler<AsynchronousSocketChannel, Void>() {
 
