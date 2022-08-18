@@ -171,4 +171,8 @@ public class BL {
     public void modificarPlayList(ListaReproduccion playListActual)throws SQLException{
         daListaReproduccion.modificarPlayLis(playListActual);
     }
+
+    public void modificarUsuario(Usuario usuarioActual)throws SQLException{
+        daUsuario.modificarUsuario(usuarioActual);
+    }
 }

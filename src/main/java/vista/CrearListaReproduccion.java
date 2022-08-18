@@ -47,12 +47,24 @@ public class CrearListaReproduccion {
     private BL blConexion = BL.getInstanciaBl();
 
     public void initialize() {
+
         Main.userInformation(userNameLabel, circleUserPhoto);
         imgBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
                     Main.cambiaPantalla("listasDeReproduccion");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        circleUserPhoto.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    Main.cambiaPantalla("modificarUsuario");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
