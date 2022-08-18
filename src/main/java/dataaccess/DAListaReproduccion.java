@@ -65,7 +65,7 @@ public class DAListaReproduccion {
     public ArrayList<Video> listaVideos(int idListaReproduccion) throws SQLException {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
-        String innerJoin = "Select nombre, enlaceVideo, enlaceImagen From listaVideos_video as LV Inner Join Video as V On V.id = LV.idVideo Where LV.idListaVideos = ?";
+        String innerJoin = "Select nombre, enlaceVideo, enlaceImagen, idVideo From listaVideos_video as LV Inner Join Video as V On V.id = LV.idVideo Where LV.idListaVideos = ?";
         try (Connection connection = connectionManager.abrirConexion()) {
             try (PreparedStatement statement = connection.prepareStatement(innerJoin)) {
                 statement.setInt(1, idListaReproduccion);
@@ -76,6 +76,7 @@ public class DAListaReproduccion {
                     video.setNombre(resultSet.getString("nombre"));
                     video.setArchivo(resultSet.getString("enlaceVideo"));
                     video.setThumbnailVideo(resultSet.getString("enlaceImagen"));
+                    video.setId(resultSet.getInt("idVideo"));
                     result.add(video);
                 }
                 return result;
@@ -121,6 +122,18 @@ public class DAListaReproduccion {
         }
     }
 
+
+    public int borrarVideoEnPlayList(int idVideo)throws SQLException{
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from listaVideos_video Where idVideo = ? ";
+        try(Connection connection = connectionManager.abrirConexion()){
+            try(PreparedStatement statement = connection.prepareStatement(delete)){
+                statement.setInt(1,idVideo);
+
+                return  statement.executeUpdate();
+            }
+        }
+    }
 
 
 }

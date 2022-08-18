@@ -99,6 +99,7 @@ public class PlayListVista {
             Image img;
             Video video = listaVideos.get(i);
 
+
             if (video.getThumbnailVideo() != null && !video.getThumbnailVideo().equals("")) {
                 img = new Image("file:" + video.getThumbnailVideo());
             } else {
@@ -118,32 +119,23 @@ public class PlayListVista {
             imageViewtrash.setFitWidth(20);
             VBox contenedor = new VBox();
             HBox contenedor2 = new HBox();
-            contenedor2.setSpacing(5);
+            contenedor2.setSpacing(30);
             contenedor.setSpacing(5);
             contenedor2.getChildren().addAll(label, imageViewtrash);
             contenedor.getChildren().addAll(contenedor2, imageView);
             hBox.getChildren().add(contenedor);
             reproducirPlayList(imageView, video);
-
-            imageViewtrash.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        blConexion.borrarPlayList(actualPlayList.getId());
-
-                        }
-                    catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
+            eliminarVideoPlayList(imageViewtrash, video);
 
             if (count % Main.NCOLUMNS == 0 || count == listaVideos.size()) {
                 vBox.getChildren().add(hBox);
                 hBox = new HBox();
                 hBox.setSpacing(5);
             }
+
         }
+
+        System.out.println(listaVideos.get(0).getId());
     }
 
     public void reproducirPlayList(ImageView imageView, Video video) {
@@ -163,5 +155,21 @@ public class PlayListVista {
 
     public void playVideo() throws IOException {
         Main.cambiaPantalla("reproducirVideo");
+    }
+
+    public void eliminarVideoPlayList(ImageView imageViewTrash, Video video){
+        imageViewTrash.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                blConexion.setVideoActual(video);
+                try {
+                    blConexion.borrarVideoEnPlayList(video.getId());
+                    Main.cambiaPantalla("playList");
+                } catch (SQLException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
     }
 }
