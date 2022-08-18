@@ -75,6 +75,17 @@ public class ModificarVideoVista {
                 }
             }
         });
+
+        actualUserPhoto.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    Main.cambiaPantalla("modificarUsuario");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     /**

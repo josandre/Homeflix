@@ -1,6 +1,7 @@
 package dataaccess;
 
 import modelo.Usuario;
+import modelo.Video;
 
 import java.sql.*;
 
@@ -68,6 +69,24 @@ public class DAUsuario {
                     return true;
                 }
                 return false;
+            }
+        }
+    }
+
+    public void modificarUsuario(Usuario usuarioActual) throws SQLException {
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String update = "UPDATE Usuario Set nombre = ?, apellido = ?, nombreUsuario = ?, contrasenna = ?, archivoImagen = ? Where id = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try (PreparedStatement statement = connection.prepareStatement(update)) {
+                statement.setString(1, usuarioActual.getNombre());
+                statement.setString(2, usuarioActual.getApellido());
+                statement.setString(3,usuarioActual.getNombreUsuario());
+                statement.setString(4, usuarioActual.getContrasenna());
+                statement.setString(5, usuarioActual.getArchivoImagen());
+                statement.setInt(6, usuarioActual.getId());
+
+                statement.executeUpdate();
             }
         }
     }

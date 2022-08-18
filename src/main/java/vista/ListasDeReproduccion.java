@@ -51,6 +51,17 @@ public class ListasDeReproduccion {
                 }
             }
         });
+
+        circlePhotoUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    Main.cambiaPantalla("modificarUsuario");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     public void loadPlayList(int userId) throws SQLException {
