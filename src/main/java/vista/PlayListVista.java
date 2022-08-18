@@ -37,6 +37,9 @@ public class PlayListVista {
 
     @FXML
     public ImageView trashView;
+
+    @FXML
+    public ImageView update;
     private BL blConexion = BL.getInstanciaBl();
 
     public void initialize() throws SQLException {
@@ -80,6 +83,19 @@ public class PlayListVista {
 
             }
         });
+
+        update.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    Main.cambiaPantalla("modificarPlaylist");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
 
     }
 
