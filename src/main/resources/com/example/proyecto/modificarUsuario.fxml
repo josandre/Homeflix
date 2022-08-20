@@ -70,6 +70,7 @@
                                 <Image url="@img/homeFlixLogo.jpeg" />
                             </image>
                         </ImageView>
+                  <Button fx:id="btnDelete" layoutX="149.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleButtonDeleteAccount" style="-fx-background-color: white;" text="Eliminar Cuenta" textFill="#070707" />
                     </children>
                 </AnchorPane>
                 <PasswordField fx:id="txtContrasenna" layoutX="188.0" layoutY="268.0" prefHeight="32.0" prefWidth="222.0" />

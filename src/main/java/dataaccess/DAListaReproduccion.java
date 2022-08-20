@@ -150,5 +150,17 @@ public class DAListaReproduccion {
         }
     }
 
+    public int borrarUsuarioPlayList(int idUsuario)throws SQLException{
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from ListaVideos Where idUsuario = ? ";
+        try(Connection connection = connectionManager.abrirConexion()){
+            try(PreparedStatement statement = connection.prepareStatement(delete)){
+                statement.setInt(1,idUsuario);
+
+                return  statement.executeUpdate();
+            }
+        }
+    }
+
 
 }

@@ -175,4 +175,14 @@ public class BL {
     public void modificarUsuario(Usuario usuarioActual)throws SQLException{
         daUsuario.modificarUsuario(usuarioActual);
     }
+
+    public void eliminarCuenta(int idUsuario) throws SQLException {
+        ArrayList<Video> videosUsuario = this.listarVideos(idUsuario);
+        for (Video videoUsuario: videosUsuario){
+             this.borrarVideo(videoUsuario.getId());
+        }
+        daListaReproduccion.borrarUsuarioPlayList(idUsuario);
+        daCalificacion.borrarUsuario(idUsuario);
+        daUsuario.borrarCuenta(idUsuario);
+    }
 }
