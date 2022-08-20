@@ -46,6 +46,7 @@ public class DAUsuario {
                     usuario.setNombre(nombre);
                     usuario.setApellido(apellido);
                     usuario.setArchivoImagen(archivoImagen);
+                    usuario.setContrasenna(contrasenna);
                     usuario.setId(id);
 
                     return usuario;
