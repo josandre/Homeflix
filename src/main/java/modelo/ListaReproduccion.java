@@ -13,6 +13,7 @@ public class ListaReproduccion {
     private int idUsuario;
 
 
+
     public ListaReproduccion(ArrayList<Video> listaVideos, String nombre, String archivoImagen, int id, int idUsuario) {
         this.listaVideos = listaVideos;
         this.nombre = nombre;

@@ -19,6 +19,7 @@ import modelo.Video;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class modificarUsuario {
     @FXML
@@ -56,6 +57,9 @@ public class modificarUsuario {
 
     @FXML
     public ImageView back;
+
+    @FXML
+    public Button btnDelete;
 
     private BL blConexion = BL.getInstanciaBl();
 
@@ -181,5 +185,16 @@ public class modificarUsuario {
 
     public void handleButtonCancelar() throws IOException {
         Main.cambiaPantalla("paginaPrincipal");
+    }
+
+    public void handleButtonDeleteAccount() throws IOException, SQLException {
+        Optional<ButtonType> opcion = Main.showAlertTwoOptions("Eliminar Cuenta", "Seguro desea eliminar esta cuenta", "Si", "Cancelar", Alert.AlertType.WARNING);
+        if(opcion.get().equals(ButtonType.OK)){
+            blConexion.eliminarCuenta(blConexion.getUsuarioActual().getId());
+            Main.showAlertOneOption("Eliminación exitosa!", "************", "Ok", "login", Alert.AlertType.INFORMATION);
+            Main.cambiaPantalla("login");
+        }else {
+            Main.cambiaPantalla("modificarUsuario");
+        }
     }
 }

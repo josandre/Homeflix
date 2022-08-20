@@ -11,6 +11,7 @@ public class Usuario {
     private String archivoImagen;
     private ArrayList<Video> videosUsuario;
 
+
     private int id;
 
     public Usuario(String nombre, String apellido, String nombreUsuario, String contrasenna, String archivoImagen, ArrayList<Video> videosUsuario, int id) {

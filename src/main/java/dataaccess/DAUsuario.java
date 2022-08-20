@@ -90,4 +90,17 @@ public class DAUsuario {
             }
         }
     }
+
+    public int borrarCuenta(int idUsuario) throws SQLException {
+        ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
+        String delete = "Delete from Usuario Where id = ?";
+
+        try (Connection connection = connectionManager.abrirConexion()) {
+            try (PreparedStatement statement = connection.prepareStatement(delete)) {
+                statement.setInt(1, idUsuario);
+
+                return statement.executeUpdate();
+            }
+        }
+    }
 }
