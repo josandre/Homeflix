@@ -124,7 +124,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnHost" mnemonicParsing="false" onAction="#handleButtonAbrirConexion" prefHeight="26.0" prefWidth="56.0" style="-fx-background-color: black;" text="Host" textFill="#fff6f6">
+                        <Button fx:id="btnHost" mnemonicParsing="false" onAction="#handleButtonAbrirConexion" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: black;" text="Host" textFill="#fff6f6">
                            <HBox.margin>
                               <Insets left="10.0" top="5.0" />
                            </HBox.margin>
