@@ -1,5 +1,6 @@
 package controlador;
 
+import com.example.proyecto.Main;
 import modelo.Video;
 
 import java.io.*;
@@ -10,12 +11,15 @@ import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.Channels;
 import java.nio.channels.CompletionHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SocketServerController {
+    private Logger logger = Logger.getLogger(SocketServerController.class.getName());
 
     private ServerSocket serverSocket;
 
-        public void iniciarHost(Video video)throws IOException{
+        public void iniciarHost(Video video) {
             try{
                 final AsynchronousServerSocketChannel listener =
                         AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(3400));
@@ -50,7 +54,8 @@ public class SocketServerController {
 
                             result.close();
                         } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            logger.log(Level.SEVERE, "Video no enviado");
+                            logger.log(Level.SEVERE, e.toString());
                         }
 
                     }
@@ -66,8 +71,15 @@ public class SocketServerController {
             }
         }
 
-        public void cerrarHost() throws IOException {
-            serverSocket.close();
+        public void cerrarHost()  {
+
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "no se pudo cerrar la conexión");
+                logger.log(Level.SEVERE, e.toString());
+            }
+
         }
 
 

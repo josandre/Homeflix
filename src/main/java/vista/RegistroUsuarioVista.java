@@ -52,7 +52,7 @@ public class RegistroUsuarioVista {
     }
 
     @FXML
-    public void handleButtonRegistrarUsuario(ActionEvent event) throws SQLException, IOException {
+    public void handleButtonRegistrarUsuario(ActionEvent event)  {
         if (registrarUsuarioVerificacion()) {
             Usuario usuario = new Usuario();
 
@@ -74,7 +74,7 @@ public class RegistroUsuarioVista {
         }
     }
 
-    public boolean registrarUsuarioVerificacion() throws SQLException {
+    public boolean registrarUsuarioVerificacion()  {
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String nombreUsuario = txtNombreUsuario.getText();
@@ -144,7 +144,7 @@ public class RegistroUsuarioVista {
     }
 
     @FXML
-    public void handleButtonCancelarRegsitro(ActionEvent event) throws IOException {
+    public void handleButtonCancelarRegsitro(ActionEvent event) {
         Main.cambiaPantalla("login");
     }
 }

@@ -36,7 +36,7 @@ public class ListasDeReproduccion {
     public VBox vBox;
     private BL blConexion = BL.getInstanciaBl();
 
-    public void initialize() throws SQLException {
+    public void initialize()  {
         Usuario usuarioActual = blConexion.getUsuarioActual();
         Main.userInformation(labelUserName, circlePhotoUser);
         loadPlayList(usuarioActual.getId());
@@ -44,27 +44,19 @@ public class ListasDeReproduccion {
         imgBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("paginaPrincipal");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("paginaPrincipal");
             }
         });
 
         circlePhotoUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("modificarUsuario");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("modificarUsuario");
             }
         });
     }
 
-    public void loadPlayList(int userId) throws SQLException {
+    public void loadPlayList(int userId)  {
         ArrayList<ListaReproduccion> playLists = blConexion.listarReproductionList(userId);
         vBox.getChildren().clear();
 
@@ -104,7 +96,7 @@ public class ListasDeReproduccion {
         }
     }
 
-    public void handleButtonAddList(ActionEvent event) throws IOException {
+    public void handleButtonAddList(ActionEvent event)  {
         Main.cambiaPantalla("crearListaReproduccion");
     }
 
@@ -113,26 +105,20 @@ public class ListasDeReproduccion {
             @Override
             public void handle(MouseEvent event) {
 
-                try {
-                    addVideo(blConexion.getVideoActual().getId(), playList.getId());
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Exitoso!");
-                    alert.setContentText("Video Añadido corrrectamente");
-                    ButtonType OK = new ButtonType("OK");
-                    alert.getButtonTypes().setAll(OK);
-                    alert.showAndWait();
-                    Main.cambiaPantalla("paginaPrincipal");
+                addVideo(blConexion.getVideoActual().getId(), playList.getId());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Exitoso!");
+                alert.setContentText("Video Añadido corrrectamente");
+                ButtonType OK = new ButtonType("OK");
+                alert.getButtonTypes().setAll(OK);
+                alert.showAndWait();
+                Main.cambiaPantalla("paginaPrincipal");
 
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
             }
         });
     }
 
-    public void addVideo(int idVideo, int idPlayList) throws SQLException {
+    public void addVideo(int idVideo, int idPlayList)  {
         blConexion.addVideoToPlayList(idVideo, idPlayList);
     }
 }

@@ -25,6 +25,7 @@ public class BL {
 
     private SocketServerController socketServerController = new SocketServerController();
 
+
     private BL() {
     }
 
@@ -35,11 +36,11 @@ public class BL {
         return instanciaBl;
     }
 
-    public int annadirVideo(Video video) throws SQLException {
+    public int annadirVideo(Video video)  {
         return daVideo.annadirVideo(video);
     }
 
-    public void annadirUsuario(Usuario usuario) throws SQLException {
+    public void annadirUsuario(Usuario usuario)  {
         if (validarContrasenna(usuario.getContrasenna()) == true) {
             daUsuario.annadirUsuario(usuario);
         }
@@ -61,11 +62,11 @@ public class BL {
         return matcher.matches();
     }
 
-    public void annadirListaReproduccion(ListaReproduccion listaVideo) throws SQLException {
+    public void annadirListaReproduccion(ListaReproduccion listaVideo)  {
         daListaReproduccion.agregarListaReproduccion(listaVideo);
     }
 
-    public Usuario buscarUsuario(String contrasenna, String nombreUsuario) throws SQLException {
+    public Usuario buscarUsuario(String contrasenna, String nombreUsuario)  {
 
         Usuario usuario = daUsuario.buscarUsuario(contrasenna, nombreUsuario);
         if (usuario != null) {
@@ -74,21 +75,21 @@ public class BL {
         return usuario;
     }
 
-    public boolean UsuarioExiste(String nombreUsuario) throws SQLException {
+    public boolean UsuarioExiste(String nombreUsuario)  {
         return daUsuario.buscarNombreUsuario(nombreUsuario);
     }
 
-    public ArrayList<Video> listarVideos(int idUsuario) throws SQLException {
+    public ArrayList<Video> listarVideos(int idUsuario)  {
         ArrayList<Video> videos = daVideo.obtenerVideos(idUsuario);
         return videos;
     }
 
-    public ArrayList<ListaReproduccion> listarReproductionList(int idUsuario) throws SQLException {
+    public ArrayList<ListaReproduccion> listarReproductionList(int idUsuario)  {
         ArrayList<ListaReproduccion> listasDeReproduccion = daListaReproduccion.listarListasReproduccion(idUsuario);
         return listasDeReproduccion;
     }
 
-    public ArrayList<Video> buscarVideo(String criterio) throws SQLException {
+    public ArrayList<Video> buscarVideo(String criterio)  {
         ArrayList<Video> videosSolicitados = daVideo.buscarVideos(criterio);
         return videosSolicitados;
     }
@@ -113,23 +114,23 @@ public class BL {
         this.playListActual = playListActual;
     }
 
-    public void addVideoToPlayList(int idVideo, int idPlayList) throws SQLException {
+    public void addVideoToPlayList(int idVideo, int idPlayList)  {
         daListaReproduccion.agregarVideoAPlaylist(idVideo, idPlayList);
     }
 
-    public ArrayList<Video> videoEnPlayListActual(int idListaReproduccion) throws SQLException {
+    public ArrayList<Video> videoEnPlayListActual(int idListaReproduccion)  {
         return daListaReproduccion.listaVideos(idListaReproduccion);
     }
 
-    public void guardarCalificacion(Calificacion calificacion) throws SQLException {
+    public void guardarCalificacion(Calificacion calificacion)  {
         daCalificacion.guardarCalificacion(calificacion);
     }
 
-    public void borrarCalificacion(int idVideo, int idUsuario) throws SQLException {
+    public void borrarCalificacion(int idVideo, int idUsuario)  {
         daCalificacion.borrarCalificacion(idVideo, idUsuario);
     }
 
-    public Calificacion obtenerCalificacionActual(int idVideo, int idUsuario) throws SQLException {
+    public Calificacion obtenerCalificacionActual(int idVideo, int idUsuario)  {
         return daCalificacion.obtenerCalificacionActual(idVideo, idUsuario);
     }
 
@@ -141,42 +142,42 @@ public class BL {
         this.modoReproduccion = modoReproduccion;
     }
 
-    public void borrarVideo(int idVideo) throws SQLException {
+    public void borrarVideo(int idVideo)  {
         daCalificacion.borrarVideo(idVideo);
         daListaReproduccion.borrarVideoDeLista(idVideo);
         daVideo.borrarVideo(idVideo);
     }
 
-    public void modificar(Video videoActual) throws SQLException {
+    public void modificar(Video videoActual)  {
         daVideo.modificarVideo(videoActual);
     }
 
-    public void iniciarHost(Video video) throws IOException {
+    public void iniciarHost(Video video)  {
         socketServerController.iniciarHost(video);
     }
 
-    public void cerrarHost() throws IOException {
+    public void cerrarHost()  {
         socketServerController.cerrarHost();
     }
 
-    public void borrarPlayList(int idPlayList)throws SQLException{
+    public void borrarPlayList(int idPlayList){
         daListaReproduccion.borrarPlayListTablaIntermedia(idPlayList);
         daListaReproduccion.borrarListaVideos(idPlayList);
     }
 
-    public void borrarVideoEnPlayList(int idVideo)throws SQLException{
+    public void borrarVideoEnPlayList(int idVideo){
         daListaReproduccion.borrarVideoEnPlayList(idVideo);
     }
 
-    public void modificarPlayList(ListaReproduccion playListActual)throws SQLException{
+    public void modificarPlayList(ListaReproduccion playListActual){
         daListaReproduccion.modificarPlayLis(playListActual);
     }
 
-    public void modificarUsuario(Usuario usuarioActual)throws SQLException{
+    public void modificarUsuario(Usuario usuarioActual){
         daUsuario.modificarUsuario(usuarioActual);
     }
 
-    public void eliminarCuenta(int idUsuario) throws SQLException {
+    public void eliminarCuenta(int idUsuario)  {
         ArrayList<Video> videosUsuario = this.listarVideos(idUsuario);
         for (Video videoUsuario: videosUsuario){
              this.borrarVideo(videoUsuario.getId());

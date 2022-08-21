@@ -1,6 +1,8 @@
 package dataaccess;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Esta clase maneja la conexion a la base de datos
@@ -9,17 +11,14 @@ public class ConnectionManager {
     private Connection connection;
     private static ConnectionManager instancia;
 
-    /**
-     * Este constructor es un patron de diseño llamado singleton que solo permite crear una instancia de este tipo, en toda la aplicacion
-     */
+    private static Logger logger = Logger.getLogger(ConnectionManager.class.getName());
+
+
     private ConnectionManager(){
 
     }
 
-    /**
-     * Esta funcicon crea la unica instancia de adminitracion de la conexion de la base de datos
-     * @return la instancia de conexion
-     */
+
     public static ConnectionManager obtenerInstancia(){
 
         if(instancia == null){
@@ -29,24 +28,26 @@ public class ConnectionManager {
         return instancia;
     }
 
-    /**
-     * Esta funcion abre la conexion a la base de datos
-     * @return la conexion a baase de datos
-     * @throws SQLException
-     */
-    public Connection abrirConexion() throws SQLException{
+    public Connection abrirConexion() {
         cerrarConexion();
-        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:33097/homeflix","root","JaAch060896");
+        try {
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:33097/homeflix","root","JaAch060896");
+        } catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo abrir la conexión");
+            logger.log(Level.SEVERE, e.toString());
+        }
         return this.connection;
     }
 
-    /**
-     * Esta funcion cierra la conexion a la base de datos
-     * @throws SQLException
-     */
-    public void cerrarConexion() throws SQLException{
-        if(this.connection != null && !this.connection.isClosed()){
-            this.connection.close();
+
+    public void cerrarConexion() {
+        try {
+            if(this.connection != null && !this.connection.isClosed()){
+                this.connection.close();
+            }
+        } catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo cerrar la conexión");
+            logger.log(Level.SEVERE, e.toString());
         }
     }
 

@@ -17,6 +17,13 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import modelo.Usuario;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.LogManager;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -32,28 +39,46 @@ public class Main extends Application {
 
     private static BL blConexion = BL.getInstanciaBl();
 
-    public static void main(String[] args){
+    private static Logger logger = Logger.getLogger(Main.class.getName());
+
+    public static void main(String[] args) throws IOException {
+        InputStream loggingProperties = Main.class.getClassLoader().getResourceAsStream("logging.properties");
+        LogManager.getLogManager().readConfiguration(loggingProperties);
         launch(args);
+
     }
+
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage)  {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1300, 900);
-        stage.setTitle("HomeFlix");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        escenaPrincipal = scene;
-        stage.show();
+        logger.log(Level.INFO, "Iniciando");
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 1300, 900);
+            stage.setTitle("HomeFlix");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            escenaPrincipal = scene;
+            stage.show();
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "No se inició el programa");
+            logger.log(Level.SEVERE, e.toString());
+        }
 
     }
 
 
 
-    public static void cambiaPantalla(String nombrePantlla) throws IOException {
+    public static void cambiaPantalla(String nombrePantlla) {
         String pantalla = nombrePantlla + ".fxml";
-        Parent parent =  FXMLLoader.load(Main.class.getResource(pantalla));
-        escenaPrincipal.setRoot(parent);
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(Main.class.getResource(pantalla));
+            escenaPrincipal.setRoot(parent);
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "La pantalla no fue encontrada");
+        }
 
     }
 
@@ -77,7 +102,7 @@ public class Main extends Application {
                 CornerRadii.EMPTY, new BorderWidths(1), Insets.EMPTY));
     }
 
-    public static Optional<ButtonType> showAlertOneOption(String titulo, String mensaje, String txtBoton, String pantalla, Alert.AlertType alertType) throws IOException {
+    public static Optional<ButtonType> showAlertOneOption(String titulo, String mensaje, String txtBoton, String pantalla, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(titulo);
         alert.setContentText(mensaje);
@@ -89,7 +114,7 @@ public class Main extends Application {
 
     }
 
-    public static Optional<ButtonType> showAlertTwoOptions(String titulo, String mensaje, String txtBoton, String txtBoton2, Alert.AlertType alertType) throws IOException {
+    public static Optional<ButtonType> showAlertTwoOptions(String titulo, String mensaje, String txtBoton, String txtBoton2, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(titulo);
         alert.setContentText(mensaje);

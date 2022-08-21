@@ -71,22 +71,14 @@ public class modificarPlayList {
         imgBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("playList");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("playList");
             }
         });
 
         circleUserPhoto.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("modificarUsuario");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("modificarUsuario");
             }
         });
 
@@ -94,7 +86,7 @@ public class modificarPlayList {
     }
 
 
-    public void handleButonUpdate() throws SQLException, IOException {
+    public void handleButonUpdate()  {
         if (modificarVerificacion() == true) {
             ListaReproduccion listaReproduccion = blConexion.getPlayListActual();
             String nombre = txtNombre.getText();

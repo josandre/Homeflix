@@ -68,22 +68,14 @@ public class ModificarVideoVista {
         imgBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("paginaPrincipal");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("paginaPrincipal");
             }
         });
 
         actualUserPhoto.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("modificarUsuario");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("modificarUsuario");
             }
         });
     }
@@ -92,7 +84,7 @@ public class ModificarVideoVista {
      * @param event Este evento registra el video
      */
     @FXML
-    public void handleButtonModificar(ActionEvent event) throws SQLException, IOException {
+    public void handleButtonModificar(ActionEvent event)  {
 
         if (modificarVerificacion() == true) {
             Video video = blConexion.getVideoActual();
@@ -146,7 +138,7 @@ public class ModificarVideoVista {
      * @param event Este evento cancela el registro y envia al usuario a la pagina principal
      */
     @FXML
-    public void handleButtonCancelar(ActionEvent event) throws IOException {
+    public void handleButtonCancelar(ActionEvent event) {
         Main.cambiaPantalla("paginaPrincipal");
     }
 

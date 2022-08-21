@@ -65,32 +65,22 @@ public class RegistroVideoVista {
         imgBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("paginaPrincipal");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("paginaPrincipal");
             }
         });
 
         actualUserPhoto.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("modificarUsuario");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("modificarUsuario");
             }
         });
     }
 
-    /**
-     * @param event Este evento registra el video
-     */
+
     @FXML
-    public void handleButtonRegistrar(ActionEvent event) throws SQLException, IOException {
-        if (registrarVerificacion() == true) {
+    public void handleButtonRegistrar(ActionEvent event) {
+        if (registrarVerificacion()) {
             Video video = new Video();
             video.setFecha(LocalDate.now());
             String nombre = txtNombreVideo.getText();
@@ -120,9 +110,7 @@ public class RegistroVideoVista {
         }
     }
 
-    /**
-     * Esta funcion permite la verfificacion de los espacios en blanco del registro
-     */
+
     public boolean registrarVerificacion() {
         String nombre = txtNombreVideo.getText();
         String categoria = txtCategoria.getText();
@@ -153,17 +141,12 @@ public class RegistroVideoVista {
         return esValido;
     }
 
-    /**
-     * @param event Este evento cancela el registro y envia al usuario a la pagina principal
-     */
     @FXML
-    public void handleButtonCancelar(ActionEvent event) throws IOException {
+    public void handleButtonCancelar(ActionEvent event)  {
         Main.cambiaPantalla("paginaPrincipal");
     }
 
-    /**
-     * @param event Este evento permite subir el archivo del video que se esta registrando
-     */
+
     @FXML
     public void handleButtonSubirArchivo(ActionEvent event) {
         this.txtSubirArchivo.setEditable(false);

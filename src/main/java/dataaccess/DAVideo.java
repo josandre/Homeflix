@@ -4,19 +4,14 @@ import modelo.Video;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- * Esta clase se conecta con la base de datos y permite insertar, borrar, seleccionar y modificar los datos del video
- */
+
 public class DAVideo {
+    private static Logger logger = Logger.getLogger(DAVideo.class.getName());
 
-
-    /**
-     * @param video
-     * @return actualizacion de la base de datos
-     * @throws SQLException
-     */
-    public int annadirVideo(Video video) throws SQLException {
+    public int annadirVideo(Video video)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlaceVideo, enlaceImagen, idUsuario) values( ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -39,11 +34,14 @@ public class DAVideo {
                     return resultSet.getInt(1);
                 }
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo registrar el video");
+            logger.log(Level.SEVERE, e.toString());
         }
         return 0;
     }
 
-    public ArrayList<Video> obtenerVideos(int idUser) throws SQLException {
+    public ArrayList<Video> obtenerVideos(int idUser)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
         String select = "Select nombre, descripcion, enlaceVideo, enlaceImagen, id, idUsuario, categoria  FROM Video WHERE idUsuario = ?";
@@ -66,10 +64,14 @@ public class DAVideo {
                 }
                 return result;
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo listar videos");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return result;
     }
 
-    public ArrayList<Video> buscarVideos(String criterio) throws SQLException {
+    public ArrayList<Video> buscarVideos(String criterio){
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
         String select = "Select nombre, descripcion, enlaceVideo, enlaceImagen, id, idUsuario, categoria FROM Video where descripcion like ? or Nombre like ? or categoria like ?";
@@ -95,11 +97,15 @@ public class DAVideo {
                 }
                 return result;
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo buscar videos");
+            logger.log(Level.SEVERE, e.toString());
         }
 
+        return result;
     }
 
-    public int borrarVideo(int idVideo) throws SQLException {
+    public int borrarVideo(int idVideo)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from Video Where id = ?";
 
@@ -109,10 +115,14 @@ public class DAVideo {
 
                 return statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar el video");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
-    public void modificarVideo(Video video) throws SQLException {
+    public void modificarVideo(Video video)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String update = "UPDATE Video Set nombre = ?, categoria = ?, descripcion = ?, enlaceImagen = ? Where id = ?";
 
@@ -126,10 +136,10 @@ public class DAVideo {
 
                 statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo modificar el video");
+            logger.log(Level.SEVERE, e.toString());
         }
     }
-
-
-
 
 }
