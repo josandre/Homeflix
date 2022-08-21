@@ -75,6 +75,8 @@ public class ReproducirVideoVista {
     @FXML
     public ScrollPane scrollPane;
 
+    private boolean isHosting = false;
+
     @FXML
     public Button btnHost;
     private ArrayList<Video> videos = new ArrayList<>();
@@ -279,8 +281,19 @@ public class ReproducirVideoVista {
         return videoActual.getIdUsuario() == idUsuarioActual;
     }
 
-    public void handleButtonAbrirConexion()  {
-        blConexion.iniciarHost(videos.get(posicionActual));
+    public void handleButtonAbrirConexion()
+    {
+        if(isHosting){
+            btnHost.setText("Host");
+            blConexion.cerrarHost();
+            isHosting = false;
+
+        }else {
+            btnHost.setText("Terminar");
+            blConexion.iniciarHost(videos.get(posicionActual));
+            isHosting = true;
+        }
+
     }
 
     public void loadVideosPlayList() {

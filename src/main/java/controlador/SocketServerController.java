@@ -17,18 +17,19 @@ import java.util.logging.Logger;
 public class SocketServerController {
     private Logger logger = Logger.getLogger(SocketServerController.class.getName());
 
-    private ServerSocket serverSocket;
+    private AsynchronousServerSocketChannel serverSocket;
 
         public void iniciarHost(Video video) {
             try{
-                final AsynchronousServerSocketChannel listener =
+                this.serverSocket  =
                         AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(3400));
+                logger.log(Level.INFO, "conexion del servidor iniciada");
 
-                listener.accept(null, new CompletionHandler<AsynchronousSocketChannel, Void>() {
+                serverSocket.accept(null, new CompletionHandler<AsynchronousSocketChannel, Void>() {
 
                     @Override
                     public void completed(AsynchronousSocketChannel result, Void attachment) {
-                        listener.accept(null, this);
+                        serverSocket.accept(null, this);
                         File videoFile = new File(video.getArchivo());
 
 
@@ -50,7 +51,9 @@ public class SocketServerController {
                             dataOutputStream.writeInt(fileContentBytes.length);
                             dataOutputStream.write(fileContentBytes);
 
-                            System.out.println("video envidado");
+                            logger.log(Level.INFO, "video envidado");
+
+
 
                             result.close();
                         } catch (IOException e) {
@@ -72,9 +75,9 @@ public class SocketServerController {
         }
 
         public void cerrarHost()  {
-
             try {
                 serverSocket.close();
+                logger.log(Level.SEVERE, "Conexión terminada");
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "no se pudo cerrar la conexión");
                 logger.log(Level.SEVERE, e.toString());
