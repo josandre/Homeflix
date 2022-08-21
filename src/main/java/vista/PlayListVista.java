@@ -42,7 +42,7 @@ public class PlayListVista {
     public ImageView update;
     private BL blConexion = BL.getInstanciaBl();
 
-    public void initialize() throws SQLException {
+    public void initialize()  {
         Main.userInformation(labelUserName, photoUser);
         loadVideosPlayList();
         ListaReproduccion playListActual = blConexion.getPlayListActual();
@@ -51,11 +51,7 @@ public class PlayListVista {
         back.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("paginaPrincipal");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("paginaPrincipal");
             }
         });
 
@@ -63,23 +59,15 @@ public class PlayListVista {
             @Override
             public void handle(MouseEvent event) {
                 blConexion.setModoReproduccion(ModoReproduccion.Multiple);
-                try {
-                    playVideo();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                playVideo();
             }
         });
 
         trashView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    blConexion.borrarPlayList(playListActual.getId());
-                    Main.showAlertOneOption("Exito!", "Playlist Eliminado correctamente", "OK", "paginaPrincipal", Alert.AlertType.INFORMATION);
-                } catch (SQLException | IOException e) {
-                    throw new RuntimeException(e);
-                }
+                blConexion.borrarPlayList(playListActual.getId());
+                Main.showAlertOneOption("Exito!", "Playlist Eliminado correctamente", "OK", "paginaPrincipal", Alert.AlertType.INFORMATION);
 
             }
         });
@@ -87,11 +75,7 @@ public class PlayListVista {
         update.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("modificarPlaylist");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("modificarPlaylist");
 
             }
         });
@@ -99,18 +83,14 @@ public class PlayListVista {
         photoUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("modificarUsuario");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("modificarUsuario");
             }
         });
 
 
     }
 
-    public void loadVideosPlayList() throws SQLException {
+    public void loadVideosPlayList() {
         ListaReproduccion actualPlayList = blConexion.getPlayListActual();
         ArrayList<Video> listaVideos = blConexion.videoEnPlayListActual(actualPlayList.getId());
         actualPlayList.setListaVideos(listaVideos);
@@ -171,16 +151,12 @@ public class PlayListVista {
             public void handle(MouseEvent event) {
                 blConexion.setVideoActual(video);
                 blConexion.setModoReproduccion(ModoReproduccion.Simple);
-                try {
-                    playVideo();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                playVideo();
             }
         });
     }
 
-    public void playVideo() throws IOException {
+    public void playVideo()  {
         Main.cambiaPantalla("reproducirVideo");
     }
 
@@ -189,12 +165,8 @@ public class PlayListVista {
             @Override
             public void handle(MouseEvent event) {
                 blConexion.setVideoActual(video);
-                try {
-                    blConexion.borrarVideoEnPlayList(video.getId());
-                    Main.cambiaPantalla("playList");
-                } catch (SQLException | IOException e) {
-                    throw new RuntimeException(e);
-                }
+                blConexion.borrarVideoEnPlayList(video.getId());
+                Main.cambiaPantalla("playList");
             }
         });
 

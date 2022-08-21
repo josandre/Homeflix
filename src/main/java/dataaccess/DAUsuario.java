@@ -1,13 +1,17 @@
 package dataaccess;
 
 import modelo.Usuario;
-import modelo.Video;
+
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DAUsuario {
 
-    public int annadirUsuario(Usuario usuario) throws SQLException {
+    private static Logger logger = Logger.getLogger(DAUsuario.class.getName());
+
+    public int annadirUsuario(Usuario usuario)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into Usuario(nombre, apellido, nombreUsuario, contrasenna, archivoImagen) values(?, ?, ?, ?, ?)";
 
@@ -21,10 +25,14 @@ public class DAUsuario {
 
                 return statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo registrar el usuario");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
-    public Usuario buscarUsuario(String contrasenna, String nombreUsuario) throws SQLException {
+    public Usuario buscarUsuario(String contrasenna, String nombreUsuario)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String select = "Select nombre, apellido, archivoImagen, id FROM Usuario WHERE nombreUsuario = ? and contrasenna = ?";
 
@@ -53,10 +61,14 @@ public class DAUsuario {
                 }
                 return null;
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo buscar el usuario");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return null;
     }
 
-    public boolean buscarNombreUsuario(String nombreUsuario) throws SQLException {
+    public boolean buscarNombreUsuario(String nombreUsuario)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String select = "Select id FROM Usuario WHERE nombreUsuario = ? ";
 
@@ -71,10 +83,14 @@ public class DAUsuario {
                 }
                 return false;
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo encontrar el nombre del usuario");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return false;
     }
 
-    public void modificarUsuario(Usuario usuarioActual) throws SQLException {
+    public void modificarUsuario(Usuario usuarioActual)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String update = "UPDATE Usuario Set nombre = ?, apellido = ?, nombreUsuario = ?, contrasenna = ?, archivoImagen = ? Where id = ?";
 
@@ -89,10 +105,13 @@ public class DAUsuario {
 
                 statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo modificar el usuario");
+            logger.log(Level.SEVERE, e.toString());
         }
     }
 
-    public int borrarCuenta(int idUsuario) throws SQLException {
+    public int borrarCuenta(int idUsuario) {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from Usuario Where id = ?";
 
@@ -102,6 +121,10 @@ public class DAUsuario {
 
                 return statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar la cuenta del usuario");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return idUsuario;
     }
 }

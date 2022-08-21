@@ -7,11 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import modelo.Video;
 
 public class DAListaReproduccion {
-    public int agregarListaReproduccion(ListaReproduccion listaVideo) throws SQLException {
+
+    private static Logger logger = Logger.getLogger(DAListaReproduccion.class.getName());
+    public int agregarListaReproduccion(ListaReproduccion listaVideo)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into ListaVideos(nombre, enlaceImagen, idUsuario) values(?, ?, ?)";
 
@@ -23,10 +27,14 @@ public class DAListaReproduccion {
 
                 return statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se agregó la lista de reproducción");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
-    public ArrayList<ListaReproduccion> listarListasReproduccion(int idUsuario) throws SQLException {
+    public ArrayList<ListaReproduccion> listarListasReproduccion(int idUsuario)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<ListaReproduccion> result = new ArrayList<>();
         String select = "Select nombre, enlaceImagen, idUsuario, id From ListaVideos WHERE idUsuario  = ?";
@@ -46,10 +54,14 @@ public class DAListaReproduccion {
                 }
                 return result;
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo obtener las listas de reproducción");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return result;
     }
 
-    public int agregarVideoAPlaylist(int idVideo, int idPlayList) throws SQLException {
+    public int agregarVideoAPlaylist(int idVideo, int idPlayList)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into listaVideos_video (idListaVideos, idVideo ) values(?, ?)";
         try (Connection connection = connectionManager.abrirConexion()) {
@@ -59,10 +71,15 @@ public class DAListaReproduccion {
 
                 return statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se agregó el video al playlist");
+            logger.log(Level.SEVERE, e.toString());
         }
+
+        return 0;
     }
 
-    public ArrayList<Video> listaVideos(int idListaReproduccion) throws SQLException {
+    public ArrayList<Video> listaVideos(int idListaReproduccion)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         ArrayList<Video> result = new ArrayList<>();
         String innerJoin = "Select nombre, enlaceVideo, enlaceImagen, idVideo From listaVideos_video as LV Inner Join Video as V On V.id = LV.idVideo Where LV.idListaVideos = ?";
@@ -81,10 +98,14 @@ public class DAListaReproduccion {
                 }
                 return result;
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo listar videos del playlist");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return result;
     }
 
-    public int borrarVideoDeLista(int idVideo) throws SQLException {
+    public int borrarVideoDeLista(int idVideo)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from listaVideos_video Where idVideo = ?";
 
@@ -94,10 +115,14 @@ public class DAListaReproduccion {
 
                 return statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar el video");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
-    public int borrarPlayListTablaIntermedia(int idPlayList)throws SQLException{
+    public int borrarPlayListTablaIntermedia(int idPlayList){
         ConnectionManager connectionMannager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from listaVideos_video Where idListaVideos = ?";
 
@@ -107,10 +132,14 @@ public class DAListaReproduccion {
 
                 return  statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar playlist de la tabla intermedia");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
-    public int borrarListaVideos(int idPlayList)throws SQLException{
+    public int borrarListaVideos(int idPlayList){
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from ListaVideos Where id = ? ";
         try(Connection connection = connectionManager.abrirConexion()){
@@ -119,11 +148,15 @@ public class DAListaReproduccion {
 
                 return  statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar playlist");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
 
-    public int borrarVideoEnPlayList(int idVideo)throws SQLException{
+    public int borrarVideoEnPlayList(int idVideo){
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from listaVideos_video Where idVideo = ? ";
         try(Connection connection = connectionManager.abrirConexion()){
@@ -132,10 +165,14 @@ public class DAListaReproduccion {
 
                 return  statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar el video del playlist");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
-    public void modificarPlayLis(ListaReproduccion playlistActual) throws SQLException {
+    public void modificarPlayLis(ListaReproduccion playlistActual)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String update = "UPDATE ListaVideos Set nombre = ?, enlaceImagen = ? Where id = ?";
 
@@ -147,10 +184,13 @@ public class DAListaReproduccion {
 
                 statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo modificar playlist");
+            logger.log(Level.SEVERE, e.toString());
         }
     }
 
-    public int borrarUsuarioPlayList(int idUsuario)throws SQLException{
+    public int borrarUsuarioPlayList(int idUsuario){
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from ListaVideos Where idUsuario = ? ";
         try(Connection connection = connectionManager.abrirConexion()){
@@ -159,7 +199,11 @@ public class DAListaReproduccion {
 
                 return  statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar playlist");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
 

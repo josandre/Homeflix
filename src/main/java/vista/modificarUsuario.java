@@ -84,11 +84,7 @@ public class modificarUsuario {
         back.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("paginaPrincipal");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("paginaPrincipal");
             }
         });
     }
@@ -104,7 +100,7 @@ public class modificarUsuario {
         }
     }
 
-    public void handleButtonModificarUsuario() throws SQLException, IOException {
+    public void handleButtonModificarUsuario()  {
         if (verificacionModificar()) {
             Usuario usuario = new Usuario();
             String nombre = txtNombre.getText();
@@ -126,7 +122,7 @@ public class modificarUsuario {
         }
     }
 
-    public boolean verificacionModificar() throws SQLException {
+    public boolean verificacionModificar()  {
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String nombreUsuario = txtNombreUsuario.getText();
@@ -183,11 +179,11 @@ public class modificarUsuario {
         return esValido;
     }
 
-    public void handleButtonCancelar() throws IOException {
+    public void handleButtonCancelar()  {
         Main.cambiaPantalla("paginaPrincipal");
     }
 
-    public void handleButtonDeleteAccount() throws IOException, SQLException {
+    public void handleButtonDeleteAccount()  {
         Optional<ButtonType> opcion = Main.showAlertTwoOptions("Eliminar Cuenta", "Seguro desea eliminar esta cuenta", "Si", "Cancelar", Alert.AlertType.WARNING);
         if(opcion.get().equals(ButtonType.OK)){
             blConexion.eliminarCuenta(blConexion.getUsuarioActual().getId());

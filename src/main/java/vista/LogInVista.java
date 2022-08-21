@@ -25,7 +25,7 @@ public class LogInVista {
 
     }
 
-    public void handleButtonLogIn(ActionEvent event) throws SQLException, IOException {
+    public void handleButtonLogIn(ActionEvent event) {
         Usuario usuario = blConexion.buscarUsuario(txtConstrasenna.getText(), txtUsuario.getText());
 
         if (usuario == null && !(txtUsuario.getText().isEmpty() && txtConstrasenna.getText().isEmpty())) {
@@ -51,7 +51,7 @@ public class LogInVista {
         System.exit(0);
     }
 
-    public void handleButtonRegister() throws IOException {
+    public void handleButtonRegister()  {
         Main.cambiaPantalla("registrarUsuario");
     }
 }

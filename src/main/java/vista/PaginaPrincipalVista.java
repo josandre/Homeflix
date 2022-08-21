@@ -47,7 +47,7 @@ public class PaginaPrincipalVista {
     private BL blConexion = BL.getInstanciaBl();
     private Usuario usuarioActual = blConexion.getUsuarioActual();
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         Main.userInformation(labelUserName, circlePhoto);
         hBoxVideos.setSpacing(5);
         loadDataVideos(usuarioActual.getId());
@@ -59,11 +59,7 @@ public class PaginaPrincipalVista {
             public void handle(MouseEvent event) {
                 hBoxVideos.getChildren().clear();
                 txtBuscar.setText("");
-                try {
-                    loadDataVideos(usuarioActual.getId());
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                loadDataVideos(usuarioActual.getId());
             }
         });
 
@@ -72,17 +68,9 @@ public class PaginaPrincipalVista {
             public void handle(MouseEvent event) {
                 hBoxVideos.getChildren().clear();
                 if (txtBuscar.getText().trim().isEmpty()) {
-                    try {
-                        loadDataVideos(usuarioActual.getId());
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                    loadDataVideos(usuarioActual.getId());
                 } else {
-                    try {
-                        searchLoadData();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                    searchLoadData();
                 }
             }
         });
@@ -90,39 +78,27 @@ public class PaginaPrincipalVista {
         exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("login");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("login");
             }
         });
 
         add.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("registrarVideo");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("registrarVideo");
             }
         });
 
         circlePhoto.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("modificarUsuario");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("modificarUsuario");
             }
         });
     }
 
 
-    public void loadDataVideos(int userId) throws SQLException {
+    public void loadDataVideos(int userId) {
         resultadoBusqueda.setText("Mis Videos");
         ArrayList<Video> videos = blConexion.listarVideos(userId);
         for (int i = 0; i < videos.size(); i++) {
@@ -149,7 +125,7 @@ public class PaginaPrincipalVista {
         }
     }
 
-    public void loadDataPlayList(int userId) throws SQLException {
+    public void loadDataPlayList(int userId) {
         ArrayList<ListaReproduccion> playList = blConexion.listarReproductionList(userId);
         for (int i = 0; i < playList.size(); i++) {
             Image imgPlayList;
@@ -176,7 +152,7 @@ public class PaginaPrincipalVista {
 
     }
 
-    public void searchLoadData() throws SQLException {
+    public void searchLoadData()  {
         ArrayList<Video> videos = blConexion.buscarVideo(txtBuscar.getText());
         hBoxVideos.getChildren().clear();
         String texto = videos.size() == 0 ? "No se encontró ningún resultado" : "Resultados";
@@ -214,16 +190,12 @@ public class PaginaPrincipalVista {
                 blConexion.setVideoActual(video);
                 blConexion.setModoReproduccion(ModoReproduccion.Simple);
                 System.out.println(blConexion.getVideoActual().getId());
-                try {
-                    playVideo();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                playVideo();
             }
         });
     }
 
-    public void playVideo() throws IOException {
+    public void playVideo() {
         Main.cambiaPantalla("reproducirVideo");
     }
 
@@ -232,11 +204,7 @@ public class PaginaPrincipalVista {
             @Override
             public void handle(MouseEvent event) {
                 blConexion.setPlayListActual(actualPlayList);
-                try {
-                    Main.cambiaPantalla("playList");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("playList");
             }
         });
     }

@@ -52,27 +52,19 @@ public class CrearListaReproduccion {
         imgBack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("listasDeReproduccion");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("listasDeReproduccion");
             }
         });
 
         circleUserPhoto.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    Main.cambiaPantalla("modificarUsuario");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Main.cambiaPantalla("modificarUsuario");
             }
         });
     }
 
-    public void handleButonAddList() throws SQLException, IOException {
+    public void handleButonAddList()  {
         if (verfificacionRegistro()) {
             ListaReproduccion listaVideos = new ListaReproduccion();
 

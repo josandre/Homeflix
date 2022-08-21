@@ -6,10 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DACalificacion {
+    private static Logger logger = Logger.getLogger(DACalificacion.class.getName());
 
-    public int guardarCalificacion (Calificacion calificacion) throws SQLException {
+    public int guardarCalificacion (Calificacion calificacion)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into Calificacion(idVideo, idUsuario, estado) values (?, ?, ?)";
 
@@ -20,10 +23,14 @@ public class DACalificacion {
                 statement.setBoolean(3, calificacion.isEstado());
                 return statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo guardar la calificación");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
-    public void borrarCalificacion (int idVideo, int idUsuario) throws SQLException {
+    public void borrarCalificacion (int idVideo, int idUsuario)  {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from Calificacion Where idVideo = ? and idUsuario = ?";
 
@@ -34,10 +41,13 @@ public class DACalificacion {
 
                 statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar la calificación");
+            logger.log(Level.SEVERE, e.toString());
         }
     }
 
-    public Calificacion obtenerCalificacionActual (int idVideo, int idUsuario) throws SQLException {
+    public Calificacion obtenerCalificacionActual (int idVideo, int idUsuario) {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String select = "Select idCalificacion, estado From Calificacion Where idVideo = ? and idUsuario = ?";
 
@@ -59,11 +69,14 @@ public class DACalificacion {
                     return calificacion;
                 }
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo obtener la calificación");
+            logger.log(Level.SEVERE, e.toString());
         }
         return null;
     }
 
-    public int borrarVideo(int idVideo)throws SQLException{
+    public int borrarVideo(int idVideo){
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from Calificacion Where idVideo = ?";
 
@@ -73,10 +86,14 @@ public class DACalificacion {
 
                 return statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar el id del video en la tabla Calificación");
+            logger.log(Level.SEVERE, e.toString());
         }
+        return 0;
     }
 
-    public void borrarUsuario(int idUsuario) throws SQLException {
+    public void borrarUsuario(int idUsuario) {
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String delete = "Delete from Calificacion Where idUsuario = ?";
 
@@ -86,6 +103,9 @@ public class DACalificacion {
 
                 statement.executeUpdate();
             }
+        }catch (SQLException e){
+            logger.log(Level.SEVERE,"No se pudo borrar el usuario de la tabla Calificación");
+            logger.log(Level.SEVERE, e.toString());
         }
     }
 }
