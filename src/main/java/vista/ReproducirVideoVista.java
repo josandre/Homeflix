@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -73,19 +74,33 @@ public class ReproducirVideoVista {
     private int posicionActual = 0;
 
     @FXML
-    public ScrollPane scrollPane;
+    public ScrollPane scrollPanePlayList;
+
+    @FXML
+    public HBox hboxPrincipal;
+
+    @FXML
+    public VBox vboxPrincipal;
 
     private boolean isHosting = false;
+
+    private static final int defaultVideoHeight = 850;
+
+    private static final int defaultVideoWidth = 1150;
+
+
 
     @FXML
     public Button btnHost;
     private ArrayList<Video> videos = new ArrayList<>();
 
     public void initialize() {
-       scrollPane.setVisible(false);
-        indicadorLike();
+
+       scrollPanePlayList.setVisible(false);
+
         loadVideosPlayList(blConexion.getModoReproduccion());
         reproducirVideo();
+        indicadorLike();
 
         volumSlider.setValue(mediaPlayer.getVolume() * 100);
         volumSlider.valueProperty().addListener(new InvalidationListener() {
@@ -99,24 +114,36 @@ public class ReproducirVideoVista {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage = (Stage) Main.getEscenaPrincipal().getWindow();
-                ChangeListener changeListener = (ChangeListener) (obs, oldValue, newValue) ->
-                {
-                    mediaVideo.setFitHeight(550);
-                    mediaVideo.setFitWidth(1000);
-                };
+
+
 
                 if (stage.isFullScreen()) {
+                    //saliendo de full screen
                     stage.setFullScreen(false);
-                    mediaVideo.setFitHeight(550);
-                    mediaVideo.setFitWidth(1000);
-                    stage.fullScreenProperty().removeListener(changeListener);
+                    mediaVideo.setFitHeight(defaultVideoHeight);
+
+
+
+                    if(blConexion.getModoReproduccion().equals(ModoReproduccion.Multiple)){
+                        hboxPrincipal.getChildren().add(scrollPanePlayList);
+                        vboxPrincipal.setPrefWidth(defaultVideoWidth);
+                        mediaVideo.setFitWidth(defaultVideoWidth);
+                    }else {
+                        vboxPrincipal.setPrefWidth(1300);
+                        mediaVideo.setFitWidth(1300);
+                    }
+
 
                 } else {
-                    stage.setFullScreen(true);
+                    stage.setFullScreen(true);//entrada a full screen
                     double height = stage.getHeight() - 75;
+                    System.out.println(stage.getWidth());
                     mediaVideo.setFitHeight(height);
                     mediaVideo.setFitWidth(stage.getWidth());
-                    stage.fullScreenProperty().addListener(changeListener);
+                    vboxPrincipal.setPrefWidth(stage.getWidth());
+
+                    hboxPrincipal.getChildren().remove(scrollPanePlayList);
+
                 }
             }
         });
@@ -144,16 +171,14 @@ public class ReproducirVideoVista {
         mediaPlayer.setAutoPlay(true);
         mediaVideo.setMediaPlayer(mediaPlayer);
         mediaVideo.setPreserveRatio(false);
-        mediaVideo.setFitHeight(550);
-        mediaVideo.setFitWidth(1000);
         mediaPlayer.setOnEndOfMedia(() ->
         {
 
             if (posicionActual == videos.size() - 1) {
                 mediaPlayer.stop();
+
             } else {
                 posicionActual++;
-
                 reproducirVideo();
             }
         });
@@ -161,8 +186,12 @@ public class ReproducirVideoVista {
         mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
             @Override
             public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                double valorTiempo =  newValue.toSeconds();
+                if(valorTiempo > 60){
+                    valorTiempo = valorTiempo/ 60;
+                }
                 progresBar.setValue(newValue.toSeconds());
-                labelTime.setText(String.valueOf(newValue.toSeconds()));
+                labelTime.setText(String.valueOf(valorTiempo));
             }
         });
 
@@ -234,10 +263,21 @@ public class ReproducirVideoVista {
         videos.clear();
         if (modoReproduccion.equals(ModoReproduccion.Simple)) {
             videos.add(blConexion.getVideoActual());
+            System.out.println(hboxPrincipal.getChildren().size());
+            hboxPrincipal.getChildren().remove(scrollPanePlayList);
+            mediaVideo.setFitWidth(1300);
+            System.out.println(hboxPrincipal.getChildren().size());
+            Stage stage = (Stage) Main.getEscenaPrincipal().getWindow();
+            System.out.println(stage.getWidth());
+            vboxPrincipal.setPrefWidth(1300);
         } else {
             videos.addAll(blConexion.getPlayListActual().getListaVideos());
             loadVideosPlayList();
+            mediaVideo.setFitWidth(1150);
+            vboxPrincipal.setPrefWidth(1150);
         }
+        mediaVideo.setFitHeight(defaultVideoHeight);
+
     }
 
     @FXML
@@ -261,7 +301,7 @@ public class ReproducirVideoVista {
     }
 
     public void indicadorLike()  {
-        int idVideoActual = blConexion.getVideoActual().getId();
+        int idVideoActual = videos.get(posicionActual).getId();
         int idUsuarioActual = blConexion.getUsuarioActual().getId();
 
         Calificacion calificacionActual = blConexion.obtenerCalificacionActual(idVideoActual, idUsuarioActual);
@@ -302,7 +342,7 @@ public class ReproducirVideoVista {
 
         vBoxVideos.getChildren().clear();
         vBoxVideos.setSpacing(3);
-        scrollPane.setVisible(true);
+        scrollPanePlayList.setVisible(true);
 
 
         for(int i = 0; i < videos.size(); i++){
