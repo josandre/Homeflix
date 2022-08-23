@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class DAVideo {
     private static Logger logger = Logger.getLogger(DAVideo.class.getName());
 
-    public int annadirVideo(Video video)  {
+    public int annadirVideo(Video video){
         ConnectionManager connectionManager = ConnectionManager.obtenerInstancia();
         String insert = "Insert into Video(nombre, categoria, fecha, descripcion, calificacion, enlaceVideo, enlaceImagen, idUsuario) values( ?, ?, ?, ?, ?, ?, ?, ?)";
 

@@ -32,10 +32,10 @@ public class Main extends Application {
 
     private static Scene escenaPrincipal;
 
-    public static final int HEIGHT = 150;
-    public static final int WIDTH = 150;
+    public static final int HEIGHT = 250;
+    public static final int WIDTH = 250;
 
-    public static final int NCOLUMNS = 6;
+    public static final int NCOLUMNS = 5;
 
     private static BL blConexion = BL.getInstanciaBl();
 
