@@ -126,9 +126,9 @@ public class PlayListVista {
             imageViewtrash.setFitWidth(20);
             VBox contenedor = new VBox();
             HBox contenedor2 = new HBox();
-            contenedor2.setSpacing(30);
+            contenedor2.setSpacing(60);
             contenedor.setSpacing(5);
-            contenedor2.getChildren().addAll(label, imageViewtrash);
+            contenedor2.getChildren().addAll(imageViewtrash, label );
             contenedor.getChildren().addAll(contenedor2, imageView);
             hBox.getChildren().add(contenedor);
             reproducirPlayList(imageView, video);

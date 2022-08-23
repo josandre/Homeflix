@@ -9,29 +9,29 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.CrearListaReproduccion">
+<AnchorPane fx:id="mainPane" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.CrearListaReproduccion">
    <children>
-      <TextField fx:id="txtNombre" layoutX="170.0" layoutY="184.0" prefHeight="32.0" prefWidth="222.0" promptText="Introduzca el nombre de la lista" />
-      <Label layoutX="176.0" layoutY="158.0" prefHeight="26.0" prefWidth="89.0" text="Nombre">
+      <TextField fx:id="txtNombre" layoutX="235.0" layoutY="248.0" prefHeight="32.0" prefWidth="222.0" promptText="Introduzca el nombre de la lista" />
+      <Label layoutX="241.0" layoutY="222.0" prefHeight="26.0" prefWidth="89.0" text="Nombre">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Button fx:id="btnCrearListaVideos" layoutX="231.0" layoutY="449.0" mnemonicParsing="false" onAction="#handleButonAddList" prefWidth="100.0" style="-fx-background-color: black;" text="Crear" textFill="#fff6f6">
+      <Button fx:id="btnCrearListaVideos" layoutX="296.0" layoutY="513.0" mnemonicParsing="false" onAction="#handleButonAddList" prefWidth="100.0" style="-fx-background-color: black;" text="Crear" textFill="#fff6f6">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label layoutX="173.0" layoutY="284.0" text="Imagen">
+      <Label layoutX="238.0" layoutY="343.0" text="Imagen">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEnlaceImagen" layoutX="173.0" layoutY="306.0" prefHeight="32.0" prefWidth="222.0" promptText="Archivo Imagen" />
-      <Button fx:id="btnSubirArchivo" layoutX="395.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: black;" text="..." textFill="#f2efef" />
-      <AnchorPane prefHeight="95.0" prefWidth="1000.0" style="-fx-background-color: black;">
+      <TextField fx:id="txtEnlaceImagen" layoutX="238.0" layoutY="370.0" prefHeight="32.0" prefWidth="222.0" promptText="Archivo Imagen" />
+      <Button fx:id="btnSubirArchivo" layoutX="460.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: black;" text="..." textFill="#f2efef" />
+      <AnchorPane prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: black;">
          <children>
-            <Label layoutX="246.0" layoutY="25.0" prefHeight="47.0" prefWidth="367.0" text="Nueva lista de reproducción" textAlignment="CENTER" textFill="#f5f4f4">
+            <Label layoutX="366.0" layoutY="25.0" prefHeight="47.0" prefWidth="367.0" text="Nueva lista de reproducción" textAlignment="CENTER" textFill="#f5f4f4">
                <font>
                   <Font name="System Bold" size="31.0" />
                </font>
@@ -41,11 +41,11 @@
                   <Image url="@img/back.png" />
                </image>
             </ImageView>
-            <Label fx:id="userNameLabel" layoutX="841.0" layoutY="41.0" prefHeight="17.0" prefWidth="157.0" text="Label" textFill="#f5f0f0" />
-            <Circle fx:id="circleUserPhoto" fill="DODGERBLUE" layoutX="802.0" layoutY="47.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="userNameLabel" layoutX="1129.0" layoutY="41.0" prefHeight="17.0" prefWidth="157.0" text="Label" textFill="#f5f0f0" />
+            <Circle fx:id="circleUserPhoto" fill="DODGERBLUE" layoutX="1090.0" layoutY="47.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </AnchorPane>
-      <ImageView fitHeight="544.0" fitWidth="395.0" layoutX="577.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="462.0" fitWidth="489.0" layoutX="740.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/playList.png" />
          </image>

@@ -10,17 +10,17 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.PlayListVista">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.PlayListVista">
    <top>
-      <AnchorPane prefHeight="95.0" prefWidth="1000.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="100.0" prefWidth="1000.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="nombrePlayList" layoutX="308.0" layoutY="24.0" prefHeight="38.0" prefWidth="351.0" textFill="#fffbfb">
                <font>
                   <Font name="System Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="labelUserName" layoutX="872.0" layoutY="40.0" prefHeight="17.0" prefWidth="125.0" text="Label" textFill="#fcf8f8" />
-            <Circle fx:id="photoUser" fill="DODGERBLUE" layoutX="835.0" layoutY="48.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="labelUserName" layoutX="1138.0" layoutY="40.0" prefHeight="17.0" prefWidth="125.0" text="Label" textFill="#fcf8f8" />
+            <Circle fx:id="photoUser" fill="DODGERBLUE" layoutX="1101.0" layoutY="48.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
             <ImageView fx:id="back" fitHeight="50.0" fitWidth="50.0" layoutX="34.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/back.png" />
@@ -37,7 +37,7 @@
    <center>
       <AnchorPane prefHeight="546.0" prefWidth="605.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane layoutX="16.0" layoutY="44.0" prefHeight="392.0" prefWidth="970.0">
+            <ScrollPane layoutX="16.0" layoutY="44.0" prefHeight="670.0" prefWidth="1270.0">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="940.0">
                      <children>
@@ -52,12 +52,12 @@
    <bottom>
       <AnchorPane prefHeight="67.0" prefWidth="548.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="trashView" fitHeight="56.0" fitWidth="53.0" layoutX="933.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trashView" fitHeight="56.0" fitWidth="53.0" layoutX="1234.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/trash3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="update" fitHeight="42.0" fitWidth="87.0" layoutX="860.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="update" fitHeight="42.0" fitWidth="87.0" layoutX="1161.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/update.png" />
                </image>
