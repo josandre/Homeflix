@@ -101,6 +101,8 @@ public class PlayListVista {
         vBox.setSpacing(10);
         int count = 0;
 
+
+
         for (int i = 0; i < listaVideos.size(); i++) {
             count = i + 1;
             Image img;
@@ -142,7 +144,17 @@ public class PlayListVista {
 
         }
 
-        System.out.println(listaVideos.get(0).getId());
+    }
+
+    public void loadNothing(){
+        ListaReproduccion actualPlayList = blConexion.getPlayListActual();
+        vBox.getChildren().clear();
+
+        HBox hBox = new HBox();
+        hBox.setSpacing(5);
+        vBox.setSpacing(10);
+        int count = 0;
+
     }
 
     public void reproducirPlayList(ImageView imageView, Video video) {

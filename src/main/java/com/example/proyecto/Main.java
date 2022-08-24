@@ -32,8 +32,8 @@ public class Main extends Application {
 
     private static Scene escenaPrincipal;
 
-    public static final int HEIGHT = 250;
-    public static final int WIDTH = 250;
+    public static final int HEIGHT = 170;
+    public static final int WIDTH = 185;
 
     public static final int NCOLUMNS = 5;
 
@@ -55,7 +55,7 @@ public class Main extends Application {
         logger.log(Level.INFO, "Iniciando");
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 1300, 900);
+            scene = new Scene(fxmlLoader.load(), 1100, 700);
             stage.setTitle("HomeFlix");
             stage.setScene(scene);
             stage.setResizable(false);
@@ -77,7 +77,7 @@ public class Main extends Application {
             parent = FXMLLoader.load(Main.class.getResource(pantalla));
             escenaPrincipal.setRoot(parent);
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "La pantalla no fue encontrada");
+            logger.log(Level.SEVERE, "La pantalla no fue encontrada", e);
         }
 
     }

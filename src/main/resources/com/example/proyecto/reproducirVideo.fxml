@@ -15,19 +15,19 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ReproducirVideoVista">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ReproducirVideoVista">
    <center>
-      <HBox fx:id="hboxPrincipal" prefHeight="900.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="hboxPrincipal" prefHeight="600.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="vboxPrincipal" alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0">
+            <VBox fx:id="vboxPrincipal" alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0">
                <children>
                   <MediaView fx:id="mediaVideo" fitHeight="200.0" fitWidth="200.0" />
-                  <Slider fx:id="progresBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="1130.0" />
-                  <HBox prefHeight="75.0" prefWidth="1158.0">
+                  <Slider fx:id="progresBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="900.0" />
+                  <HBox prefHeight="75.0" prefWidth="960.0">
                      <children>
                         <Button fx:id="btnReproducir" mnemonicParsing="false" onAction="#handleButtonReproducir" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: Black;" text="Play" textFill="#fffdfd">
                            <HBox.margin>
-                              <Insets left="70.0" right="7.0" top="7.0" />
+                              <Insets left="100.0" right="7.0" top="7.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#handleButtonVolver" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: Black;" text="Volver" textFill="#faf6f6">
@@ -41,16 +41,6 @@
                            </HBox.margin>
                         </Button>
                         <Button fx:id="btnParar" mnemonicParsing="false" onAction="#handleButtonParar" prefHeight="26.0" prefWidth="46.0" style="-fx-background-color: black;" text="□" textFill="#fff9f9">
-                           <HBox.margin>
-                              <Insets left="7.0" right="7.0" top="7.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="btnLento" mnemonicParsing="false" onAction="#handleButtonLento" prefHeight="26.0" prefWidth="45.0" style="-fx-background-color: black;" text="&lt;&lt;" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets left="7.0" right="7.0" top="7.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="btnRapido" mnemonicParsing="false" onAction="#handleButtonRapido" prefHeight="26.0" prefWidth="39.0" style="-fx-background-color: Black;" text="&gt;&gt;" textFill="#f7f1f1">
                            <HBox.margin>
                               <Insets left="7.0" right="7.0" top="7.0" />
                            </HBox.margin>
@@ -125,14 +115,14 @@
                         </Label>
                         <Button fx:id="btnHost" mnemonicParsing="false" onAction="#handleButtonAbrirConexion" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: black;" text="Host" textFill="#fff6f6">
                            <HBox.margin>
-                              <Insets left="10.0" top="5.0" />
+                              <Insets left="14.0" top="5.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <ScrollPane fx:id="scrollPanePlayList" prefHeight="900.0" prefWidth="150.0" visible="false" BorderPane.alignment="TOP_LEFT">
+            <ScrollPane fx:id="scrollPanePlayList" prefHeight="700.0" prefWidth="170.0" visible="false" BorderPane.alignment="TOP_LEFT">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="150.0">
                      <children>
