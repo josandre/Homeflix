@@ -84,9 +84,9 @@ public class ReproducirVideoVista {
 
     private boolean isHosting = false;
 
-    private static final int defaultVideoHeight = 850;
+    private static final int defaultVideoHeight = 650;
 
-    private static final int defaultVideoWidth = 1150;
+    private static final int defaultVideoWidth = 900;
 
 
 
@@ -126,11 +126,11 @@ public class ReproducirVideoVista {
 
                     if(blConexion.getModoReproduccion().equals(ModoReproduccion.Multiple)){
                         hboxPrincipal.getChildren().add(scrollPanePlayList);
-                        vboxPrincipal.setPrefWidth(defaultVideoWidth);
-                        mediaVideo.setFitWidth(defaultVideoWidth);
+                        vboxPrincipal.setPrefWidth(930);
+                        mediaVideo.setFitWidth(930);
                     }else {
-                        vboxPrincipal.setPrefWidth(1300);
-                        mediaVideo.setFitWidth(1300);
+                        vboxPrincipal.setPrefWidth(1100);
+                        mediaVideo.setFitWidth(1100);
                     }
 
 
@@ -265,16 +265,16 @@ public class ReproducirVideoVista {
             videos.add(blConexion.getVideoActual());
             System.out.println(hboxPrincipal.getChildren().size());
             hboxPrincipal.getChildren().remove(scrollPanePlayList);
-            mediaVideo.setFitWidth(1300);
+            mediaVideo.setFitWidth(1000);
             System.out.println(hboxPrincipal.getChildren().size());
             Stage stage = (Stage) Main.getEscenaPrincipal().getWindow();
             System.out.println(stage.getWidth());
-            vboxPrincipal.setPrefWidth(1300);
+            vboxPrincipal.setPrefWidth(1100);
         } else {
             videos.addAll(blConexion.getPlayListActual().getListaVideos());
             loadVideosPlayList();
-            mediaVideo.setFitWidth(1150);
-            vboxPrincipal.setPrefWidth(1150);
+            mediaVideo.setFitWidth(930);
+            vboxPrincipal.setPrefWidth(930);
         }
         mediaVideo.setFitHeight(defaultVideoHeight);
 

@@ -9,29 +9,29 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.modificarPlayList">
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.modificarPlayList">
     <children>
-        <TextField fx:id="txtNombre" layoutX="289.0" layoutY="297.0" prefHeight="32.0" prefWidth="222.0" promptText="Introduzca el nombre de la lista" />
-        <Label layoutX="295.0" layoutY="271.0" prefHeight="26.0" prefWidth="89.0" text="Nombre">
+        <TextField fx:id="txtNombre" layoutX="245.0" layoutY="253.0" prefHeight="32.0" prefWidth="222.0" promptText="Introduzca el nombre de la lista" />
+        <Label layoutX="251.0" layoutY="227.0" prefHeight="26.0" prefWidth="89.0" text="Nombre">
             <font>
                 <Font size="21.0" />
             </font>
         </Label>
-        <Button fx:id="btnUpdate" layoutX="334.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleButonUpdate" prefWidth="100.0" style="-fx-background-color: black;" text="Modificar" textFill="#fff6f6">
+        <Button fx:id="btnUpdate" layoutX="290.0" layoutY="506.0" mnemonicParsing="false" onAction="#handleButonUpdate" prefWidth="100.0" style="-fx-background-color: black;" text="Modificar" textFill="#fff6f6">
             <font>
                 <Font size="14.0" />
             </font>
         </Button>
-        <Label layoutX="289.0" layoutY="392.0" text="Imagen">
+        <Label layoutX="245.0" layoutY="348.0" text="Imagen">
             <font>
                 <Font size="21.0" />
             </font>
         </Label>
-        <TextField fx:id="txtEnlaceImagen" layoutX="292.0" layoutY="419.0" prefHeight="32.0" prefWidth="222.0" promptText="Archivo Imagen" />
-        <Button fx:id="btnSubirArchivo" layoutX="514.0" layoutY="419.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: black;" text="..." textFill="#f2efef" />
-        <AnchorPane prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: black;">
+        <TextField fx:id="txtEnlaceImagen" layoutX="248.0" layoutY="375.0" prefHeight="32.0" prefWidth="222.0" promptText="Archivo Imagen" />
+        <Button fx:id="btnSubirArchivo" layoutX="470.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleButtonSubirArchivo" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: black;" text="..." textFill="#f2efef" />
+        <AnchorPane prefHeight="100.0" prefWidth="1100.0" style="-fx-background-color: black;">
             <children>
-                <Label layoutX="402.0" layoutY="25.0" prefHeight="47.0" prefWidth="367.0" text="Modificar Lista De Reproducción" textAlignment="CENTER" textFill="#f5f4f4">
+                <Label layoutX="251.0" layoutY="28.0" prefHeight="47.0" prefWidth="462.0" text="Modificar Lista De Reproducción" textAlignment="CENTER" textFill="#f5f4f4">
                     <font>
                         <Font name="System Bold" size="31.0" />
                     </font>
@@ -41,11 +41,11 @@
                         <Image url="@img/back.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="userNameLabel" layoutX="1128.0" layoutY="41.0" prefHeight="17.0" prefWidth="157.0" text="Label" textFill="#f5f0f0" />
-                <Circle fx:id="circleUserPhoto" fill="DODGERBLUE" layoutX="1089.0" layoutY="47.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                <Label fx:id="userNameLabel" layoutX="928.0" layoutY="41.0" prefHeight="17.0" prefWidth="157.0" text="Label" textFill="#f5f0f0" />
+                <Circle fx:id="circleUserPhoto" fill="DODGERBLUE" layoutX="889.0" layoutY="47.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
         </AnchorPane>
-        <ImageView fitHeight="395.0" fitWidth="618.0" layoutX="773.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="395.0" fitWidth="430.0" layoutX="615.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@img/playList.png" />
             </image>
