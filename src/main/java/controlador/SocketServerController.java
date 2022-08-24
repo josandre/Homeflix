@@ -52,9 +52,6 @@ public class SocketServerController {
                             dataOutputStream.write(fileContentBytes);
 
                             logger.log(Level.INFO, "video envidado");
-
-
-
                             result.close();
                         } catch (IOException e) {
                             logger.log(Level.SEVERE, "Video no enviado");

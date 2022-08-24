@@ -37,11 +37,11 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `homeflix`.`Usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `apellido` VARCHAR(45) NOT NULL,
-  `nombreUsuario` VARCHAR(45) NOT NULL,
-  `contrasenna` VARCHAR(45) NOT NULL,
-  `archivoImagen` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(500) NOT NULL,
+  `apellido` VARCHAR(500) NOT NULL,
+  `nombreUsuario` VARCHAR(500) NOT NULL,
+  `contrasenna` VARCHAR(500) NOT NULL,
+  `archivoImagen` VARCHAR(1000) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `nombreUsuario_UNIQUE` (`nombreUsuario` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -55,7 +55,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `homeflix`.`ListaVideos` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(100) NOT NULL,
+  `nombre` VARCHAR(1000) NOT NULL,
   `enlaceImagen` VARCHAR(500) NULL DEFAULT NULL,
   `idUsuario` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
